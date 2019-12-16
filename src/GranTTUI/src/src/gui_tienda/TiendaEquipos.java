@@ -43,6 +43,7 @@ public class TiendaEquipos extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				listaComprar.setJugadores(lista.getSelectedValue().getJugadores());
+				Updater.update();
 			}
 		});
 		
