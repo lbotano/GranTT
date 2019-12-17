@@ -27,7 +27,7 @@ begin
 	INSERT INTO GRANTT.Equipo_Usuario
 		(nombre, presupuesto)
     VALUES
-		(f_nombre, 11000);
+		(f_nombre, 15000);
         
 	UPDATE GRANTT.Usuario
     SET id_equipo = LAST_INSERT_ID()

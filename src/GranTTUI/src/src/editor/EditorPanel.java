@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import grantt.BaseDeDatos;
@@ -45,6 +46,7 @@ public class EditorPanel extends JPanel {
 		this.estado = new StatePanel(new Dimension(this.size.width, this.size.height / 5), this);
 		this.panelIzquierda = new EditorLeftPanel(new Dimension(this.size.width / 6, this.size.height / 5 * 4), this);
 		this.panelDerecha = new EditorRightPanel(new Dimension(this.size.width / 6, this.size.height / 5 * 4), this);
+		this.getJugadores();
 		this.jugadores = new ArrayList<ItemJugador>();
 		
 		gbc.gridx = 0;
@@ -75,7 +77,9 @@ public class EditorPanel extends JPanel {
 						panelDerecha.prl.addJugador(panelIzquierda.pfl.quitarJugador());
 						estado.actualizarValor();
 					} else {
-						System.out.println("Se Intento Mover Un Jugador Nulo");
+						JOptionPane.showMessageDialog(
+                            null, "Se Intento Mover Un Jugador Nulo"
+                        );
 					}
 				}
 			}
@@ -120,10 +124,14 @@ public class EditorPanel extends JPanel {
 							panelIzquierda.pfl.addJugador(panelDerecha.prl.quitarJugador());
 							estado.actualizarValor();
 						} else {
-							System.out.println("No Se Puede Mover El Jugador Indicado");
+							JOptionPane.showMessageDialog(
+                                null, "No Se Puede Mover El Jugador Indicado"
+                            );
 						}
 					} else {
-						System.out.println("Se Intento Mover Un Jugador Nulo");
+						JOptionPane.showMessageDialog(
+                            null, "Se Intento Mover Un Jugador Nulo"
+                        );
 					}
 				}
 			}
@@ -151,7 +159,9 @@ public class EditorPanel extends JPanel {
 							}
 							
 						} else {
-							System.out.println("No Se Pudo Guardar El Equipo.");
+							JOptionPane.showMessageDialog(
+	                            null, "No Se Pudo Guardar Su Equipo. Jugadores Invalidos."
+	                        );
 						}
 					}
 				}
@@ -159,11 +169,7 @@ public class EditorPanel extends JPanel {
 	}
 	
 	public void getJugadores() {
-		this.jugadores.clear();
-		ArrayList<Jugador> jug = (ArrayList<Jugador>) BaseDeDatos.obtenerJugadoresEquipo();
-		ArrayList<ItemJugador> jugadores = new ArrayList<ItemJugador>();
-		for(Jugador j : jug) {
-			jugadores.add(new ItemJugador(j));
-		}
+		this.panelIzquierda.getJugadoresTitulares();
+		this.panelDerecha.getJugadoresSuplentes();
 	}
 }

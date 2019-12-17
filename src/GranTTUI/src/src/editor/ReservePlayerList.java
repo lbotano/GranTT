@@ -36,7 +36,6 @@ public class ReservePlayerList extends JList {
 	}
 
 	public void addJugador(ItemJugador j) {
-		
 		this.model.addElement(
 			j
 		);

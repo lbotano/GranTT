@@ -30,7 +30,7 @@ public class EditorRightPanel extends JPanel{
 		this.setLayout(this.gbl);
 		initComponents(d);
 		initEvents();
-		this.getJugadoresSuplentes();
+		//this.getJugadoresSuplentes();
 	}
 	
 	private void initComponents(Dimension d) {
@@ -61,7 +61,7 @@ public class EditorRightPanel extends JPanel{
 	
 	
 	public void getJugadoresSuplentes() {
-		this.prl.removeAll();
+		this.prl.model.removeAllElements();
 		
 		ArrayList<Jugador> jugadores = (ArrayList<Jugador>) BaseDeDatos.getSuplentesEquipo();
 		for(Jugador j : jugadores) {

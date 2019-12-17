@@ -1366,7 +1366,8 @@ public class BaseDeDatos {
  		PreparedStatement sp = null;
  		try {
  			sp = conn.prepareStatement("CALL actualizarJugadorEquipo(?, ?, ?)");
- 			sp.setString(1, j.getNombre());
+ 			System.out.println(j.getNombre() + " " + j.getId() + " " + titular);
+ 			sp.setString(1, usuarioLogueado.getNombre());
  			sp.setInt(2, j.getId());
  			sp.setBoolean(3, titular);
  			sp.execute();

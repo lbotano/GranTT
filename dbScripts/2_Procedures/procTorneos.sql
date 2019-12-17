@@ -52,6 +52,8 @@ begin
     UPDATE GRANTT.Jugador SET partidosSuspendido = 0;
     UPDATE GRANTT.Equipo_Usuario SET presupuesto = 15000;
     
+    DELETE FROM GRANTT.Ocurrencia;
+    
     return LAST_INSERT_ID();
 end//
 DELIMITER ;

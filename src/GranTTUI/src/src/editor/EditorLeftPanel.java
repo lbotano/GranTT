@@ -43,15 +43,9 @@ public class EditorLeftPanel extends JPanel {
 		this.size = d;
 		this.setPreferredSize(this.size);
 		this.pfl = new PlayerFieldList(this.size);
-		this.getJugadoresTitulares();
-		
 		
 		this.setBackground(Color.GRAY);
 		
-		
-		
-		
-		//gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 0.95;
