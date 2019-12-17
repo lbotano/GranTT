@@ -223,5 +223,3 @@ begin
 end//
 
 DELIMITER ;
-
-CALL obtenerJugadoresEquipoUsuario(2);
