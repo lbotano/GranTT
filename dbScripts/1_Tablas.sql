@@ -82,12 +82,10 @@ CREATE TABLE Partido (
 CREATE TABLE Equipo_Usuario_Jugador (
 	id_equipo INTEGER,
     id_jugador INTEGER,
-    id_posicion INTEGER,
-    nro_combobox INTEGER,
+    titular BOOLEAN DEFAULT false,
     CONSTRAINT pk_equipoUsuario_jugador PRIMARY KEY (id_equipo, id_jugador),
     CONSTRAINT fk_relEquipoUsuario_jugador FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
-    CONSTRAINT fk_relEquipoUsuario_equipo FOREIGN KEY (id_equipo) REFERENCES Equipo_Usuario(id_equipo),
-    CONSTRAINT fk_relEquipoUsuario_pos FOREIGN KEY (id_posicion) REFERENCES Posicion(id_posicion)
+    CONSTRAINT fk_relEquipoUsuario_equipo FOREIGN KEY (id_equipo) REFERENCES Equipo_Usuario(id_equipo)
 );
 
 /*

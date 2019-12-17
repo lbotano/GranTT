@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import editor.EditorPanel;
+
 
 public class MainScreen extends JFrame {
     public JPanel menuContainer;
@@ -26,6 +28,7 @@ public class MainScreen extends JFrame {
     public JButton btnJugar;
     public JButton btnTienda;
     public JButton btnAdmin;
+    public JButton btnEditor;
     
     public CardLayout cl;
     
@@ -36,6 +39,7 @@ public class MainScreen extends JFrame {
     private Jugar jugar;
     private TiendaPanel tienda;
     private Admin adminPanel;
+    private EditorPanel editor;
     
     public MainScreen() {
         super("GranTT - Menu");
@@ -68,10 +72,7 @@ public class MainScreen extends JFrame {
         btnJugar = new JButton("Jugar");
         btnTienda = new JButton("Tienda");
         btnAdmin = new JButton("Admin");
-        
-        jugar	= new Jugar();
-        tienda	= new TiendaPanel(this, BaseDeDatos.obtenerEquiposReales());
-        adminPanel = new Admin();
+        btnEditor = new JButton("Editor");
         
         cl = new CardLayout();
         
@@ -80,12 +81,19 @@ public class MainScreen extends JFrame {
             Toolkit.getDefaultToolkit().getScreenSize().height / 20 * 17
         );
         
+        jugar	= new Jugar();
+        tienda	= new TiendaPanel(this, BaseDeDatos.obtenerEquiposReales());
+        adminPanel = new Admin();
+        editor = new EditorPanel(new Dimension(this.size.width / 20 * 18, this.size.height));
+        
         leftPanel.setBackground(Color.DARK_GRAY);
         rightPanel.setBackground(Color.GRAY);
         menuContainer.setBackground(Color.WHITE);
         
         btnJugar.setBackground(Color.LIGHT_GRAY);
         btnTienda.setBackground(Color.LIGHT_GRAY);
+        btnEditor.setBackground(Color.LIGHT_GRAY);
+        btnAdmin.setBackground(Color.LIGHT_GRAY);
         
         leftPanel.setPreferredSize(
             new Dimension(
@@ -105,10 +113,13 @@ public class MainScreen extends JFrame {
         Dimension buttonSize = new Dimension(size.width / 20 * 2, size.height / 20);
         btnJugar.setMaximumSize(buttonSize);
         btnTienda.setMaximumSize(buttonSize);
+        btnEditor.setMaximumSize(buttonSize);
         btnAdmin.setMaximumSize(buttonSize);
         
         btnJugar.setFocusPainted(false);
         btnTienda.setFocusPainted(false);
+        btnEditor.setFocusPainted(false);
+        btnAdmin.setFocusPainted(false);
 
         menuContainer.setLayout(new BorderLayout());
         leftPanel.setLayout(new BoxLayout(this.leftPanel, BoxLayout.Y_AXIS));
@@ -117,12 +128,14 @@ public class MainScreen extends JFrame {
         
         rightPanel.add(this.jugar, "Jugar");
         rightPanel.add(this.tienda, "Tienda");
+        rightPanel.add(this.editor, "Editor");
         if(BaseDeDatos.esAdmin()) rightPanel.add(this.adminPanel, "Admin");
         
         //aca agrego los paneles de la interfaz
         
         leftPanel.add(this.btnJugar);
         leftPanel.add(this.btnTienda);
+        leftPanel.add(this.btnEditor);
         if(BaseDeDatos.esAdmin()) leftPanel.add(this.btnAdmin);
         
         menuContainer.add(this.leftPanel, BorderLayout.LINE_START);
@@ -162,6 +175,15 @@ public class MainScreen extends JFrame {
 					CardLayout cl = (CardLayout)rightPanel.getLayout();
 					cl.show(MainScreen.this.rightPanel, "Admin");
 					adminPanel.update();
+				}
+			}
+        );
+        this.btnEditor.addActionListener(
+        	new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					CardLayout cl = (CardLayout)rightPanel.getLayout();
+					cl.show(MainScreen.this.rightPanel, "Editor");
 				}
 			}
         );

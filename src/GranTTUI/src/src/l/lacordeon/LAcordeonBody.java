@@ -1,7 +1,5 @@
 package l.lacordeon;
 
-import java.util.List;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 

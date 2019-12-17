@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import grantt.BaseDeDatos;
 import grantt.Torneo;
-import gui_tienda.Updater;
 
 public class Admin extends JPanel{
 	private GridBagLayout layout;

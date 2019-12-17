@@ -2,7 +2,6 @@ package l.lacordeon;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

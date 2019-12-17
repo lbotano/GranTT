@@ -5,26 +5,16 @@
  */
 package jugar;
 
-import static grantt.BaseDeDatos.obtenerEquiposReales;
-import static grantt.BaseDeDatos.obtenerPartidosJugados;
-
 import grantt.BaseDeDatos;
 import grantt.Ocurrencia;
-import grantt.Ocurrencia.TipoOcurrencia;
 import grantt.Partido;
 import l.lacordeon.LAcordeon;
 import l.lacordeon.LAcordeonItem;
 
 import javax.swing.JPanel;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JScrollPane;

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import editor.ItemJugador;
 import grantt.Ocurrencia.TipoOcurrencia;
 
 //import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
@@ -15,7 +16,7 @@ import grantt.Ocurrencia.TipoOcurrencia;
 public class BaseDeDatos {
 	private static Connection conn;
 		
-	private static Usuario usuarioLogueado;
+	public static Usuario usuarioLogueado;
 	private static Torneo torneoActual = null;
 	
 	public static void inicializarBd() {
@@ -1324,4 +1325,54 @@ public class BaseDeDatos {
 		
 		return list;
 	}
+ 	
+ 	public static List<Jugador> getSuplentesEquipo() {
+ 		inicializarBd();
+ 		List<Jugador> jugadores;
+ 		PreparedStatement query = null;
+ 		ResultSet rs;
+		try {
+			query = conn.prepareStatement("CALL obtenerSuplentesEquipoUsuario(?)");
+			query.setString(1, usuarioLogueado.getNombre());
+			rs = query.executeQuery();
+			jugadores = resultSetToJugador(rs);
+			try {conn.close();}catch(SQLException e) {}
+			return jugadores;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+ 	}
+ 	
+ 	public static List<Jugador> getTitularesEquipo() {
+ 		inicializarBd();
+ 		PreparedStatement query = null;
+ 		ResultSet rs;
+		try {
+			query = conn.prepareStatement("CALL obtenerTitularesEquipoUsuario(?)");
+			query.setString(1, usuarioLogueado.getNombre());
+			rs = query.executeQuery();
+			List<Jugador> res = resultSetToJugador(rs); 
+			try {conn.close();}catch(SQLException e) {}
+			return res;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+ 	}
+ 	
+ 	public static void guardarJugador(ItemJugador j, boolean titular) {
+ 		inicializarBd();
+ 		PreparedStatement sp = null;
+ 		try {
+ 			sp = conn.prepareStatement("CALL actualizarJugadorEquipo(?, ?, ?)");
+ 			sp.setString(1, j.getNombre());
+ 			sp.setInt(2, j.getId());
+ 			sp.setBoolean(3, titular);
+ 			sp.execute();
+ 			try {conn.close();} catch(Exception e) {}
+ 		} catch(Exception e) {
+ 			e.printStackTrace();
+ 		}
+ 	}
 }
