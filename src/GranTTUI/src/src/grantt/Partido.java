@@ -154,8 +154,6 @@ public class Partido {
 		calcularGoleadores(golesVisitante, equipoVisitante);
 		
 		actualizarSuspensiones();
-		
-		System.out.println(equipoLocal.getNombre() + " " + golesLocal + " - " + golesVisitante + " " + equipoVisitante.getNombre());
 	}
 	
 	private int calcularGoles(int calidad) {

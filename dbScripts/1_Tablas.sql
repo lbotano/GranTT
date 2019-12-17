@@ -115,3 +115,5 @@ VALUES (3, 'medio');
 
 INSERT INTO Posicion
 VALUES (4, 'delantero');
+
+CALL obtenerJugadoresEquipoUsuario(8);

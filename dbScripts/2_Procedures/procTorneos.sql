@@ -50,6 +50,7 @@ begin
     UPDATE GRANTT.Jugador SET tarjetasAmarillas = 0;
     UPDATE GRANTT.Jugador SET tarjetasRojas = 0;
     UPDATE GRANTT.Jugador SET partidosSuspendido = 0;
+    UPDATE GRANTT.Equipo_Usuario SET presupuesto = 15000;
     
     return LAST_INSERT_ID();
 end//
@@ -74,6 +75,7 @@ begin
 end//
 DELIMITER ;
 
+SELECT * FROM GRANTT.Usuario
 /*SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE GRANTT.Torneo;
 TRUNCATE TABLE GRANTT.Partido;

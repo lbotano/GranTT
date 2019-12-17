@@ -11,7 +11,7 @@ DELIMITER ;
 
 drop procedure if exists obtenerJugadoresEquipoUsuario;
 DELIMITER //
-create procedure obtenerJugadoresEquipoUsuario(id_equipo int)
+create procedure obtenerJugadoresEquipoUsuario(p_id_equipo int)
 begin
 	SELECT
 		j.*
@@ -21,7 +21,8 @@ begin
         GRANTT.Equipo_Usuario e
 	WHERE
 		j.id_jugador = ej.id_jugador AND
-        e.id_equipo = ej.id_equipo;
+        e.id_equipo = ej.id_equipo AND
+        e.id_equipo = p_id_equipo;
 end//
 
 DELIMITER ;

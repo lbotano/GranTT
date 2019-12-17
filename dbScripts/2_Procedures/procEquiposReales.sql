@@ -70,7 +70,13 @@ CREATE PROCEDURE ponerTarjetaAmarilla(p_id_jugador INTEGER)
 deterministic
 BEGIN
 	-- Verifica si no es su 5ta tarjeta del torneo
-    SELECT tarjetasAmarillas = 4 INTO @mereceRoja;
+    SELECT tarjetasAmarillas FROM GRANTT.Jugador WHERE id_jugador = p_id_jugador INTO @tarjetasAmarillas;
+    
+    if @tarjetasAmarillas = 4 then
+		SET @mereceRoja = true;
+	else
+		SET @mereceROja = false;
+	end if;
     
     if @mereceRoja then
         CALL ponerTarjetaRoja(p_id_jugador);

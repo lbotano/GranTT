@@ -62,7 +62,6 @@ public final class Jugar extends JPanel {
     		item.addSubItem(diaPanel);
     		
     		// Pone las ocurrencias del partido como subitems
-    		System.out.println(p.getId());
     		for(Ocurrencia ocurrencia : BaseDeDatos.obtenerOcurrencias(p.getId())) {
     			String ocurrenciaString = "";
 				switch (ocurrencia.getTipo()) {

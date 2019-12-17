@@ -34,7 +34,7 @@ public class Admin extends JPanel{
 		// Desactiva los botenes de acuerdo a si quedan partidos
 		boolean quedanPartidos = BaseDeDatos.obtenerPartidosPendientes().size() > 0;
 		pasarJornada.setEnabled(quedanPartidos);
-		crearTorneo.setEnabled(!quedanPartidos);
+		crearTorneo.setEnabled(true);
 		pasarJornada.repaint();
 		crearTorneo.repaint();
 		

@@ -52,7 +52,6 @@ public class TiendaPanel extends JPanel {
 	private int getCant(Jugador.Posiciones pos) {
 		int cant = 0;
 		for(Jugador j : jugadoresVenderPanel.jugadores) {
-			System.out.println(j.getNombre() + " " + j.getPosicion().name());
 			if(j.getPosicion().equals(pos)) {
 				cant++;
 			}

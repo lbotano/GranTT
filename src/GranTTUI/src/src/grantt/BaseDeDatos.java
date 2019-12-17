@@ -102,7 +102,7 @@ public class BaseDeDatos {
 			query = conn.prepareStatement("SELECT crearUsuario(?, ?, ?);");
 			query.setString(1, usuario.getNombre());
 			query.setString(2, usuario.getContraseña());
-			query.setBoolean(3, true);
+			query.setBoolean(3, esAdmin);
 			
 			rs = query.executeQuery();
 			if(rs.next()) return rs.getBoolean(1);
