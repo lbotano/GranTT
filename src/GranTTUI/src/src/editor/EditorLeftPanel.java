@@ -44,8 +44,14 @@ public class EditorLeftPanel extends JPanel {
 		this.setPreferredSize(this.size);
 		this.pfl = new PlayerFieldList(this.size);
 		
+		
+		
 		this.setBackground(Color.GRAY);
 		
+		
+		
+		
+		//gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 0.95;
@@ -66,11 +72,13 @@ public class EditorLeftPanel extends JPanel {
 	}
 	
 	public void getJugadoresTitulares() {
-		this.pfl.removeAll();
+		this.pfl.model.removeAllElements();
 		
 		ArrayList<Jugador> jugadores = (ArrayList<Jugador>) BaseDeDatos.getTitularesEquipo();
-		for(Jugador j : jugadores) {
-			this.pfl.addJugador(j);
+		if(jugadores != null) {
+			for(Jugador j : jugadores) {
+				this.pfl.addJugador(j);
+			}
 		}
 	}
 	

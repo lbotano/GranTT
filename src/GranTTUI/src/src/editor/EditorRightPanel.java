@@ -64,8 +64,10 @@ public class EditorRightPanel extends JPanel{
 		this.prl.model.removeAllElements();
 		
 		ArrayList<Jugador> jugadores = (ArrayList<Jugador>) BaseDeDatos.getSuplentesEquipo();
-		for(Jugador j : jugadores) {
-			this.prl.addJugador(new ItemJugador(j));
+		if(jugadores != null) {
+			for(Jugador j : jugadores) {
+				this.prl.addJugador(new ItemJugador(j));
+			}
 		}
 	}
 }

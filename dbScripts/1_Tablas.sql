@@ -52,6 +52,7 @@ CREATE TABLE Jugador (
     CONSTRAINT fk_jugador_posicion FOREIGN KEY (id_posicion) REFERENCES Posicion(id_posicion)
 );
 
+
 CREATE TABLE Equipo_Local (
 	id_equipo_local INTEGER auto_increment,
     id_equipoReal INTEGER,

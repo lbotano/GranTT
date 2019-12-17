@@ -1,20 +1,19 @@
 DROP PROCEDURE IF EXISTS obtenerTitularesEquipoUsuario;
-
-CALL obtenerSuplentesEquipoUsuario('lautaro');
-
 DELIMITER //
 CREATE PROCEDURE obtenerTitularesEquipoUsuario(p_usuario NVARCHAR(50))
-BEGIN
-	SELECT j.*
-    FROM
-		GRANTT.Jugador j,
-        GRANTT.Equipo_Usuario_Jugador euj,
-        GRANTT.Usuario u
-	WHERE
-		u.id_equipo = euj.id_equipo AND
-        euj.id_jugador = j.id_jugador AND
-        euj.titular AND
-        u.nombre = p_usuario;
+BEGIN  
+	select j.* 
+    from
+		Equipo_Usuario_Jugador euj,
+		Jugador j,
+		Usuario u,
+		Equipo_Usuario eu
+	where 
+		u.nombre = p_usuario
+		and u.id_equipo = eu.id_equipo
+		and euj.id_equipo = eu.id_equipo
+		and euj.id_jugador = j.id_jugador
+		and euj.titular = true;
 END//
 DELIMITER ;
 
@@ -22,16 +21,18 @@ DROP PROCEDURE IF EXISTS obtenerSuplentesEquipoUsuario;
 DELIMITER //
 CREATE PROCEDURE obtenerSuplentesEquipoUsuario(p_usuario NVARCHAR(50))
 BEGIN
-	SELECT j.*
-    FROM
-		GRANTT.Jugador j,
-        GRANTT.Equipo_Usuario_Jugador euj,
-        GRANTT.Usuario u
-	WHERE
-		u.id_equipo = euj.id_equipo AND
-        euj.id_jugador = j.id_jugador AND
-        NOT euj.titular AND
-        u.nombre = p_usuario;
+	select j.* 
+    from
+		Equipo_Usuario_Jugador euj,
+		Jugador j,
+		Usuario u,
+		Equipo_Usuario eu
+	where 
+		u.nombre = p_usuario
+		and u.id_equipo = eu.id_equipo
+		and euj.id_equipo = eu.id_equipo
+		and euj.id_jugador = j.id_jugador
+		and euj.titular = false;
 END//
 DELIMITER ;
 

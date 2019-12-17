@@ -171,5 +171,13 @@ public class EditorPanel extends JPanel {
 	public void getJugadores() {
 		this.panelIzquierda.getJugadoresTitulares();
 		this.panelDerecha.getJugadoresSuplentes();
+		/*
+		this.jugadores.clear();
+		ArrayList<Jugador> jug = (ArrayList<Jugador>) BaseDeDatos.obtenerJugadoresEquipo();
+		ArrayList<ItemJugador> jugadores = new ArrayList<ItemJugador>();
+		for(Jugador j : jug) {
+			jugadores.add(new ItemJugador(j));
+		}
+		*/
 	}
 }
