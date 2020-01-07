@@ -25,6 +25,7 @@ CREATE TABLE Usuario (
     contraseña TEXT(512),
     id_equipo INTEGER,
     admin BOOLEAN,
+    dni NCHAR(10) UNIQUE,
     CONSTRAINT pk_usuario PRIMARY KEY (nombre),
     CONSTRAINT fk_usuario_equipo FOREIGN KEY (id_equipo) REFERENCES Equipo_Usuario(id_equipo)
 );

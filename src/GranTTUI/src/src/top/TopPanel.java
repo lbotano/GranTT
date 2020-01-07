@@ -21,7 +21,7 @@ public class TopPanel extends JPanel{
 		lm.removeAllElements();
 		int i = 1;
 		for(Usuario u : BaseDeDatos.obtenerTopUsuarios()) {
-			lm.addElement("<html><b>" + i + "</b> " + u.getNombre() + " " + u.getPresupuesto() + "</html>");
+			lm.addElement("<html><b>" + i + "</b> " + u.getNombre() + " " + u.valor + "</html>");
 			i++;
 		}
 	}

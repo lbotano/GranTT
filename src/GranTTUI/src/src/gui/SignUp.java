@@ -12,9 +12,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.NumberFormat;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -33,6 +36,9 @@ public class SignUp extends JFrame {
     JPasswordField txtContraseña;
     
     JPasswordField txtCodigo;
+    
+    NumberFormat formato = NumberFormat.getNumberInstance();
+    JFormattedTextField txtDni = new JFormattedTextField(formato);
     
     JButton btnRegistrarse;
     
@@ -76,8 +82,8 @@ public class SignUp extends JFrame {
          
         this.panel = new JPanel();
         this.boxlayout = new BoxLayout(this.panel, BoxLayout.Y_AXIS);
-        this.txtUsuario = new JTextField("Nombre De Usuario");
-        this.txtContraseña = new JPasswordField();
+        this.txtUsuario = new JTextField("Nombre de usuario");
+        this.txtContraseña = new JPasswordField("Contraseña");
         this.txtCodigo = new JPasswordField();
         this.btnRegistrarse = new JButton("Registrarse");
         this.btnCancelar = new JButton("Cancelar");
@@ -87,14 +93,18 @@ public class SignUp extends JFrame {
         this.btnRegistrarse.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.txtUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.txtContraseña.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.txtDni.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+       
         //agrego los controles al frame
         this.panel.add(this.txtUsuario);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));   
         this.panel.add(this.txtContraseña);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
         this.panel.add(this.txtCodigo);
+        this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        this.panel.add(this.txtDni);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
         this.panel.add(this.btnRegistrarse);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -105,6 +115,7 @@ public class SignUp extends JFrame {
         
         this.txtCodigo.setEchoChar((char)0);
         this.txtCodigo.setText("Codigo");
+        this.txtDni.setText("DNI");
         
         
         // Seteo el borde vacio
@@ -117,24 +128,45 @@ public class SignUp extends JFrame {
         this.txtUsuario.addFocusListener(
             new FocusListener() {
                 public void focusGained(FocusEvent fe) {
-                    if(txtUsuario.getText().equals("Nombre De Usuario"))
+                    if(txtUsuario.getText().equals("Nombre de usuario"))
                         txtUsuario.setText("");
                 }
                 public void focusLost(FocusEvent fe) {
                     if(txtUsuario.getText().equals(""))
-                        txtUsuario.setText("Nombre De Usuario");
+                        txtUsuario.setText("Nombre de usuario");
                 }
 
             }
         );
         
         
+        this.txtContraseña.addFocusListener(
+        	new FocusListener() {
+				
+				@Override
+				public void focusLost(FocusEvent arg0) {
+					if(new String(txtContraseña.getPassword()).equals("")){
+						txtContraseña.setText("Contraseña");
+						txtContraseña.setEchoChar((char)0);
+        			}
+				}
+				
+				@Override
+				public void focusGained(FocusEvent arg0) {
+					if(new String(txtContraseña.getPassword()).equals("Contraseña"))
+					{
+						txtContraseña.setText("");
+						txtContraseña.setEchoChar('●');
+					}
+				}
+			}
+        );
         
-        this.txtContraseña.addMouseListener(
+        this.txtCodigo.addMouseListener(
             new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
-                    txtContraseña.setText("");
-                    txtCodigo.setEchoChar('*');
+                    txtCodigo.setText("");
+                    txtCodigo.setEchoChar('●');
                 }
                 //no le prestes atencion a esto
                 public void mousePressed(MouseEvent e) {}
@@ -144,17 +176,18 @@ public class SignUp extends JFrame {
             }
         );
         
-        this.txtCodigo.addMouseListener(
-            new MouseListener() {
-                public void mouseClicked(MouseEvent e) {
-                    txtCodigo.setText("");
-                    txtCodigo.setEchoChar('*');
+        
+        this.txtDni.addFocusListener(
+            new FocusListener() {
+                public void focusGained(FocusEvent fe) {
+                    if(txtDni.getText().equals("DNI"))
+                        txtDni.setText("");
                 }
-                //no le prestes atencion a esto
-                public void mousePressed(MouseEvent e) {}
-                public void mouseReleased(MouseEvent e) {}
-                public void mouseEntered(MouseEvent e) {}
-                public void mouseExited(MouseEvent e) {}
+                public void focusLost(FocusEvent fe) {
+                    if(txtDni.getText().equals(""))
+                        txtDni.setText("DNI");
+                }
+
             }
         );
         
@@ -162,7 +195,7 @@ public class SignUp extends JFrame {
             new ActionListener() {
                 @Override 
                 public void actionPerformed(ActionEvent e) {
-                    if(!txtUsuario.getText().isEmpty()) {
+                    if(!(txtUsuario.getText().isEmpty() || txtDni.getText().length() != 10)) {
                         if(!txtContraseña.getPassword().toString().isEmpty()) {    
                             boolean adm = false;
                             String valor = new String(txtCodigo.getPassword());
@@ -175,7 +208,8 @@ public class SignUp extends JFrame {
                                     txtUsuario.getText(), 
                                     String.valueOf(txtContraseña.getPassword())
                                 ), 
-                                adm)
+                                adm,
+                                String.valueOf(txtDni.getText()))
                             ) {
                                 JOptionPane.showMessageDialog(
                                     null, "Se Ha Creado El Usuario Con Exito"

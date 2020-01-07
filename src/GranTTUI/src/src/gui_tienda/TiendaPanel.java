@@ -138,7 +138,7 @@ public class TiendaPanel extends JPanel {
 		c.gridwidth = 1;
 		c.anchor	= GridBagConstraints.WEST;
 		
-		this.add(new JLabel("<html>Azul: lesionado<br>Amarillo: tarjeta roja<br>Rojo: tarjeta roja</html>"), this.c);
+		this.add(new JLabel("<html>Azul: lesionado<br>Amarillo: tarjeta amarilla<br>Rojo: tarjeta roja</html>"), this.c);
 		
 		c.gridx		= 2;
 		c.gridy		= 2;

@@ -50,7 +50,7 @@ public class ItemJugador extends Jugador {
 		return "<html><font color=green>" + this.getPosicion() +
 				"</font> " + this.getNombre() + 
 				" Partidos Suspendidos: <font color=orange>" + this.getPartidosSuspendido() + 
-				" </font>Tarjetas Amarillas: " + this.getAmarillas() + 
+				" </font>Tarjetas Amarillas: " + (this.getAmarillas()? "SI" : "NO" ) + 
 				" Precio: " + this.getValor() +
 				"</html>";
 	}

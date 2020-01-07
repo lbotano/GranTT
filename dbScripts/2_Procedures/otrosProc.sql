@@ -11,8 +11,17 @@ DELIMITER ;
 
 drop procedure if exists obtenerJugadoresEquipoUsuario;
 DELIMITER //
-create procedure obtenerJugadoresEquipoUsuario(p_id_equipo int)
+create procedure obtenerJugadoresEquipoUsuario(p_usuario NVARCHAR(50))
 begin
+	SELECT
+		id_equipo
+	FROM
+		GRANTT.Usuario
+	WHERE
+		nombre = p_usuario
+	INTO
+		@id_equip;
+
 	SELECT
 		j.*
 	FROM
@@ -22,7 +31,7 @@ begin
 	WHERE
 		j.id_jugador = ej.id_jugador AND
         e.id_equipo = ej.id_equipo AND
-        e.id_equipo = p_id_equipo;
+        e.id_equipo = @id_equip;
 end//
 
 DELIMITER ;

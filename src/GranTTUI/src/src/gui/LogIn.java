@@ -122,7 +122,7 @@ class LogIn extends JFrame {
                 public void focusGained(FocusEvent fe) {
                     if("Contraseña".equals(new String(txtContraseña.getPassword()))) {
                         txtContraseña.setText("");
-                        txtContraseña.setEchoChar('*');
+                        txtContraseña.setEchoChar('●');
                     }
                 }
                 public void focusLost(FocusEvent fe) {

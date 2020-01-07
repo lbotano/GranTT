@@ -35,7 +35,7 @@ DELIMITER ;
 
 drop function if exists crearUsuario;
 DELIMITER //
-create function crearUsuario(f_usuario nvarchar(50), f_contraseña nvarchar(50), f_esAdmin bool)
+create function crearUsuario(f_usuario nvarchar(50), f_contraseña nvarchar(50), f_esAdmin bool, dni NCHAR(10))
 returns bool
 deterministic
 begin
@@ -47,7 +47,7 @@ begin
     -- Crear usuario
 	INSERT INTO GRANTT.Usuario
 	VALUES 
-		(f_usuario, sha2(f_contraseña, 512), null, f_esAdmin);
+		(f_usuario, sha2(f_contraseña, 512), null, f_esAdmin, dni);
 	return true;
 end//
 DELIMITER ;
@@ -74,11 +74,11 @@ begin
 	SELECT
 		u.nombre AS nombreUsuario,
         e.nombre AS nombreEquipo,
-        e.presupuesto
+		obtenerValorTotalEquipo(e.id_equipo) AS dou
 	FROM
 		GRANTT.Usuario u,
         GRANTT.Equipo_Usuario e
 	WHERE
 		u.id_equipo = e.id_equipo
-	ORDER BY e.presupuesto DESC;
+	ORDER BY dou DESC;
 end//

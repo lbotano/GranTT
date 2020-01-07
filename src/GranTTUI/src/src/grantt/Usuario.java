@@ -9,9 +9,16 @@ public class Usuario {
 	
 	private int presupuesto;
 	
+	public double valor;
+	
 	public Usuario(String nombre, String contraseña) {
 		this.nombre = nombre;
 		this.contraseña = contraseña;
+	}
+	
+	public Usuario(String nombre, String contraseña, double valor) {
+		this(nombre, contraseña);
+		this.valor = valor;
 	}
 	
 	public Usuario(String nombre, String nombreEquipo, int presupuesto) {

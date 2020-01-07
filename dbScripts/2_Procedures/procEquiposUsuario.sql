@@ -73,3 +73,26 @@ begin
     return @presupuesto;
 end//
 DELIMITER ;
+
+DROP FUNCTION IF EXISTS obtenerValorTotalEquipoUsuario;
+DELIMITER //
+CREATE FUNCTION obtenerValorTotalEquipoUsuario(p_usuario NVARCHAR(50))
+RETURNS int
+deterministic
+BEGIN
+	SELECT id_equipo
+    FROM GRANTT.Usuario
+    WHERE nombre = p_usuario
+    INTO @equipo;
+	
+    SELECT SUM(valor) 
+    FROM
+		GRANTT.Jugador j,
+        GRANTT.Equipo_Usuario_Jugador euj
+	WHERE
+		j.id_jugador = euj.id_jugador AND
+        euj.id_equipo = @equipo
+	INTO @valor;
+    return @valor;
+END//
+DELIMITER ;

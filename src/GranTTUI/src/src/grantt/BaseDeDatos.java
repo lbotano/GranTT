@@ -64,15 +64,16 @@ public class BaseDeDatos {
 		return false;
 	}
 	
-	public static boolean crearUsuario(Usuario usuario) {
+	public static boolean crearUsuario(Usuario usuario, String dni) {
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		try {
-			query = conn.prepareStatement("SELECT crearUsuario(?, ?);");
+			query = conn.prepareStatement("SELECT crearUsuario(?, ?, ?);");
 			query.setString(1, usuario.getNombre());
 			query.setString(2, usuario.getContraseña());
 			query.setBoolean(3, false);
+			query.setString(4, dni);
 			
 			rs = query.executeQuery();
 			if(rs.next()) return rs.getBoolean(1);
@@ -94,15 +95,16 @@ public class BaseDeDatos {
 		return false;
 	}
 	
-	public static boolean crearUsuario(Usuario usuario, boolean esAdmin) {
+	public static boolean crearUsuario(Usuario usuario, boolean esAdmin, String dni) {
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		try {
-			query = conn.prepareStatement("SELECT crearUsuario(?, ?, ?);");
+			query = conn.prepareStatement("SELECT crearUsuario(?, ?, ?, ?);");
 			query.setString(1, usuario.getNombre());
 			query.setString(2, usuario.getContraseña());
 			query.setBoolean(3, esAdmin);
+			query.setString(4, dni);
 			
 			rs = query.executeQuery();
 			if(rs.next()) return rs.getBoolean(1);
@@ -252,9 +254,10 @@ public class BaseDeDatos {
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		List<Jugador> jugadores = new ArrayList<Jugador>();
+		System.out.println("Hola dario jajajxd " + usuarioLogueado.getEquipo());
 		try {
 			query = conn.prepareStatement("CALL obtenerJugadoresEquipoUsuario(?)");
-			query.setInt(1, usuarioLogueado.getEquipo());
+			query.setString(1, usuarioLogueado.getNombre());
 			
 			rs = query.executeQuery();
 			
@@ -263,7 +266,7 @@ public class BaseDeDatos {
 			e.printStackTrace();
 		}finally {
 			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
+				try {conn.close();}catch(SQLException e) {}
 			}
 			
 			if(query != null) {
@@ -274,6 +277,8 @@ public class BaseDeDatos {
 				try {query.close();}catch(SQLException e) {}
 			}
 		}
+		
+		System.out.println(jugadores.size());
 		
 		return jugadores;
 	}
@@ -674,35 +679,38 @@ public class BaseDeDatos {
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		List<Partido> partidos = new ArrayList<Partido>();
-		try {
-			query = conn.prepareStatement("CALL obtenerPartidosJugados(?)");
-			query.setInt(1, torneoActual.getId());
-			
-			rs = query.executeQuery();
-			
-			while(rs.next()) {
-				Equipo equipoLocal = torneoActual.getEquiposPorId(rs.getInt("equipo_local"));
-				Equipo equipoVisitante = torneoActual.getEquiposPorId(rs.getInt("equipo_visitante"));
-				int id = rs.getInt("id_partido");
-				int jornada = rs.getInt("jornada");
-				int golesLocal = rs.getInt("goles_local");
-				int golesVisitante = rs.getInt("goles_visitante");
+		
+		if(torneoActual != null) {
+			try {
+				query = conn.prepareStatement("CALL obtenerPartidosJugados(?)");
+				query.setInt(1, torneoActual.getId());
 				
-				partidos.add(new Partido(id, equipoLocal, equipoVisitante, jornada, golesLocal, golesVisitante));
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
+				rs = query.executeQuery();
+				
+				while(rs.next()) {
+					Equipo equipoLocal = torneoActual.getEquiposPorId(rs.getInt("equipo_local"));
+					Equipo equipoVisitante = torneoActual.getEquiposPorId(rs.getInt("equipo_visitante"));
+					int id = rs.getInt("id_partido");
+					int jornada = rs.getInt("jornada");
+					int golesLocal = rs.getInt("goles_local");
+					int golesVisitante = rs.getInt("goles_visitante");
+					
+					partidos.add(new Partido(id, equipoLocal, equipoVisitante, jornada, golesLocal, golesVisitante));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(conn != null) {
+					try{conn.close();}catch(SQLException e) {}
+				}
+				
+				if(query != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
+				
+				if(rs != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
 			}
 		}
 		return partidos;
@@ -738,33 +746,35 @@ public class BaseDeDatos {
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		List<Partido> partidos = new ArrayList<Partido>();
-		try {
-			query = conn.prepareStatement("CALL obtenerPartidosPendientes(?)");
-			query.setInt(1,  torneoActual.getId());
-			
-			rs = query.executeQuery();
-			
-			while(rs.next()) {
-				int id = rs.getInt("id_partido");
-				Equipo equipoLocal = torneoActual.getEquiposPorId(rs.getInt("equipo_local"));
-				Equipo equipoVisitante = torneoActual.getEquiposPorId(rs.getInt("equipo_visitante"));
-				int jornada = rs.getInt("jornada");
+		if(torneoActual != null) {
+			try {
+				query = conn.prepareStatement("CALL obtenerPartidosPendientes(?)");
+				query.setInt(1,  torneoActual.getId());
 				
-				partidos.add(new Partido(id, equipoLocal, equipoVisitante, jornada));
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
+				rs = query.executeQuery();
+				
+				while(rs.next()) {
+					int id = rs.getInt("id_partido");
+					Equipo equipoLocal = torneoActual.getEquiposPorId(rs.getInt("equipo_local"));
+					Equipo equipoVisitante = torneoActual.getEquiposPorId(rs.getInt("equipo_visitante"));
+					int jornada = rs.getInt("jornada");
+					
+					partidos.add(new Partido(id, equipoLocal, equipoVisitante, jornada));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(conn != null) {
+					try{conn.close();}catch(SQLException e) {}
+				}
+				
+				if(query != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
+				
+				if(rs != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
 			}
 		}
 		return partidos;
@@ -887,28 +897,29 @@ public class BaseDeDatos {
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
-		try {
-			query = conn.prepareStatement("SELECT obtenerJornadaTorneo(?)");
-			query.setInt(1, torneoActual.getId());
-			
-			rs = query.executeQuery();
-			if(rs.next()) return rs.getInt(1);
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
+		if(torneoActual != null) {
+			try {
+				query = conn.prepareStatement("SELECT obtenerJornadaTorneo(?)");
+				query.setInt(1, torneoActual.getId());
+				
+				rs = query.executeQuery();
+				if(rs.next()) return rs.getInt(1);
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				if(conn != null) {
+					try{conn.close();}catch(SQLException e) {}
+				}
+				
+				if(query != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
+				
+				if(rs != null) {
+					try {query.close();}catch(SQLException e) {}
+				}
 			}
 		}
-		
 		return -1;
 	}
 	
@@ -1041,7 +1052,7 @@ public class BaseDeDatos {
 			query = conn.prepareStatement("CALL seleccionarTopUsuarios()");
 			rs = query.executeQuery();
 			while(rs.next()) {
-				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getString("nombreEquipo"), (int)rs.getDouble("presupuesto"));
+				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getString("nombreEquipo"), rs.getDouble("dou"));
 				usuarios.add(usuario);
 			}
 		}catch(SQLException e) {
@@ -1375,5 +1386,28 @@ public class BaseDeDatos {
  		} catch(Exception e) {
  			e.printStackTrace();
  		}
+ 	}
+ 	
+ 	public static int obtenerValorEquipoUsuario(String usuario) {
+ 		inicializarBd();
+ 		int valor = 0;
+ 		PreparedStatement query = null;
+ 		ResultSet rs = null;
+ 		try {
+ 			query = conn.prepareStatement("SELECT obtenerValorTotalEquipoUsuario(?)");
+ 			query.setString(1, usuario);
+ 			rs = query.executeQuery();
+ 			
+ 			while(rs.next()) {
+ 				valor = rs.getInt(1);
+ 				System.out.println("HOLAxd " + usuario + " " + valor);
+ 			}
+ 			
+ 			try {conn.close();}catch(Exception e) {}
+ 		} catch(Exception e) {
+ 			e.printStackTrace();
+ 		}
+ 		
+ 		return valor;
  	}
 }

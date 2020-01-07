@@ -25,6 +25,7 @@ public class TiendaEquipos extends JPanel{
 		
 		dataModel 	= new DefaultListModel<Equipo>();
 		lista 		= new JList<>(dataModel);
+	
 		
 		lista.addMouseListener(new MouseListener() {
 			
