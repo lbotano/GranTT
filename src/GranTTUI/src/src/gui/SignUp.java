@@ -17,6 +17,7 @@ import java.text.NumberFormat;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,21 +29,20 @@ import javax.swing.border.EmptyBorder;
 public class SignUp extends JFrame {
 
     JPanel panel;
-    
     BoxLayout boxlayout;
     
     JTextField txtUsuario;
-    
     JPasswordField txtContraseña;
-    
-    JPasswordField txtCodigo;
+    JCheckBox chkAdmin;
     
     NumberFormat formato = NumberFormat.getNumberInstance();
     JFormattedTextField txtDni = new JFormattedTextField(formato);
     
     JButton btnRegistrarse;
-    
     JButton btnCancelar;
+    
+    final String CODIGO_ADMIN = "admin";
+    boolean esAdmin = false;
     
     public SignUp() {
         super("GranTT - Registrarse");
@@ -52,39 +52,30 @@ public class SignUp extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         this.setResizable(false);
-
-        
         this.initComponents();
-        
-
-        
-        //inicio eventos y demas
         this.initEvents();
         
-        // Seteo el tamaño
         this.setSize(500, 300);
          
-        
         this.add(this.panel);
         this.pack();
-        //para centrar la interfaz
+        
+        // Centrar la ventana
         this.setLocation(
             (int) ((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - this.getWidth()) / 2), 
             (int) ((Toolkit.getDefaultToolkit().getScreenSize().getHeight()- this.getHeight()) / 2)
         );
-                
         
         this.btnRegistrarse.requestFocus();
         this.setVisible(true);
     }
     
     private void initComponents() {
-         
         this.panel = new JPanel();
         this.boxlayout = new BoxLayout(this.panel, BoxLayout.Y_AXIS);
         this.txtUsuario = new JTextField("Nombre de usuario");
         this.txtContraseña = new JPasswordField("Contraseña");
-        this.txtCodigo = new JPasswordField();
+        this.chkAdmin = new JCheckBox("Registrarse como admin");
         this.btnRegistrarse = new JButton("Registrarse");
         this.btnCancelar = new JButton("Cancelar");
         
@@ -93,6 +84,7 @@ public class SignUp extends JFrame {
         this.btnRegistrarse.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.txtUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.txtContraseña.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.chkAdmin.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.txtDni.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
         
@@ -102,7 +94,7 @@ public class SignUp extends JFrame {
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));   
         this.panel.add(this.txtContraseña);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
-        this.panel.add(this.txtCodigo);
+        this.panel.add(this.chkAdmin);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
         this.panel.add(this.txtDni);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -113,12 +105,7 @@ public class SignUp extends JFrame {
         this.txtContraseña.setEchoChar((char)0);
         this.txtContraseña.setText("Contraseña");
         
-        this.txtCodigo.setEchoChar((char)0);
-        this.txtCodigo.setText("Codigo");
         this.txtDni.setText("DNI");
-        
-        
-        // Seteo el borde vacio
         
         this.panel.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
 
@@ -153,8 +140,7 @@ public class SignUp extends JFrame {
 				
 				@Override
 				public void focusGained(FocusEvent arg0) {
-					if(new String(txtContraseña.getPassword()).equals("Contraseña"))
-					{
+					if(new String(txtContraseña.getPassword()).equals("Contraseña")){
 						txtContraseña.setText("");
 						txtContraseña.setEchoChar('●');
 					}
@@ -162,13 +148,18 @@ public class SignUp extends JFrame {
 			}
         );
         
-        this.txtCodigo.addMouseListener(
+        this.chkAdmin.addMouseListener(
             new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
-                    txtCodigo.setText("");
-                    txtCodigo.setEchoChar('●');
+                	if(chkAdmin.isSelected()) {
+                		esAdmin = JOptionPane.showInputDialog("Código de admin: ").equals(CODIGO_ADMIN);
+                		
+                		if(!esAdmin) {
+                			JOptionPane.showMessageDialog(null, "Código incorrecto");
+                			chkAdmin.setSelected(false);
+                		}
+                	}
                 }
-                //no le prestes atencion a esto
                 public void mousePressed(MouseEvent e) {}
                 public void mouseReleased(MouseEvent e) {}
                 public void mouseEntered(MouseEvent e) {}
@@ -196,19 +187,13 @@ public class SignUp extends JFrame {
                 @Override 
                 public void actionPerformed(ActionEvent e) {
                     if(!(txtUsuario.getText().isEmpty() || txtDni.getText().length() != 10)) {
-                        if(!txtContraseña.getPassword().toString().isEmpty()) {    
-                            boolean adm = false;
-                            String valor = new String(txtCodigo.getPassword());
-                            
-                            if(valor.equals("admin")) {
-                                adm = true;
-                            }
+                        if(!txtContraseña.getPassword().toString().isEmpty()) {
                             if(BaseDeDatos.crearUsuario(
                                 new Usuario(
                                     txtUsuario.getText(), 
                                     String.valueOf(txtContraseña.getPassword())
                                 ), 
-                                adm,
+                                esAdmin && chkAdmin.isSelected(),
                                 String.valueOf(txtDni.getText()))
                             ) {
                                 JOptionPane.showMessageDialog(
