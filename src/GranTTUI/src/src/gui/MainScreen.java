@@ -36,8 +36,6 @@ public class MainScreen extends JFrame {
     
     private Dimension size;
     
-    
-    //>>>>>>>>>>>>>>>>>>>>AGREGAAAA ACAAAAA TU JPANELL<<<<<<<<<<<<<<<<<<<<<<<<<<
     private Jugar jugar;
     private TiendaPanel tienda;
     private Admin adminPanel;
@@ -50,14 +48,11 @@ public class MainScreen extends JFrame {
         BaseDeDatos.setUltimoTorneo();
         
         this.initComponents();
-        
         this.initEvents();
-        
-        
         this.setSize(this.size.width, this.size.height);
         this.setResizable(false);
         
-        //para centrar la interfaz
+        // Centrar la ventana
         this.setLocation(
             (int) ((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - this.getWidth()) / 2), 
             (int) ((Toolkit.getDefaultToolkit().getScreenSize().getHeight()- this.getHeight()) / 2)
@@ -107,8 +102,7 @@ public class MainScreen extends JFrame {
                 this.size.height
             )
         );
-        //w: screen / 20 * 18 / 20 * 18
-        //h: screen / 20 * 17
+
         rightPanel.setPreferredSize(
             new Dimension(
                 size.width / 20 * 18, 
@@ -139,8 +133,6 @@ public class MainScreen extends JFrame {
         rightPanel.add(this.editor, "Editor");
         rightPanel.add(this.top, "Top Usuarios");
         if(BaseDeDatos.esAdmin()) rightPanel.add(this.adminPanel, "Admin");
-        
-        //aca agrego los paneles de la interfaz
         
         leftPanel.add(this.btnJugar);
         leftPanel.add(this.btnTienda);
