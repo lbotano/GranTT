@@ -1247,8 +1247,6 @@ public class BaseDeDatos {
 	}
 	
 	public static boolean tieneTarjetaAmarilla(Jugador j) {
-		List<Ocurrencia> ocurrencias = new ArrayList<Ocurrencia>();
-		
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
@@ -1279,9 +1277,7 @@ public class BaseDeDatos {
 		return false;
 	}
 	
-	public static boolean tieneTarjetaRoja(Jugador j) {
-		List<Ocurrencia> ocurrencias = new ArrayList<Ocurrencia>();
-		
+	public static boolean tieneTarjetaRoja(Jugador j) {		
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;

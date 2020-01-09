@@ -20,11 +20,9 @@ public abstract class PlayerPanel extends JPanel {
 	private JLabel nombre;
 	private JLabel precio;
 	private JLabel estado;
-	private Dimension size;
 	
 	public PlayerPanel(Dimension size) {
 		super();
-		this.size = size;
 
 		this.nombre = new JLabel();
 		this.precio = new JLabel();

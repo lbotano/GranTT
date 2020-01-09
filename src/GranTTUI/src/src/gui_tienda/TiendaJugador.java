@@ -25,14 +25,9 @@ public class TiendaJugador extends JPanel {
 	private JLabel 	dorsal;
 	private JLabel	posicion;
 	
-	private Jugador jugador;
-	
 	private JButton botonComprar;
 	
 	private GridBagLayout layout;
-	
-	private TiendaListaComprar panelComprar;
-	private TiendaListaVender panelVender;
 	
 	private Color color1 = null;
 	private Color color2 = null;
@@ -59,8 +54,6 @@ public class TiendaJugador extends JPanel {
 	
 	public TiendaJugador(Jugador jugador) {
 		super();
-		
-		this.jugador = jugador;
 		
 		this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		

@@ -4,16 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import grantt.BaseDeDatos;
-import grantt.Equipo;
 import grantt.Jugador;
 
 public class StatePanel extends JPanel {
@@ -24,23 +21,17 @@ public class StatePanel extends JPanel {
 	
 	public JLabel precio;
 	public JButton btnGuardar;
-	private EditorPanel owner;
 	
 	public StatePanel(Dimension d, EditorPanel ep) {
 		super();
 		
-		this.owner = ep;
 		this.size = d;
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
 		this.precio = new JLabel("Valor Total: ");
 		this.btnGuardar = new JButton("Guardar Cambios");
 		
-		
 		this.setPreferredSize(this.size);
-		
-		
-		
 		this.setLayout(this.gbl);
 		
 		this.gbc.gridx = 0;
@@ -68,7 +59,6 @@ public class StatePanel extends JPanel {
 		for(Jugador j : jugadores) {
 			valor += j.getValor();
 		}
-		
 		
 		this.precio.setText("Valor Total: " + valor);
 	}

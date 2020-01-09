@@ -88,8 +88,6 @@ public class SignUp extends JFrame {
         this.txtDni.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.btnCancelar.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-       
-        //agrego los controles al frame
         this.panel.add(this.txtUsuario);
         this.panel.add(Box.createRigidArea(new Dimension(0, 10)));   
         this.panel.add(this.txtContraseña);
@@ -108,7 +106,6 @@ public class SignUp extends JFrame {
         this.txtDni.setText("DNI");
         
         this.panel.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
-
     }
     
     private void initEvents() {
@@ -222,7 +219,7 @@ public class SignUp extends JFrame {
                 @Override 
                 public void actionPerformed(ActionEvent e) {
                     dispose();
-                    LogIn li = new LogIn();
+                    new LogIn();
                 }
             }
         );

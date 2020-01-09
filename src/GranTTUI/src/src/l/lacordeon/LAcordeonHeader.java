@@ -10,12 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 public class LAcordeonHeader extends JPanel{
-	private LAcordeonItem item;
 	private BorderLayout layout;
 	
 	public LAcordeonHeader(LAcordeonItem item) {
 		super();
-		this.item = item;
 		
 		layout = new BorderLayout();
 		this.setLayout(layout);

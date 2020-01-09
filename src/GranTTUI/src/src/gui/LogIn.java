@@ -151,9 +151,10 @@ class LogIn extends JFrame {
                                     null, "Error Al Iniciar Sesion. El Usuario No Existe"
                                 );
                             } else {
-                                MainScreen ms = new MainScreen();
+                                new MainScreen();
                                 dispose();
-                                //me fijo si hace falta crear el equipo
+                                
+                                // Se fija si hace falta crear el equipo
                                 if(BaseDeDatos.usuarioNoTieneEquipo()) {
                                     String in = "";
                                     do{
