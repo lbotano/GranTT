@@ -21,7 +21,7 @@ public class BaseDeDatos {
 	
 	public static void inicializarBd() {
 		try{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/GRANTT?useSSL=false&allowPublicKeyRetrieval=true", "root", "12345");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/GRANTT?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf-8", "root", "12345");
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -220,7 +220,7 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static List<Jugador> obtenerJugadores(){
+	/*public static List<Jugador> obtenerJugadores(){
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
@@ -247,7 +247,7 @@ public class BaseDeDatos {
 			}
 		}
 		return jugadores;
-	}
+	}*/
 	
 	public static List<Jugador> obtenerJugadoresEquipo(){
 		inicializarBd();

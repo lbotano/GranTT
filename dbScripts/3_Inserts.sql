@@ -158,7 +158,7 @@ INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('35', 'Miguel Torren ', '31', '2', '2', '2');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('36', 'Marcos Angeleri', '36', '2', '2', '6');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('37', 'Elias Gomez ', '25', '2', '2', '24');
-INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('38', 'Enzo YbaÃ±ez', '21', '2', '2', '3');
+INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('38', 'Enzo Ybañez', '21', '2', '2', '3');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('39', 'Jonathan Sandoval', '32', '2', '2', '15');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('40', 'Aaron Barquett', '20', '2', '2', '21');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('41', 'Matias Romero ', '23', '2', '2', '26');
@@ -203,11 +203,11 @@ INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('77', 'Alejo Antilef', '21', '3', '3', '24');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('78', 'Emiliano Mendez', '30', '3', '3', '5');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('79', 'Lionel Laborda', '20', '3', '3', '29');
-INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('80', 'Diego NuÃ±ez', '29', '3', '3', '35');
+INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('80', 'Diego Nuñez', '29', '3', '3', '35');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('81', 'Lucas Necul', '20', '3', '3', '10');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('82', 'Lucas Piovi', '27', '3', '3', '15');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('83', 'Mateo Carabajal', '22', '3', '3', '14');
-INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('84', 'Joel SoÃ±ora', '23', '3', '3', '19');
+INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('84', 'Joel Soñora', '23', '3', '3', '19');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('85', 'Nicolas Gimenez', '23', '3', '3', '31');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('86', 'Juan Cruz Kaprof', '24', '3', '3', '17');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('87', 'Facundo Pons', '23', '4', '3', '7');
@@ -312,13 +312,13 @@ INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('178', 'Leandro Requena', '32', '1', '7', '17');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('179', 'Matias Nani', '21', '2', '7', '3');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('180', 'Francisco Manenti', '23', '2', '7', '31');
-INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('181', 'Maximiliano AcuÃ±a', '21', '2', '7', '16');
+INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('181', 'Maximiliano Acuña', '21', '2', '7', '16');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('182', 'Nicolas Correa', '35', '2', '7', '2');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('183', 'Oscar Salomon', '20', '2', '7', '32');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('184', 'Leonel Ferroni', '23', '2', '7', '34');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('185', 'Jonathan Bay', '26', '2', '7', '12');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('186', 'Marcos Sanchez', '29', '2', '7', '6');
-INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('187', 'Gervasio NuÃ±ez', '31', '2', '7', '40');
+INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('187', 'Gervasio Nuñez', '31', '2', '7', '40');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('188', 'Cristian Diaz', '30', '2', '7', '26');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('189', 'Hugo Vera', '28', '2', '7', '24');
 INSERT INTO `GRANTT`.`Jugador` (`id_jugador`, `nombre`, `edad`, `id_posicion`, `id_equipoReal`, `dorsal`) VALUES ('190', 'Ismael Quilez', '31', '2', '7', '29');
