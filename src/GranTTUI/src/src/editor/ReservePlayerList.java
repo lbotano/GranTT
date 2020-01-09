@@ -1,6 +1,5 @@
 package editor;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,7 +11,7 @@ import javax.swing.JScrollPane;
 
 import grantt.Jugador;
 
-public class ReservePlayerList extends JList {
+public class ReservePlayerList extends JList<ItemJugador> {
 	
 	
 	public Dimension size;
@@ -23,7 +22,7 @@ public class ReservePlayerList extends JList {
 	public JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	
 	public ReservePlayerList(Dimension size) {
-		<ItemJugador>super();
+		super();
 		this.setModel(model);
 		this.size = size;
 		

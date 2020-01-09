@@ -1,19 +1,11 @@
 package editor;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.border.MatteBorder;
 
 import grantt.BaseDeDatos;
 import grantt.Jugador;
@@ -23,19 +15,15 @@ import java.util.*;
 public class ListPanel extends JPanel {
 	
 	public Dimension size;
-	public JList lista;
+	public JList<String> lista;
 	public DefaultListModel<String> dlm;
-	private EditorPanel owner;
 	
 	public ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 	
 	public ListPanel(Dimension d, EditorPanel owner) {
 		super();
 		
-		
-		
 		this.setPreferredSize(this.size);
-		
 		this.setBackground(Color.CYAN);
 		this.initComponents(d, owner);
         
@@ -65,15 +53,9 @@ public class ListPanel extends JPanel {
 	
 	private void initComponents(Dimension d, EditorPanel ep) {
 		this.size = d;
-		this.owner = ep;
 		this.dlm = new DefaultListModel<String>();
-		this.lista = new JList(dlm);
-		
+		this.lista = new JList<String>(dlm);
 	}
-	
-	private void initEvents() {
-		
-	}	
 }
 
 

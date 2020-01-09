@@ -30,13 +30,10 @@ public class PlayerListPanel extends PlayerPanel {
 	}
 
 	@Override
-	public void addJugador(Jugador j) {
-
-	}
+	public void addJugador(Jugador j) {}
 
 	@Override
 	public Jugador quitarJugador() {
-
 		return null;
 	}
 	
@@ -50,7 +47,5 @@ public class PlayerListPanel extends PlayerPanel {
 		this.add(this.btnMover, this.gbc);
 	}
 	
-	private void initEvents() {
-		
-	}
+	private void initEvents() {}
 }

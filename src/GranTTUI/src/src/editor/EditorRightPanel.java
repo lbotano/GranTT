@@ -21,12 +21,10 @@ public class EditorRightPanel extends JPanel{
 	
 	private GridBagLayout gbl = new GridBagLayout();;
 	private GridBagConstraints gbc = new GridBagConstraints();
-	private EditorPanel owner;
 	
 	public EditorRightPanel(Dimension d, EditorPanel ep) {
 		super();
-		
-		this.owner = ep;		
+				
 		this.setLayout(this.gbl);
 		initComponents(d);
 		initEvents();

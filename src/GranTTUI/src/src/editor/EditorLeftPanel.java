@@ -19,7 +19,6 @@ public class EditorLeftPanel extends JPanel {
 	public JScrollPane pflSP;
 	public JButton btnQuitar = new JButton("Quitar");
 	public Dimension size;
-	private EditorPanel owner;
 	
 	private GridBagLayout gbl = new GridBagLayout();;
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -28,15 +27,10 @@ public class EditorLeftPanel extends JPanel {
 	
 	public EditorLeftPanel(Dimension d, EditorPanel ep) {
 		super();
-		this.owner = ep;
 		
 		this.setLayout(this.gbl);
 		
-		
 		initComponents(d);
-		initEvents();
-		
-		
 	}
 	
 	private void initComponents(Dimension d) {
@@ -44,14 +38,8 @@ public class EditorLeftPanel extends JPanel {
 		this.setPreferredSize(this.size);
 		this.pfl = new PlayerFieldList(this.size);
 		
-		
-		
 		this.setBackground(Color.GRAY);
-		
-		
-		
-		
-		//gbc.fill = GridBagConstraints.BOTH;
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.weighty = 0.95;
@@ -64,11 +52,6 @@ public class EditorLeftPanel extends JPanel {
 		gbc.weighty = 0.05;
 		gbc.weightx = 1.0;
 		this.add(this.btnQuitar, gbc);
-
-	}
-	
-	private void initEvents() {
-		
 	}
 	
 	public void getJugadoresTitulares() {

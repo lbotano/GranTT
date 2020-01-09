@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -71,25 +70,23 @@ public class EditorPanel extends JPanel {
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(panelIzquierda.pfl.getSelectedIndex() > -1) {
-						ItemJugador j = (ItemJugador) panelIzquierda.pfl.getSelectedValue();
-						
 						panelIzquierda.pfl.setSelectedIndex(-1);
 						panelDerecha.prl.addJugador(panelIzquierda.pfl.quitarJugador());
 						estado.actualizarValor();
 					} else {
-						JOptionPane.showMessageDialog(
-                            null, "Se Intento Mover Un Jugador Nulo"
-                        );
+						JOptionPane.showMessageDialog(null, "Tenés que seleccionar un jugador");
 					}
 				}
 			}
 		);
+		
 		this.panelDerecha.btnAgregar.addActionListener(
 			new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(panelDerecha.prl.getSelectedIndex() > -1) {
 						ItemJugador j = (ItemJugador) panelDerecha.prl.getSelectedValue();
-						//me fijo si tiene posiciones vacias
+						
+						// Fijarse si tiene posiciones vacias
 						Jugador.Posiciones p = j.getPosicion();
 						System.out.println("ID Del Seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
 						int max = 0;
@@ -107,13 +104,13 @@ public class EditorPanel extends JPanel {
 						int cont = 0;
 						if(panelIzquierda.pfl.model.getSize() > 0) {
 							ArrayList<ItemJugador> jugadores = new ArrayList<ItemJugador>();
-							//agrego los jugadores a la lista para despues iterar
+							
+							// Agrega los jugadores a la lista para despues iterar
 							for(int i = 0; i < panelIzquierda.pfl.model.getSize(); i++) {
 								jugadores.add(panelIzquierda.pfl.model.getElementAt(i));
 							}
-							//System.out.println("Tamaño Del Array: " + jugadores.size());
+							
 							for(ItemJugador jugador : jugadores) {
-								//System.out.println(jugador.getPosicion().toString());
 								if(jugador.getPosicion() == p) {
 									cont++;
 								}
@@ -125,12 +122,12 @@ public class EditorPanel extends JPanel {
 							estado.actualizarValor();
 						} else {
 							JOptionPane.showMessageDialog(
-                                null, "No Se Puede Mover El Jugador Indicado"
+                                null, "No se puede mover el jugador indicado."
                             );
 						}
 					} else {
 						JOptionPane.showMessageDialog(
-                            null, "Se Intento Mover Un Jugador Nulo"
+                            null, "Tenés que seleccionar un jugador."
                         );
 					}
 				}

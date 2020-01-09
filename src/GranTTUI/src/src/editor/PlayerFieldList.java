@@ -7,13 +7,12 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import grantt.Jugador;
 
-public class PlayerFieldList extends JList {
+public class PlayerFieldList extends JList<ItemJugador> {
 	
 	
 	public Dimension size;
