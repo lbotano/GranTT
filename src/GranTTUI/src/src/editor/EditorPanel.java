@@ -86,6 +86,16 @@ public class EditorPanel extends JPanel {
 					if(panelDerecha.prl.getSelectedIndex() > -1) {
 						ItemJugador j = (ItemJugador) panelDerecha.prl.getSelectedValue();
 						
+						if(j.getDiasLesionado() > 0) {
+							JOptionPane.showMessageDialog(null, "El jugador está lesionado");
+							return;
+						}
+						
+						if(j.getPartidosSuspendido() > 0) {
+							JOptionPane.showMessageDialog(null, "El jugador está suspendido");
+							return;
+						}
+						
 						// Fijarse si tiene posiciones vacias
 						Jugador.Posiciones p = j.getPosicion();
 						System.out.println("ID Del Seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
