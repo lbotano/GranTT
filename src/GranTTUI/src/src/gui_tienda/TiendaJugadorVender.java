@@ -135,8 +135,6 @@ public class TiendaJugadorVender extends JPanel{
 				if(BaseDeDatos.venderJugador(jugador.getId())) {
 					Updater.update();
 					System.out.println("Jugador vendido");
-					repaint();
-					revalidate();
 				}else {
 					System.out.println("Jugador no vendido");
 				}
