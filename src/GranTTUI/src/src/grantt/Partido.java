@@ -20,6 +20,8 @@ public class Partido {
 	private final float umbralRandom = 0.2f;
 	private final int PUNTOS_POR_GOL = 100;
 	
+	private final float PROBABILIDAD_TARJETA_ROJA = 0.2f;
+	
 	private List<Jugador> jugadoresTarjeteados;
 	
 	public Partido(Equipo equipoLocal, Equipo equipoVisitante, int jornada) {
@@ -108,7 +110,7 @@ public class Partido {
 			Jugador tarjeteado = obtenerJugadorRandom(equipo);
 			
 			TipoOcurrencia tipo = null;
-			if(estaTarjeteado(tarjeteado)) {
+			if(estaTarjeteado(tarjeteado) || Math.random() < PROBABILIDAD_TARJETA_ROJA) {
 				// Tarjeta roja
 				BaseDeDatos.ponerTarjetaRoja(tarjeteado);
 				tipo = TipoOcurrencia.ROJA;
