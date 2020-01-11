@@ -106,6 +106,11 @@ begin
 		(id_equipo, id_jugador)
     VALUES (@idEquipo, f_id_jugador);
     
+    -- Desasignar a todos los titulares
+    UPDATE Equipo_Usuario_Jugador
+    SET titular = false
+    WHERE id_equipo = @idEquipo;
+    
     return true;
 end//
 
@@ -141,6 +146,11 @@ begin
     -- Desreferenciar al jugador
     DELETE FROM GRANTT.Equipo_Usuario_Jugador
     WHERE id_jugador = f_jugador;
+    
+    -- Desasignar a todos los titulares
+    UPDATE Equipo_Usuario_Jugador
+    SET titular = false
+    WHERE id_equipo = @idEquipo;
     
     return true;
 end//

@@ -61,6 +61,7 @@ public class TiendaListaVender extends JPanel{
 		}
 		
 		// Si no se repinta el último jugador borrado se queda
+		listaPanel.revalidate();
 		listaPanel.repaint();
 	}
 	
