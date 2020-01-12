@@ -1052,7 +1052,7 @@ public class BaseDeDatos {
 			query = conn.prepareStatement("CALL seleccionarTopUsuarios()");
 			rs = query.executeQuery();
 			while(rs.next()) {
-				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getString("nombreEquipo"), rs.getDouble("dou"));
+				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getString("nombreEquipo"));
 				usuarios.add(usuario);
 			}
 		}catch(SQLException e) {

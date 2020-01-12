@@ -91,7 +91,8 @@ BEGIN
         GRANTT.Equipo_Usuario_Jugador euj
 	WHERE
 		j.id_jugador = euj.id_jugador AND
-        euj.id_equipo = @equipo
+        euj.id_equipo = @equipo AND
+        euj.titular = true
 	INTO @valor;
     return @valor;
 END//

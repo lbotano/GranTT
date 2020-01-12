@@ -7,24 +7,11 @@ public class Usuario {
 	private int id_equipo;
 	private String nombreEquipo;
 	
-	private int presupuesto;
-	
 	public double valor;
 	
 	public Usuario(String nombre, String contraseña) {
 		this.nombre = nombre;
 		this.contraseña = contraseña;
-	}
-	
-	public Usuario(String nombre, String contraseña, double valor) {
-		this(nombre, contraseña);
-		this.valor = valor;
-	}
-	
-	public Usuario(String nombre, String nombreEquipo, int presupuesto) {
-		this.nombre = nombre;
-		this.nombreEquipo = nombreEquipo;
-		this.presupuesto = presupuesto;
 	}
 	
 	public void setEquipo(int id_equipo) {
@@ -43,8 +30,8 @@ public class Usuario {
 		return this.contraseña;
 	}
 	
-	public int getPresupuesto() {
-		return this.presupuesto;
+	public double getPresupuesto() {
+		return BaseDeDatos.obtenerValorEquipoUsuario(this.getNombre());
 	}
 	
 	public String getNombreEquipo() {
