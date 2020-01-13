@@ -11,8 +11,6 @@ public class ItemJugador extends Jugador {
 		Posiciones posicion, 
 		float valor, 
 		int diasLesionado,
-		int tarjetasAmarillas, 
-		int tarjetasRojas, 
 		int partidosSuspendido, 
 		int dorsal
 	) {
@@ -22,9 +20,7 @@ public class ItemJugador extends Jugador {
 			edad, 
 			posicion, 
 			valor, 
-			diasLesionado, 
-			tarjetasAmarillas, 
-			tarjetasRojas, 
+			diasLesionado,
 			partidosSuspendido, 
 			dorsal
 		);
@@ -39,8 +35,6 @@ public class ItemJugador extends Jugador {
 			j.getPosicion(),
 			j.getValor(),
 			j.getDiasLesionado(),
-			(int) (j.getAmarillas() ? 1 : 0),
-			(int) (j.getRojas() ? 1 : 0),
 			j.getPartidosSuspendido(),
 			j.getDorsal()
 		);

@@ -45,14 +45,11 @@ CREATE TABLE Jugador (
     dorsal INTEGER,
     valor FLOAT DEFAULT 100,
     diasLesionado INTEGER,
-    tarjetasAmarillas INTEGER DEFAULT 0,
-    tarjetasRojas INTEGER DEFAULT 0,
     partidosSuspendido INTEGER DEFAULT 0,
     CONSTRAINT pk_jugador PRIMARY KEY (id_jugador),
     CONSTRAINT fk_jugador_equipoReal FOREIGN KEY (id_equipoReal) REFERENCES Equipo_Real(id_equipoReal),
     CONSTRAINT fk_jugador_posicion FOREIGN KEY (id_posicion) REFERENCES Posicion(id_posicion)
 );
-
 
 CREATE TABLE Equipo_Local (
 	id_equipo_local INTEGER auto_increment,

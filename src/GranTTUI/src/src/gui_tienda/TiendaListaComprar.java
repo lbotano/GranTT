@@ -57,12 +57,6 @@ public class TiendaListaComprar extends JPanel{
 		lista.revalidate();
 	}
 	
-	public TiendaListaComprar(List<Jugador> jugadores) {
-		super();
-		initComponents();
-		setJugadores(jugadores);
-	}
-	
 	public TiendaListaComprar() {
 		super();
 		initComponents();

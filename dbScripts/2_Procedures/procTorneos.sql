@@ -47,8 +47,6 @@ begin
 	INSERT INTO GRANTT.Torneo () VALUES ();
     UPDATE GRANTT.Jugador SET valor = 1000;
     UPDATE GRANTT.Jugador SET diasLesionado = 0;
-    UPDATE GRANTT.Jugador SET tarjetasAmarillas = 0;
-    UPDATE GRANTT.Jugador SET tarjetasRojas = 0;
     UPDATE GRANTT.Jugador SET partidosSuspendido = 0;
     UPDATE GRANTT.Equipo_Usuario SET presupuesto = 15000;
     

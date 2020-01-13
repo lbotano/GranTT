@@ -112,11 +112,11 @@ public class Partido {
 			TipoOcurrencia tipo = null;
 			if(estaTarjeteado(tarjeteado) || Math.random() < PROBABILIDAD_TARJETA_ROJA) {
 				// Tarjeta roja
-				BaseDeDatos.ponerTarjetaRoja(tarjeteado);
+				BaseDeDatos.ponerOcurrencia(new Ocurrencia(tarjeteado, TipoOcurrencia.ROJA, this.getId()));
 				tipo = TipoOcurrencia.ROJA;
 			}else {
 				// Tarjeta amarilla
-				BaseDeDatos.ponerTarjetaAmarilla(tarjeteado);
+				BaseDeDatos.ponerTarjetaAmarilla(tarjeteado, this);
 				tipo = TipoOcurrencia.AMARILLA;
 			}
 			

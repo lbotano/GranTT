@@ -17,8 +17,6 @@ public class Jugador {
 		Posiciones posicion,
 		float valor,
 		int diasLesionado,
-		int tarjetasAmarillas,
-		int tarjetasRojas,
 		int partidosSuspendido,
 		int dorsal
 	) {

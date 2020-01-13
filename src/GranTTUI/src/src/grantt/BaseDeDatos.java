@@ -1093,32 +1093,13 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static void ponerTarjetaRoja(Jugador j) {
+	public static void ponerTarjetaAmarilla(Jugador j, Partido p) {
 		inicializarBd();
 		PreparedStatement query = null;
 		try {
-			query = conn.prepareStatement("CALL ponerTarjetaRoja(?)");
+			query = conn.prepareStatement("CALL ponerTarjetaAmarilla(?, ?)");
 			query.setInt(1, j.getId());
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try {conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
-	public static void ponerTarjetaAmarilla(Jugador j) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL ponerTarjetaAmarilla(?)");
-			query.setInt(1, j.getId());
+			query.setInt(2, p.getId());
 			query.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -1156,6 +1137,7 @@ public class BaseDeDatos {
 	public static void ponerOcurrencia(Ocurrencia ocurrencia) {
 		inicializarBd();
 		PreparedStatement query = null;
+		System.out.println(ocurrencia.getJugador().getNombre() + " " + ocurrencia.getTipo());
 		try {
 			query = conn.prepareStatement("CALL ponerOcurrencia(?, ?, ?)");
 			switch (ocurrencia.getTipo()) {
@@ -1319,11 +1301,10 @@ public class BaseDeDatos {
 					Jugador.intToPosicion(rs.getInt("id_posicion")),
 					rs.getFloat("valor"),
 					rs.getInt("diasLesionado"),
-					rs.getInt("tarjetasAmarillas"),
-					rs.getInt("tarjetasRojas"),
 					rs.getInt("partidosSuspendido"),
 					rs.getInt("dorsal")
 				);
+				
 				list.add(j);
 			}
 		}catch(SQLException e) {

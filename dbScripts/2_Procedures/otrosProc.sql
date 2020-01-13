@@ -206,39 +206,3 @@ begin
 end//
 
 DELIMITER ;
-
-drop function if exists tieneTarjetaAmarilla;
-DELIMITER //
-create function tieneTarjetaAmarilla(p_id_jugador INTEGER)
-returns boolean
-deterministic
-begin
-	SELECT COUNT(*) > 0
-    FROM GRANTT.Ocurrencia
-    WHERE
-		id_jugador = p_id_jugador AND
-        ocurrencia = 3
-	INTO @res;
-    
-    RETURN @res;
-end//
-
-DELIMITER ;
-
-drop function if exists tieneTarjetaRoja;
-DELIMITER //
-create function tieneTarjetaRoja(p_id_jugador INTEGER)
-returns boolean
-deterministic
-begin
-	SELECT COUNT(*) > 0
-    FROM GRANTT.Ocurrencia
-    WHERE
-		id_jugador = p_id_jugador AND
-        ocurrencia = 4
-	INTO @res;
-    
-    RETURN @res;
-end//
-
-DELIMITER ;
