@@ -645,8 +645,6 @@ public class BaseDeDatos {
 		
 		if(idTorneo != -1) {
 			setTorneoActual(idTorneo);
-			torneoActual.generarFixture();
-			guardarFixtureDeTorneoActual();
 		}else {
 			System.err.println("Error al crear torneo");
 		}
@@ -778,32 +776,6 @@ public class BaseDeDatos {
 			}
 		}
 		return partidos;
-	}
-	
-	public static void guardarFixtureDeTorneoActual() {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			for(Partido p : torneoActual.getPartidos()) {
-				query = conn.prepareStatement("CALL anadirPartidoPendiente(?, ?, ?, ?)");
-				query.setInt(1, torneoActual.getId());
-				query.setInt(2, p.getJornada());
-				query.setInt(3, p.getEquipoLocal().getId());
-				query.setInt(4, p.getEquipoVisitante().getId());
-				
-				query.execute();
-			}
-		}catch (SQLException e){
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
 	}
 	
 	public static int getCalidad(Equipo equipo) {

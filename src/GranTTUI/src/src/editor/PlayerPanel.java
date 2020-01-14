@@ -35,7 +35,6 @@ public abstract class PlayerPanel extends JPanel {
 	
 	public abstract Jugador quitarJugador();
 	
-	
 	protected void displayPlayer(Jugador j) {
 		
 		this.jugador = j;
