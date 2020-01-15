@@ -124,7 +124,7 @@ begin
     SET @i = 0;
     SET @jornada = 0;
     WHILE @i < @cantPartidos DO
-		IF @i % 40 = 0 THEN
+		IF @i % 1 = 0 THEN
 			SET @jornada = @jornada + 1;
 		END IF;
         
@@ -143,6 +143,160 @@ begin
         SET @i = @i + 1;
     END WHILE;
 end//
+
+DELIMITER ;
+
+drop procedure if exists jugarDiaSiguiente;
+DELIMITER //
+create procedure jugarDiaSiguiente()
+begin
+	DECLARE iPartido INTEGER DEFAULT 0;
+    DECLARE iGolLocal INTEGER DEFAULT 0;
+    DECLARE iGolVisitante INTEGER DEFAULT 0;
+	
+	-- Obtener id del ultimo torneo y la jornada por la que va
+    SELECT id_torneo, jornada
+    FROM GRANTT.Torneo
+    ORDER BY id_torneo DESC
+    LIMIT 1
+    INTO @id_torneo, @jornada;
+    
+    -- Cambia al día siguiente
+    UPDATE GRANTT.Torneo
+    SET jornada = jornada + 1
+    WHERE id_torneo = @id_torneo;
+    SET @jornada = @jornada + 1;
+    
+    -- Obtiene una tabla con todos los partidos a jugar
+    DROP TEMPORARY TABLE IF EXISTS partidos_a_jugar;
+    CREATE TEMPORARY TABLE partidos_a_jugar SELECT id_partido
+    FROM GRANTT.Partido
+    WHERE 
+		id_torneo = @id_torneo AND
+        jornada = @jornada;
+    
+    -- Debug :/
+    /*SELECT @id_torneo, @jornada;
+	SELECT * FROM partidos_a_jugar;
+    SELECT * FROM GRANTT.Partido;*/
+    
+    -- Poner una cantidad de goles aleatoria a los
+    -- partidos a jugar
+    UPDATE GRANTT.Equipo_Local
+    INNER JOIN GRANTT.Partido ON partido_local = id_equipo_local AND jornada = @jornada
+    SET goles = FLOOR(RAND() * (4 + 1));
+    
+    UPDATE GRANTT.Equipo_Visitante
+    INNER JOIN GRANTT.Partido ON partido_visitante = id_equipo_visitante AND jornada = @jornada
+    SET goles = FLOOR(RAND() * (4 + 1));
+    
+    --
+    -- Elegir a los goleadores 
+	--
+    
+    SET iPartido = 0;
+    SELECT COUNT(*)
+    FROM GRANTT.Partido
+    WHERE
+		jornada = @jornada AND
+        id_torneo = @id_torneo
+    INTO @nPartido; 
+    -- por cada partido
+    while iPartido < @nPartido do
+		-- Selecciona la id del equipo local y el visitante
+        -- y la id del partido
+		SELECT
+			el.id_equipoReal,
+            ev.id_equipoReal,
+            p.id_partido
+        FROM
+            GRANTT.Partido p,
+            GRANTT.Equipo_Local el,
+            GRANTT.Equipo_Visitante ev
+		WHERE
+			el.id_equipo_local = p.partido_local AND
+            ev.id_equipo_visitante = p.partido_visitante AND
+            p.jornada = @jornada AND
+            p.id_torneo = @id_torneo
+		ORDER BY p.id_partido DESC
+        LIMIT iPartido, 1
+        INTO
+			@idEquipoLocal,
+            @idEquipoVisitante,
+            @id_partido;
+                
+		-- Hacer los goles del equipo local
+        SELECT 'Estoy en el local' FROM dual;
+        
+		SELECT
+			el.goles
+        FROM
+			GRANTT.Partido p,
+            GRANTT.Equipo_Local el
+		WHERE
+			p.partido_local = el.id_equipo_local AND
+            p.id_partido = @id_partido
+		INTO @nGolLocal;
+        
+        SET iGolLocal = 0;
+        while iGolLocal < @nGolLocal do
+			-- Selecciona un jugador al azar
+            SELECT id_jugador
+            FROM GRANTT.Jugador
+            WHERE
+				id_equipoReal = @idEquipoLocal AND
+                diasLesionado = 0 AND
+                partidosSuspendido = 0
+			ORDER BY RAND()
+            LIMIT 1
+            INTO @idJugadorRandom;
+            
+            SELECT 'Puse un gol al menos :\\', 1, @id_partido, @idJugadorRandom, @idEquipoLocal;
+            CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
+            
+            SET iGolLocal = iGolLocal + 1;
+        end while;
+        
+        -- Hacer los goles del equipo visitante
+        SELECT 'Estoy en el visitante' FROM dual;
+        SELECT
+			ev.goles
+        FROM
+			GRANTT.Partido p,
+            GRANTT.Equipo_Visitante ev
+		WHERE
+			p.partido_visitante = ev.id_equipo_visitante AND
+            p.id_partido = @id_partido
+		INTO @nGolVisitante;
+        
+		SET iGolVisitante = 0;
+        while iGolVisitante < @nGolVisitante do
+			-- Selecciona un jugador al azar
+            SELECT id_jugador
+            FROM GRANTT.Jugador
+            WHERE
+				id_equipoReal = @idEquipoVisitante AND
+                diasLesionado = 0 AND
+                partidosSuspendido = 0
+			ORDER BY RAND()
+            LIMIT 1
+            INTO @idJugadorRandom;
+            
+            SELECT 'Puse un gol al menos :/', @id_partido, @idJugadorRandom, @idEquipoVisitante;
+            CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
+            
+            --
+            
+            SET iGolVisitante = iGolVisitante + 1;
+        end while;
+        
+        SET iPartido = iPartido + 1;
+	end while;
+end//
+
+DELIMITER ;
+
+-- CALL jugarDiaSiguiente();
 
 /*SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE GRANTT.Torneo;
