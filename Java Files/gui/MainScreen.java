@@ -60,6 +60,8 @@ public class MainScreen extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        
+        this.btnTienda.doClick();
     }
     
     
@@ -127,8 +129,9 @@ public class MainScreen extends JFrame {
         leftPanel.setLayout(new BoxLayout(this.leftPanel, BoxLayout.Y_AXIS));
         rightPanel.setLayout(this.cl);
         
-        rightPanel.add(this.tienda, "Tienda");
+        
         rightPanel.add(this.jugar, "Jugar");
+        rightPanel.add(this.tienda, "Tienda");
         rightPanel.add(this.editor, "Editor");
         rightPanel.add(this.top, "Top Usuarios");
         if(BaseDeDatos.esAdmin()) rightPanel.add(this.adminPanel, "Admin");

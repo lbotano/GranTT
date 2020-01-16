@@ -179,6 +179,7 @@ begin
 end//
 delimiter ;
 
+
 drop procedure if exists obtenerTopUsuarios;
 delimiter //
 create procedure obtenerTopUsuarios()
@@ -196,7 +197,6 @@ begin
 	order by j.valor desc;
 end//
 delimiter ;
-
 
 drop function if exists obtenerValorEquipo;
 delimiter //
@@ -226,9 +226,4 @@ begin
 end//
 delimiter ;
 
-/*
-select * from 
-	usuario u,
-    equipo_usuario eu
-where u.id_equipo = eu.id_equipo
-*/
+-- call resetDatabase()

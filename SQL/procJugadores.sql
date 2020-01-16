@@ -100,7 +100,11 @@ BEGIN
 	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador)
     VALUES (p_ocurrencia, p_id_partido, p_id_jugador);
     
-    IF p_ocurrencia > 1 AND p_ocurrencia <= 4 THEN
+    IF p_ocurrencia = 1 THEN
+		UPDATE GRANTT.Jugador
+        SET valor = valor + 100
+        WHERE id_jugador = p_id_jugador;
+    ELSEIF p_ocurrencia > 1 AND p_ocurrencia <= 4 THEN
 		UPDATE GRANTT.Jugador
         SET valor = valor - 100
         WHERE id_jugador = p_id_jugador;
@@ -109,7 +113,11 @@ BEGIN
 			UPDATE GRANTT.Jugador
             SET partidosSuspendido = 2
             WHERE id_jugador = p_id_jugador;
-		END IF;
+		ELSEIF p_ocurrencia = 2 THEN
+			UPDATE GRANTT.Jugador
+            SET diasLesionado = 5
+            WHERE id_jugador = p_id_jugador;
+        END IF;
     END IF;
 END//
 DELIMITER ;
@@ -168,11 +176,4 @@ BEGIN
 END//
 DELIMITER ; 
 
-DROP PROCEDURE IF EXISTS lesionarJugador;
-DELIMITER //
-CREATE PROCEDURE lesionarJugador(p_id_jugador INTEGER)
-BEGIN
-	UPDATE GRANTT.Jugador
-    SET diasLesionado = diasLesionado + 1
-    WHERE id_jugador = p_id_jugador;
-END;
+SELECT * FROM Jugador;

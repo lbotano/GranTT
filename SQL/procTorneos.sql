@@ -124,7 +124,7 @@ begin
     SET @i = 0;
     SET @jornada = 0;
     WHILE @i < @cantPartidos DO
-		IF @i % 1 = 0 THEN
+		IF @i % 20 = 0 THEN
 			SET @jornada = @jornada + 1;
 		END IF;
         
@@ -153,6 +153,7 @@ begin
 	DECLARE iPartido INTEGER DEFAULT 0;
     DECLARE iGolLocal INTEGER DEFAULT 0;
     DECLARE iGolVisitante INTEGER DEFAULT 0;
+    DECLARE iOcurrencia INTEGER DEFAULT 0;
 	
 	-- Obtener id del ultimo torneo y la jornada por la que va
     SELECT id_torneo, jornada
@@ -174,11 +175,6 @@ begin
     WHERE 
 		id_torneo = @id_torneo AND
         jornada = @jornada;
-    
-    -- Debug :/
-    /*SELECT @id_torneo, @jornada;
-	SELECT * FROM partidos_a_jugar;
-    SELECT * FROM GRANTT.Partido;*/
     
     -- Poner una cantidad de goles aleatoria a los
     -- partidos a jugar
@@ -226,7 +222,6 @@ begin
             @id_partido;
                 
 		-- Hacer los goles del equipo local
-        SELECT 'Estoy en el local' FROM dual;
         
 		SELECT
 			el.goles
@@ -251,14 +246,12 @@ begin
             LIMIT 1
             INTO @idJugadorRandom;
             
-            SELECT 'Puse un gol al menos :\\', 1, @id_partido, @idJugadorRandom, @idEquipoLocal;
             CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
             
             SET iGolLocal = iGolLocal + 1;
         end while;
         
         -- Hacer los goles del equipo visitante
-        SELECT 'Estoy en el visitante' FROM dual;
         SELECT
 			ev.goles
         FROM
@@ -282,12 +275,38 @@ begin
             LIMIT 1
             INTO @idJugadorRandom;
             
-            SELECT 'Puse un gol al menos :/', @id_partido, @idJugadorRandom, @idEquipoVisitante;
             CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
             
-            --
             
             SET iGolVisitante = iGolVisitante + 1;
+        end while;
+        
+        -- CALCULAR TARJETAS
+        
+        SELECT FLOOR(RAND() * 5) INTO @cantOcurrencias;
+        SET iOcurrencia = 0;
+        
+        while iOcurrencia < @cantOcurrencias do
+			-- Selecciona el tipo de ocurrencia (roja, amarilla o lesión)
+            SELECT FLOOR(RAND() * 3 + 2) INTO @tipoOcurrencia;
+            
+            -- Selecciona un jugador al azar de entre los dos equipos
+            SELECT id_jugador
+            FROM GRANTT.Jugador
+            WHERE
+				(id_equipoReal = @idEquipoLocal OR
+                id_equipoReal = @idEquipoVisitante) AND
+                diasLesionado = 0 AND
+                partidosSuspendido = 0
+			ORDER BY RAND()
+            LIMIT 1
+            INTO @idJugadorOcurrencia;
+            
+            -- Pone la ocurrencia
+            CALL ponerOcurrencia(@tipoOcurrencia, @id_partido, @idJugadorOcurrencia);
+            
+        
+			SET iOcurrencia = iOcurrencia + 1;
         end while;
         
         SET iPartido = iPartido + 1;

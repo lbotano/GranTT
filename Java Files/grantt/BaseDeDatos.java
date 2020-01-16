@@ -1359,4 +1359,17 @@ public class BaseDeDatos {
  		
  		return valor;
  	}
+
+	public static void jugarDiaSiguiente() {
+ 		inicializarBd();
+ 		PreparedStatement query = null;
+ 		try {
+ 			query = conn.prepareStatement("CALL jugarDiaSiguiente()");
+ 			query.execute();
+ 			
+ 			try {conn.close();}catch(Exception e) {}
+ 		} catch(Exception e) {
+ 			e.printStackTrace();
+ 		}
+ 	}
 }
