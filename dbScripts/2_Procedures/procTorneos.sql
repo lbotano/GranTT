@@ -176,11 +176,6 @@ begin
 		id_torneo = @id_torneo AND
         jornada = @jornada;
     
-    -- Debug :/
-    /*SELECT @id_torneo, @jornada;
-	SELECT * FROM partidos_a_jugar;
-    SELECT * FROM GRANTT.Partido;*/
-    
     -- Poner una cantidad de goles aleatoria a los
     -- partidos a jugar
     UPDATE GRANTT.Equipo_Local
@@ -289,7 +284,6 @@ begin
         -- CALCULAR TARJETAS
         
         SELECT FLOOR(RAND() * 5) INTO @cantOcurrencias;
-        SELECT @cantOcurrencias;
         SET iOcurrencia = 0;
         
         while iOcurrencia < @cantOcurrencias do
@@ -309,7 +303,6 @@ begin
             INTO @idJugadorOcurrencia;
             
             -- Pone la ocurrencia
-            SELECT @tipoOcurrencia AS tipo_ocurrencia, @id_partido AS id_partido, @idJugadorOcurrencia AS id_jugador;
             CALL ponerOcurrencia(@tipoOcurrencia, @id_partido, @idJugadorOcurrencia);
             
         
