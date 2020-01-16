@@ -113,7 +113,11 @@ BEGIN
 			UPDATE GRANTT.Jugador
             SET partidosSuspendido = 2
             WHERE id_jugador = p_id_jugador;
-		END IF;
+		ELSEIF p_ocurrencia = 2 THEN
+			UPDATE GRANTT.Jugador
+            SET diasLesionado = 5
+            WHERE id_jugador = p_id_jugador;
+        END IF;
     END IF;
 END//
 DELIMITER ;
@@ -171,14 +175,5 @@ BEGIN
 	WHERE id_jugador = p_id_jugador;
 END//
 DELIMITER ; 
-
-DROP PROCEDURE IF EXISTS lesionarJugador;
-DELIMITER //
-CREATE PROCEDURE lesionarJugador(p_id_jugador INTEGER)
-BEGIN
-	UPDATE GRANTT.Jugador
-    SET diasLesionado = diasLesionado + 1
-    WHERE id_jugador = p_id_jugador;
-END;
 
 SELECT * FROM Jugador;

@@ -32,10 +32,7 @@ public class Torneo {
 	public void pasarJornada() {
 		this.diaHoy++;
 		
-		List<Partido> partidosAJugar = BaseDeDatos.obtenerPartidosSinJugarDeHoy();
-		for(Partido partido : partidosAJugar) {
-			partido.jugar();
-		}
+		BaseDeDatos.jugarDiaSiguiente();
 	}
 	
 	public Equipo getEquiposPorId(int id){
