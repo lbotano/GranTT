@@ -9,20 +9,6 @@ BEGIN
 END//
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS pasarJornada;
-DELIMITER //
-CREATE PROCEDURE pasarJornada(IN p_id_torneo INT)
-BEGIN
-	UPDATE Torneo
-    set jornada = jornada + 1
-    where id_torneo = p_id_torneo;
-    
-	UPDATE Jugador
-	SET diasLesionado = diasLesionado - 1
-	where diasLesionado > 0;
-END//
-DELIMITER ;
-
 drop function if exists seJugoTorneo;
 DELIMITER //
 create function seJugoTorneo(f_id_torneo INTEGER)
@@ -154,6 +140,16 @@ begin
     DECLARE iGolLocal INTEGER DEFAULT 0;
     DECLARE iGolVisitante INTEGER DEFAULT 0;
     DECLARE iOcurrencia INTEGER DEFAULT 0;
+    
+    -- Pasa al día siguiente
+    UPDATE Torneo
+    set jornada = jornada + 1
+    where id_torneo = p_id_torneo;
+    
+    -- Le resta un día lesionado a los jugadores
+	UPDATE Jugador
+	SET diasLesionado = diasLesionado - 1
+	where diasLesionado > 0;
 	
 	-- Obtener id del ultimo torneo y la jornada por la que va
     SELECT id_torneo, jornada
@@ -304,10 +300,15 @@ begin
             
             -- Pone la ocurrencia
             CALL ponerOcurrencia(@tipoOcurrencia, @id_partido, @idJugadorOcurrencia);
-            
         
 			SET iOcurrencia = iOcurrencia + 1;
         end while;
+        
+        UPDATE GRANTT.Jugador
+        SET partidosSuspendido = partidosSuspendido - 1
+        WHERE
+			id_equipoReal = @idEquipoLocal OR
+            id_equipoReal = @idEquipoVisitante;
         
         SET iPartido = iPartido + 1;
 	end while;
