@@ -39,6 +39,7 @@ begin
     UPDATE GRANTT.Equipo_Usuario SET presupuesto = 15000;
     
     DELETE FROM GRANTT.Ocurrencia;
+    DELETE FROM GRANTT.Equipo_Usuario_Jugador;
     
     CALL generarFixture(@idTorneo);
     
