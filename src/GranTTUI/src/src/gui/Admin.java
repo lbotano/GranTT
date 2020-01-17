@@ -38,7 +38,11 @@ public class Admin extends JPanel{
 		pasarJornada.repaint();
 		crearTorneo.repaint();
 		
-		jornada.setText("Día: " + BaseDeDatos.obtenerJornada());
+		int intJornada = BaseDeDatos.obtenerJornada();
+		if(intJornada >= 0)
+			jornada.setText("Día: " + BaseDeDatos.obtenerJornada());
+		else
+			jornada.setText("No hay torneo");
 		
 	}
 	
