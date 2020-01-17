@@ -141,15 +141,10 @@ begin
     DECLARE iGolVisitante INTEGER DEFAULT 0;
     DECLARE iOcurrencia INTEGER DEFAULT 0;
     
-    -- Pasa al día siguiente
-    UPDATE Torneo
-    set jornada = jornada + 1
-    where id_torneo = p_id_torneo;
-    
     -- Le resta un día lesionado a los jugadores
-	UPDATE Jugador
-	SET diasLesionado = diasLesionado - 1
-	where diasLesionado > 0;
+    UPDATE Jugador
+    SET diasLesionado = diasLesionado - 1
+    where diasLesionado > 0;
 	
 	-- Obtener id del ultimo torneo y la jornada por la que va
     SELECT id_torneo, jornada
