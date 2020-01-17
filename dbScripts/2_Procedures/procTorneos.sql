@@ -315,8 +315,6 @@ end//
 
 DELIMITER ;
 
--- CALL jugarDiaSiguiente();
-
 /*SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE GRANTT.Torneo;
 TRUNCATE TABLE GRANTT.Partido;

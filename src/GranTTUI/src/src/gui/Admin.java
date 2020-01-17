@@ -63,7 +63,7 @@ public class Admin extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				BaseDeDatos.pasarJornada();
+				BaseDeDatos.jugarDiaSiguiente();;
 				update();
 			}
 		});

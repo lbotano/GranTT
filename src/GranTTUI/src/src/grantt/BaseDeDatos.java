@@ -842,29 +842,6 @@ public class BaseDeDatos {
 		return torneoActual;
 	}
 	
-	public static void pasarJornada() {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL pasarJornada(?)");
-			query.setInt(1, torneoActual.getId());
-			
-			query.execute();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		
-		torneoActual.pasarJornada();
-	}
-	
 	public static int obtenerJornada() {
 		inicializarBd();
 		PreparedStatement query = null;
