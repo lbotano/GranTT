@@ -300,11 +300,13 @@ begin
 			SET iOcurrencia = iOcurrencia + 1;
         end while;
         
+        -- El jugador suspendido ya pasó un día
         UPDATE GRANTT.Jugador
         SET partidosSuspendido = partidosSuspendido - 1
         WHERE
-			id_equipoReal = @idEquipoLocal OR
-            id_equipoReal = @idEquipoVisitante;
+			partidosSuspendidos > 0 AND
+			(id_equipoReal = @idEquipoLocal OR
+            id_equipoReal = @idEquipoVisitante);
         
         SET iPartido = iPartido + 1;
 	end while;

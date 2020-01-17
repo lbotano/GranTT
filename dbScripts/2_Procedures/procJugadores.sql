@@ -175,5 +175,3 @@ BEGIN
 	WHERE id_jugador = p_id_jugador;
 END//
 DELIMITER ; 
-
-SELECT * FROM Jugador;
