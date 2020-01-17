@@ -842,29 +842,6 @@ public class BaseDeDatos {
 		return torneoActual;
 	}
 	
-	public static void pasarJornada() {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL pasarJornada(?)");
-			query.setInt(1, torneoActual.getId());
-			
-			query.execute();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		
-		torneoActual.pasarJornada();
-	}
-	
 	public static int obtenerJornada() {
 		inicializarBd();
 		PreparedStatement query = null;
@@ -1086,65 +1063,6 @@ public class BaseDeDatos {
 		}
 	}
 	
-	public static void lesionarJugador(Jugador j) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL lesionarJugador(?)");
-			query.setInt(1, j.getId());
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try {conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
-	public static void ponerOcurrencia(Ocurrencia ocurrencia) {
-		inicializarBd();
-		PreparedStatement query = null;
-		System.out.println(ocurrencia.getJugador().getNombre() + " " + ocurrencia.getTipo());
-		try {
-			query = conn.prepareStatement("CALL ponerOcurrencia(?, ?, ?)");
-			switch (ocurrencia.getTipo()) {
-				case GOL:
-					query.setInt(1, 1);
-					break;
-				case LESION:
-					query.setInt(1, 2);
-					break;
-				case AMARILLA:
-					query.setInt(1, 3);
-					break;
-				case ROJA:
-					query.setInt(1, 4);
-					break;
-				default:
-					return;
-			}
-			query.setInt(2, ocurrencia.getPartido());
-			query.setInt(3, ocurrencia.getJugador().getId());
-			
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try {conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
 	public static List<Ocurrencia> obtenerOcurrencias(int idPartido){
 		List<Ocurrencia> ocurrencias = new ArrayList<Ocurrencia>();
 		
@@ -1349,7 +1267,7 @@ public class BaseDeDatos {
  			
  			while(rs.next()) {
  				valor = rs.getInt(1);
- 				//System.out.println("HOLAxd " + usuario + " " + valor);
+ 				System.out.println("HOLAxd " + usuario + " " + valor);
  			}
  			
  			try {conn.close();}catch(Exception e) {}
@@ -1359,8 +1277,8 @@ public class BaseDeDatos {
  		
  		return valor;
  	}
-
-	public static void jugarDiaSiguiente() {
+ 	
+ 	public static void jugarDiaSiguiente() {
  		inicializarBd();
  		PreparedStatement query = null;
  		try {

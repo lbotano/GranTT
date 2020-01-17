@@ -150,10 +150,10 @@ public class SignUp extends JFrame {
                 public void mouseClicked(MouseEvent e) {
                 	if(chkAdmin.isSelected()) {
                 		String s = JOptionPane.showInputDialog("Código de admin: ");
+                		
                 		if(!(s == null)) {
                 			esAdmin = s.equals(CODIGO_ADMIN);
-                    		
-                    		if(!esAdmin) {
+                			if(!esAdmin) {
                     			JOptionPane.showMessageDialog(null, "Código incorrecto");
                     			chkAdmin.setSelected(false);
                     		}

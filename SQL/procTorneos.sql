@@ -9,20 +9,6 @@ BEGIN
 END//
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS pasarJornada;
-DELIMITER //
-CREATE PROCEDURE pasarJornada(IN p_id_torneo INT)
-BEGIN
-	UPDATE Torneo
-    set jornada = jornada + 1
-    where id_torneo = p_id_torneo;
-    
-	UPDATE Jugador
-	SET diasLesionado = diasLesionado - 1
-	where diasLesionado > 0;
-END//
-DELIMITER ;
-
 drop function if exists seJugoTorneo;
 DELIMITER //
 create function seJugoTorneo(f_id_torneo INTEGER)
@@ -53,6 +39,7 @@ begin
     UPDATE GRANTT.Equipo_Usuario SET presupuesto = 15000;
     
     DELETE FROM GRANTT.Ocurrencia;
+    DELETE FROM GRANTT.Equipo_Usuario_Jugador;
     
     CALL generarFixture(@idTorneo);
     
@@ -154,6 +141,11 @@ begin
     DECLARE iGolLocal INTEGER DEFAULT 0;
     DECLARE iGolVisitante INTEGER DEFAULT 0;
     DECLARE iOcurrencia INTEGER DEFAULT 0;
+    
+    -- Le resta un día lesionado a los jugadores
+    UPDATE Jugador
+    SET diasLesionado = diasLesionado - 1
+    where diasLesionado > 0;
 	
 	-- Obtener id del ultimo torneo y la jornada por la que va
     SELECT id_torneo, jornada
@@ -304,18 +296,23 @@ begin
             
             -- Pone la ocurrencia
             CALL ponerOcurrencia(@tipoOcurrencia, @id_partido, @idJugadorOcurrencia);
-            
         
 			SET iOcurrencia = iOcurrencia + 1;
         end while;
+        
+        -- El jugador suspendido ya pasó un día
+        UPDATE GRANTT.Jugador
+        SET partidosSuspendido = partidosSuspendido - 1
+        WHERE
+			partidosSuspendidos > 0 AND
+			(id_equipoReal = @idEquipoLocal OR
+            id_equipoReal = @idEquipoVisitante);
         
         SET iPartido = iPartido + 1;
 	end while;
 end//
 
 DELIMITER ;
-
--- CALL jugarDiaSiguiente();
 
 /*SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE GRANTT.Torneo;
@@ -325,3 +322,4 @@ TRUNCATE TABLE GRANTT.Equipo_Visitante;
 TRUNCATE TABLE GRANTT.Equipo_Usuario_Jugador;
 TRUNCATE TABLE GRANTT.Ocurrencia;
 SET FOREIGN_KEY_CHECKS = 1;*/
+

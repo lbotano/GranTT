@@ -123,7 +123,7 @@ begin
 	where 
 		euj.id_equipo = @equipo
 		and (j.diasLesionado = 0 or j.diasLesionado is null)
-		and j.partidosSuspendido in (0, null)
+		and (j.partidosSuspendido is null or j.partidosSuspendido < 1)
         and euj.titular = 1;
 	if @cant = 11 then
 		return true;
@@ -132,6 +132,8 @@ begin
 	end if;
 end//
 delimiter ;
+
+-- select validarCantTitulares('asd')
 
 drop function if exists validarCantSuplentes;
 delimiter //
@@ -226,4 +228,5 @@ begin
 end//
 delimiter ;
 
+-- call obtenerTopUsuarios()
 -- call resetDatabase()

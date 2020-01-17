@@ -29,12 +29,6 @@ public class Torneo {
 		return this.diaHoy;
 	}
 	
-	public void pasarJornada() {
-		this.diaHoy++;
-		
-		BaseDeDatos.jugarDiaSiguiente();
-	}
-	
 	public Equipo getEquiposPorId(int id){
 		for(Equipo eq : this.equipos) {
 			if(eq.getId() == id) return eq;

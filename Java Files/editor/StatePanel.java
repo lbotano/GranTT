@@ -52,8 +52,8 @@ public class StatePanel extends JPanel {
 		BaseDeDatos.updateEquipo();
 		
 		float valor = BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre());
-
-		this.precio.setText("Valor Total: " + valor);
+		
+		this.precio.setText((valor != 0 ? "Valor Total: " + valor : "No Se Pudo Calcular El Valor Del Equipo. Jugadores Invalidos."));
 	}
 	
 }

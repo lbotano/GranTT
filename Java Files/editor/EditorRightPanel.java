@@ -38,18 +38,16 @@ public class EditorRightPanel extends JPanel{
 		this.setPreferredSize(this.size);
 		this.prl = new ReservePlayerList(this.size);
 		
-		this.label.setHorizontalAlignment(JLabel.CENTER);
-		
 		this.setBackground(Color.WHITE);
-
+		label.setHorizontalAlignment(JLabel.CENTER);
+		
 		gbc.gridy = 0;
 		gbc.weighty = 0.05;
 		this.add(this.label, gbc);
-		
-		
+
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridy = 1;
-		gbc.weighty = 0.90;
+		gbc.weighty = 0.9;
 		gbc.weightx = 1.0;
 		this.add(this.prl.getScroll(), gbc);
 
