@@ -149,10 +149,17 @@ public class SignUp extends JFrame {
             new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
                 	if(chkAdmin.isSelected()) {
-                		esAdmin = JOptionPane.showInputDialog("Código de admin: ").equals(CODIGO_ADMIN);
+                		String dialog = JOptionPane.showInputDialog("Código de administrador: ");
                 		
-                		if(!esAdmin) {
-                			JOptionPane.showMessageDialog(null, "Código incorrecto");
+                		if(dialog != null) {
+                			esAdmin = dialog.equals(CODIGO_ADMIN);
+                			
+                			if(!esAdmin) {
+	                			JOptionPane.showMessageDialog(null, "Código incorrecto");
+	                			chkAdmin.setSelected(false);
+                			}
+                		} else {
+                			esAdmin = false;
                 			chkAdmin.setSelected(false);
                 		}
                 	}
@@ -194,7 +201,7 @@ public class SignUp extends JFrame {
                                 String.valueOf(txtDni.getText()))
                             ) {
                                 JOptionPane.showMessageDialog(
-                                    null, "Se Ha Creado El Usuario Con Exito"
+                                    null, "Usuario creado exitosamente"
                                 );
                                 
                                 btnCancelar.doClick();
@@ -202,14 +209,14 @@ public class SignUp extends JFrame {
                             } else {
                                 JOptionPane.showMessageDialog(
                                     null, 
-                                    "Error Al Crear El Nuevo Usuario. Ingrese Otro Nombre"
+                                    "Error al crear el usuario, pruebe con otro nombre"
                                 );
                             }
                         
                             return;
                         }
                     }
-                    JOptionPane.showMessageDialog(null, "Ingrese Todos Los Datos");
+                    JOptionPane.showMessageDialog(null, "Datos incompletos");
                 }
             }
         );
