@@ -158,13 +158,13 @@ public class EditorPanel extends JPanel {
 								BaseDeDatos.guardarJugador(j, true);
 							}
 							
-							
 							//lo mismo para los suplentes
 							
 							for(int i = 0; i < panelDerecha.prl.model.getSize(); i++) {
 								BaseDeDatos.guardarJugador(panelDerecha.prl.model.elementAt(i), false);
 							}
-							
+							EditorPanel.this.getJugadores();
+							EditorPanel.this.estado.actualizarValor();
 						} else {
 							JOptionPane.showMessageDialog(
 	                            null, "No Se Pudo Guardar Su Equipo. Jugadores Invalidos."

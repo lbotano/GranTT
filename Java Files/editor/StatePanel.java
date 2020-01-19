@@ -34,14 +34,12 @@ public class StatePanel extends JPanel {
 		this.setPreferredSize(this.size);
 		this.setLayout(this.gbl);
 		
-		this.gbc.gridx = 0;
+		this.gbc.weighty = 1.0;
 		this.gbc.fill = GridBagConstraints.BOTH;
-		this.gbc.weightx = 0.5;
+		this.gbc.weightx = 0.514;
 		this.add(this.precio, this.gbc);
 		
-		this.gbc.gridx = 5;
-		this.gbc.weightx = 0.5;
-		this.gbc.weighty = 1.0;
+		this.gbc.weightx = 0.486;
 		this.add(this.btnGuardar, this.gbc);
 		
 		this.actualizarValor();
@@ -53,7 +51,7 @@ public class StatePanel extends JPanel {
 		
 		float valor = BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre());
 		
-		this.precio.setText((valor != 0 ? "Valor Total: " + valor : "No Se Pudo Calcular El Valor Del Equipo. Jugadores Invalidos."));
+		this.precio.setText((valor != 0 ? "Valor Total: " + valor : "<html><font color=red>Equipo Invalido.</font></html>"));
 	}
 	
 }

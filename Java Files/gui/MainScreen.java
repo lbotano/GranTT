@@ -187,6 +187,7 @@ public class MainScreen extends JFrame {
 					CardLayout cl = (CardLayout)rightPanel.getLayout();
 					cl.show(MainScreen.this.rightPanel, "Editor");
 					editor.getJugadores();
+					editor.estado.actualizarValor();
 				}
 			}
         );

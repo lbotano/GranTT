@@ -269,7 +269,6 @@ begin
             
             CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
             
-            
             SET iGolVisitante = iGolVisitante + 1;
         end while;
         
@@ -299,13 +298,13 @@ begin
         
 			SET iOcurrencia = iOcurrencia + 1;
         end while;
-        
+
         -- El jugador suspendido ya pasó un día
         UPDATE GRANTT.Jugador
         SET partidosSuspendido = partidosSuspendido - 1
         WHERE
-			partidosSuspendidos > 0 AND
-			(id_equipoReal = @idEquipoLocal OR
+			partidosSuspendido > 0 AND
+			(id_equipoReal = @idEquipoLosys_configsys_configjugadorcal OR
             id_equipoReal = @idEquipoVisitante);
         
         SET iPartido = iPartido + 1;

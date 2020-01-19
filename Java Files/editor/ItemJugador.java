@@ -42,9 +42,13 @@ public class ItemJugador extends Jugador {
 	
 	public String toString() {
 		return "<html><font color=green>" + this.getPosicion() +
-				"</font> " + this.getNombre() + 
-				" Partidos Suspendidos: <font color=orange>" + this.getPartidosSuspendido() + 
-				" </font>Tarjetas Amarillas: " + (this.getAmarillas()? "SI" : "NO" ) + 
+				"</font> " + this.getNombre() +
+				(this.getDiasLesionado() > 0 ? " <font color=cyan>LESIONADO Dias: " + this.getDiasLesionado() + "</font>" : "") +
+				(this.getRojas() ? 
+						" <font color=red>TARJETA ROJA</font> Partidos Suspendidos: <font color=orange>" + this.getPartidosSuspendido() + "</font>" : 
+						""
+				) +
+				(this.getAmarillas() ? "<font color=yellow>TARJETA AMARILLA</font>" : "") +
 				" Precio: " + this.getValor() +
 				"</html>";
 	}
