@@ -304,7 +304,7 @@ begin
         UPDATE GRANTT.Jugador
         SET partidosSuspendido = partidosSuspendido - 1
         WHERE
-			partidosSuspendidos > 0 AND
+			partidosSuspendido > 0 AND
 			(id_equipoReal = @idEquipoLocal OR
             id_equipoReal = @idEquipoVisitante);
         
