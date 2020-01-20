@@ -228,5 +228,7 @@ begin
 end//
 delimiter ;
 
+
+-- select obtenerValorEquipo('asd')
 -- call obtenerTopUsuarios()
 -- call resetDatabase()

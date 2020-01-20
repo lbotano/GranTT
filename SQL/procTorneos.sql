@@ -304,7 +304,7 @@ begin
         SET partidosSuspendido = partidosSuspendido - 1
         WHERE
 			partidosSuspendido > 0 AND
-			(id_equipoReal = @idEquipoLosys_configsys_configjugadorcal OR
+			(id_equipoReal = @idEquipoLocal OR
             id_equipoReal = @idEquipoVisitante);
         
         SET iPartido = iPartido + 1;
