@@ -149,14 +149,11 @@ public class MainScreen extends JFrame {
     
     private void initEvents() {
         
-        btnJugar.addActionListener(
+        this.btnJugar.addActionListener(
             new ActionListener() {
             	@Override
                 public void actionPerformed(ActionEvent e) {
-                    CardLayout cl = (CardLayout)rightPanel.getLayout();
-                    //cl.show(/*Tu JPanel*/, "Jugar");
-                    cl.show(MainScreen.this.rightPanel, "Jugar");
-                    jugar.update();
+            		cambiarPestana("Jugar");
                 }
             }
         );
@@ -164,9 +161,7 @@ public class MainScreen extends JFrame {
             new ActionListener() {
             	@Override
                 public void actionPerformed(ActionEvent e) {
-                    CardLayout cl = (CardLayout)rightPanel.getLayout();
-                    cl.show(MainScreen.this.rightPanel, "Tienda");
-                    Updater.update();
+            		cambiarPestana("Tienda");
                 }
             }
         );
@@ -174,9 +169,7 @@ public class MainScreen extends JFrame {
         	new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					CardLayout cl = (CardLayout)rightPanel.getLayout();
-					cl.show(MainScreen.this.rightPanel, "Admin");
-					adminPanel.update();
+					cambiarPestana("Admin");
 				}
 			}
         );
@@ -184,9 +177,7 @@ public class MainScreen extends JFrame {
         	new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					CardLayout cl = (CardLayout)rightPanel.getLayout();
-					cl.show(MainScreen.this.rightPanel, "Editor");
-					editor.getJugadores();
+					cambiarPestana("Editor");
 				}
 			}
         );
@@ -194,11 +185,32 @@ public class MainScreen extends JFrame {
         	new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					CardLayout cl = (CardLayout)rightPanel.getLayout();
-					cl.show(MainScreen.this.rightPanel, "Top Usuarios");
-					top.update();
+					cambiarPestana("Top Usuarios");
 				}
 			}
         );
+    }
+    
+    public void cambiarPestana(String pestana) {
+    	CardLayout cl = (CardLayout)this.rightPanel.getLayout();
+    	cl.show(this.rightPanel, pestana);
+    	
+    	// Actualiza todas las pestañas
+    	switch(pestana){
+    		case "Jugar":
+    			this.jugar.update();
+    			break;
+    		case "Tienda":
+    			Updater.update();
+    			break;
+    		case "Editor":
+    			this.editor.getJugadores();
+    			break;
+    		case "Top":
+    			this.top.update();
+    			break;
+    		case "Admin":
+    			this.adminPanel.update();
+    	}
     }
 }

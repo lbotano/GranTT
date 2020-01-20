@@ -44,18 +44,15 @@ class LogIn extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         this.setResizable(false);
-
         
         //inicio componentes
         this.initComponents();
-        
         
         //inicio eventos
         this.initEvents();
         
         // Seteo el tamaño
         this.setSize(500, 300);
-         
         
         this.add(this.panel);
         this.pack();
@@ -113,7 +110,6 @@ class LogIn extends JFrame {
                         txtUsuario.setText("Nombre De Usuario");
                     }
                 }
-
             }
         );
         
@@ -148,22 +144,24 @@ class LogIn extends JFrame {
                                 )
                             )) {
                                 JOptionPane.showMessageDialog(
-                                    null, "Error Al Iniciar Sesion. El Usuario No Existe"
+                                    null, "El usuario no existe"
                                 );
                             } else {
-                                new MainScreen();
+                                MainScreen ms = new MainScreen();
                                 dispose();
+                                
+                                ms.cambiarPestana("Tienda");
                                 
                                 // Se fija si hace falta crear el equipo
                                 if(BaseDeDatos.usuarioNoTieneEquipo()) {
                                     String in = "";
                                     do{
-                                        in = JOptionPane.showInputDialog("Todavia No Posee Un Equipo. Ingrese El Nombre Del Mismo: ");
+                                        in = JOptionPane.showInputDialog("Ingrese un nombre para su nuevo nuevo equipo: ");
                                     } while(in == null || in.isEmpty());
                                     if(BaseDeDatos.crearEquipo(in)) {
-                                        JOptionPane.showMessageDialog(null, "Se Ha Creado Su Equipo Con Exito");
+                                        JOptionPane.showMessageDialog(null, "Equipo creado exitosamente");
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "Hubo Un Error Al Crear El Equipo");
+                                        JOptionPane.showMessageDialog(null, "Error al crear el equipo");
                                     }
                                 }    
                             }
@@ -171,7 +169,7 @@ class LogIn extends JFrame {
                         }
                     }
                     JOptionPane.showMessageDialog(
-                        null, "Ingrese Todos Los Datos"
+                        null, "Rellene todos los campos"
                     );
                 }
             }
