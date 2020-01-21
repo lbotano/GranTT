@@ -82,7 +82,7 @@ public class MainScreen extends JFrame {
         
         jugar	= new Jugar();
         tienda	= new TiendaPanel(this, BaseDeDatos.obtenerEquiposReales());
-        adminPanel = new Admin();
+        adminPanel = new Admin(this);
         editor = new EditorPanel(new Dimension(this.size.width / 20 * 18, this.size.height));
         top = new TopPanel();
         

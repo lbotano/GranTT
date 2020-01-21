@@ -4,17 +4,23 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import grantt.BaseDeDatos;
 import grantt.Torneo;
+import grantt.Usuario;
 
 public class Admin extends JPanel{
+	private MainScreen owner;
+	
 	private GridBagLayout layout;
 	private GridBagConstraints c;
 	
@@ -33,16 +39,38 @@ public class Admin extends JPanel{
 		
 		// Desactiva los botenes de acuerdo a si quedan partidos
 		boolean quedanPartidos = BaseDeDatos.obtenerPartidosPendientes().size() > 0;
-		pasarJornada.setEnabled(quedanPartidos);
-		crearTorneo.setEnabled(true);
-		pasarJornada.repaint();
-		crearTorneo.repaint();
+		
+		if(quedanPartidos) {
+			pasarJornada.setText("Pasar al dia siguiente");
+		} else {
+			pasarJornada.setText("Obtener Resultados");
+		}
 		
 		int intJornada = BaseDeDatos.obtenerJornada();
 		if(intJornada >= 0)
 			jornada.setText("Día: " + BaseDeDatos.obtenerJornada());
 		else
 			jornada.setText("No hay torneo");
+		pasarJornada.setEnabled(true);
+		crearTorneo.setEnabled(true);
+		pasarJornada.repaint();
+		crearTorneo.repaint();
+	}
+	
+	public void mostrarResultado() {
+		String mejores = "<html><b>Mejores Jugadores:</b><br>";
+		
+		List<Usuario> usuarios = BaseDeDatos.obtenerTopUsuarios();
+		if(usuarios.size() > 0) {
+			for(Usuario u : usuarios) {
+				mejores += u.getNombre() + " " + u.getPresupuesto() + "</html>";
+			}
+		} else {
+			mejores += "No Se Encontro Ningun Jugador :(</html>";
+		}
+		
+		JOptionPane.showMessageDialog(this, mejores);
+		this.owner.cambiarPestana("Top Usuarios");
 		
 	}
 	
@@ -63,7 +91,12 @@ public class Admin extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				BaseDeDatos.jugarDiaSiguiente();;
+				if(BaseDeDatos.obtenerPartidosPendientes().size() > 0) {
+					BaseDeDatos.jugarDiaSiguiente();
+				} else {
+					mostrarResultado();
+				}
+
 				update();
 			}
 		});
@@ -90,7 +123,8 @@ public class Admin extends JPanel{
 		});
 	}
 	
-	public Admin() {
+	public Admin(MainScreen ms) {
+		this.owner = ms;
 		layout = new GridBagLayout();
 		c = new GridBagConstraints();
 		this.setLayout(layout);
