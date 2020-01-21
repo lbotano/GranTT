@@ -220,41 +220,11 @@ public class BaseDeDatos {
 		}
 	}
 	
-	/*public static List<Jugador> obtenerJugadores(){
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		List<Jugador> jugadores = new ArrayList<Jugador>();
-		try {
-			query = conn.prepareStatement("CALL obtenerJugadores()");
-			
-			rs = query.executeQuery();
-			
-			jugadores = resultSetToJugador(rs);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return jugadores;
-	}*/
-	
 	public static List<Jugador> obtenerJugadoresEquipo(){
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		List<Jugador> jugadores = new ArrayList<Jugador>();
-		System.out.println("Hola dario jajajxd " + usuarioLogueado.getEquipo());
 		try {
 			query = conn.prepareStatement("CALL obtenerJugadoresEquipoUsuario(?)");
 			query.setString(1, usuarioLogueado.getNombre());
@@ -1267,7 +1237,6 @@ public class BaseDeDatos {
  			
  			while(rs.next()) {
  				valor = rs.getInt(1);
- 				System.out.println("HOLAxd " + usuario + " " + valor);
  			}
  			
  			try {conn.close();}catch(Exception e) {}

@@ -150,8 +150,6 @@ class LogIn extends JFrame {
                                 MainScreen ms = new MainScreen();
                                 dispose();
                                 
-                                ms.cambiarPestana("Tienda");
-                                
                                 // Se fija si hace falta crear el equipo
                                 if(BaseDeDatos.usuarioNoTieneEquipo()) {
                                     String in = "";

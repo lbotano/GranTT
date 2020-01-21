@@ -13,10 +13,13 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.util.ArrayList;
 
 import editor.EditorPanel;
 
@@ -26,21 +29,11 @@ public class MainScreen extends JFrame {
     public JPanel leftPanel;
     public JPanel rightPanel;
     
-    public JButton btnJugar;
-    public JButton btnTienda;
-    public JButton btnAdmin;
-    public JButton btnEditor;
-    public JButton btnTop;
-    
     public CardLayout cl;
     
     private Dimension size;
     
-    private Jugar jugar;
-    private TiendaPanel tienda;
-    private Admin adminPanel;
-    private EditorPanel editor;
-    private TopPanel top;
+    private ArrayList<Pestana> pestanas = new ArrayList<Pestana>();
     
     public MainScreen() {
         super("GranTT - Menu");
@@ -48,7 +41,6 @@ public class MainScreen extends JFrame {
         BaseDeDatos.setUltimoTorneo();
         
         this.initComponents();
-        this.initEvents();
         this.setSize(this.size.width, this.size.height);
         this.setResizable(false);
         
@@ -60,6 +52,34 @@ public class MainScreen extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        
+        // Cambia a la pestaña de la tienda
+        this.cambiarPestana("Tienda");
+    }
+    
+    private class Pestana {
+    	public String nombre;
+    	public JButton boton;
+    	public JPanel panel;
+    	
+    	public Pestana(String nombre, JPanel panel){
+    		this.nombre = nombre;
+    		this.boton = new JButton(this.nombre);
+    		this.panel = panel;
+    	}
+    	
+    	public void updatePanel() {
+    		if(panel instanceof Jugar)
+    			((Jugar) panel).update(); 
+    		else if(panel instanceof TiendaPanel)
+    			Updater.update();
+    		else if(panel instanceof EditorPanel)
+    			((EditorPanel) panel).getJugadores();
+    		else if(panel instanceof TopPanel)
+    			((TopPanel) panel).update();
+    		else if(panel instanceof Admin)
+    			((Admin) panel).update();
+    	}
     }
     
     
@@ -67,34 +87,17 @@ public class MainScreen extends JFrame {
         menuContainer = new JPanel();
         leftPanel = new JPanel();
         rightPanel = new JPanel();
-        btnJugar = new JButton("Jugar");
-        btnTienda = new JButton("Tienda");
-        btnAdmin = new JButton("Admin");
-        btnEditor = new JButton("Editor");
-        btnTop = new JButton("Top Usuarios");
         
-        cl = new CardLayout();
-        
-        size = new Dimension(
+        this.size = new Dimension(
             Toolkit.getDefaultToolkit().getScreenSize().width / 20 * 18,
             Toolkit.getDefaultToolkit().getScreenSize().height / 20 * 17
         );
         
-        jugar	= new Jugar();
-        tienda	= new TiendaPanel(this, BaseDeDatos.obtenerEquiposReales());
-        adminPanel = new Admin();
-        editor = new EditorPanel(new Dimension(this.size.width / 20 * 18, this.size.height));
-        top = new TopPanel();
+        cl = new CardLayout();
         
         leftPanel.setBackground(Color.DARK_GRAY);
         rightPanel.setBackground(Color.GRAY);
         menuContainer.setBackground(Color.WHITE);
-        
-        btnJugar.setBackground(Color.LIGHT_GRAY);
-        btnTienda.setBackground(Color.LIGHT_GRAY);
-        btnEditor.setBackground(Color.LIGHT_GRAY);
-        btnTop.setBackground(Color.LIGHT_GRAY);
-        btnAdmin.setBackground(Color.LIGHT_GRAY);
         
         leftPanel.setPreferredSize(
             new Dimension(
@@ -105,112 +108,67 @@ public class MainScreen extends JFrame {
 
         rightPanel.setPreferredSize(
             new Dimension(
-                size.width / 20 * 18, 
-                size.height
+                this.size.width / 20 * 18, 
+                this.size.height
             )
         );
-        
-        Dimension buttonSize = new Dimension(size.width / 20 * 2, size.height / 20);
-        btnJugar.setMaximumSize(buttonSize);
-        btnTienda.setMaximumSize(buttonSize);
-        btnEditor.setMaximumSize(buttonSize);
-        btnAdmin.setMaximumSize(buttonSize);
-        btnTop.setMaximumSize(buttonSize);
-        
-        btnJugar.setFocusPainted(false);
-        btnTienda.setFocusPainted(false);
-        btnEditor.setFocusPainted(false);
-        btnAdmin.setFocusPainted(false);
-        btnTop.setFocusPainted(false);
 
+        // Fija los layouts de los paneles
         menuContainer.setLayout(new BorderLayout());
         leftPanel.setLayout(new BoxLayout(this.leftPanel, BoxLayout.Y_AXIS));
         rightPanel.setLayout(this.cl);
-        
-        
-        rightPanel.add(this.jugar, "Jugar");
-        rightPanel.add(this.tienda, "Tienda");
-        rightPanel.add(this.editor, "Editor");
-        rightPanel.add(this.top, "Top Usuarios");
-        if(BaseDeDatos.esAdmin()) rightPanel.add(this.adminPanel, "Admin");
-        
-        leftPanel.add(this.btnJugar);
-        leftPanel.add(this.btnTienda);
-        leftPanel.add(this.btnEditor);
-        leftPanel.add(this.btnTop);
-        if(BaseDeDatos.esAdmin()) leftPanel.add(this.btnAdmin);
         
         menuContainer.add(this.leftPanel, BorderLayout.LINE_START);
         menuContainer.add(this.rightPanel, BorderLayout.CENTER);
         
         getContentPane().add(this.menuContainer);
         
+        pestanas.add(new Pestana("Jugar", new Jugar()));
+        pestanas.add(new Pestana("Tienda", new TiendaPanel(this, BaseDeDatos.obtenerEquiposReales())));
+        pestanas.add(new Pestana("Editor", new EditorPanel(new Dimension(this.size.width / 20 * 18, this.size.height))));
+        pestanas.add(new Pestana("Top", new TopPanel()));
+        // Añade la pestaña de administrador si es necesario
+        if(BaseDeDatos.esAdmin()) pestanas.add(new Pestana("Admin", new Admin()));
+        
+        // Cambia el estilo de los botones
+        Dimension buttonSize = new Dimension(size.width / 20 * 2, size.height / 20);
+        for(Pestana p : this.pestanas) {
+        	// Cambia los estilos
+        	p.boton.setBackground(Color.LIGHT_GRAY);
+        	p.boton.setMaximumSize(buttonSize);
+        	p.boton.setFocusPainted(false);
+        	
+        	// Añade los componentes
+        	leftPanel.add(p.boton);
+        	rightPanel.add(p.panel, p.nombre);
+        	
+        	// Añade los eventos
+        	p.boton.addActionListener(
+        		new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						cambiarPestana(p);
+					}
+				}
+        	);
+        }
     }
     
-    private void initEvents() {
-        
-        this.btnJugar.addActionListener(
-            new ActionListener() {
-            	@Override
-                public void actionPerformed(ActionEvent e) {
-            		cambiarPestana("Jugar");
-                }
-            }
-        );
-        this.btnTienda.addActionListener(
-            new ActionListener() {
-            	@Override
-                public void actionPerformed(ActionEvent e) {
-            		cambiarPestana("Tienda");
-                }
-            }
-        );
-        this.btnAdmin.addActionListener(
-        	new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					cambiarPestana("Admin");
-				}
-			}
-        );
-        this.btnEditor.addActionListener(
-        	new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					cambiarPestana("Editor");
-				}
-			}
-        );
-        this.btnTop.addActionListener(
-        	new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					cambiarPestana("Top Usuarios");
-				}
-			}
-        );
+    public void cambiarPestana(Pestana pestana) {
+    	CardLayout cl = (CardLayout)this.rightPanel.getLayout();
+    	cl.show(this.rightPanel, pestana.nombre);
+    	
+    	pestana.updatePanel();
     }
     
     public void cambiarPestana(String pestana) {
-    	CardLayout cl = (CardLayout)this.rightPanel.getLayout();
-    	cl.show(this.rightPanel, pestana);
-    	
-    	// Actualiza todas las pestañas
-    	switch(pestana){
-    		case "Jugar":
-    			this.jugar.update();
-    			break;
-    		case "Tienda":
-    			Updater.update();
-    			break;
-    		case "Editor":
-    			this.editor.getJugadores();
-    			break;
-    		case "Top":
-    			this.top.update();
-    			break;
-    		case "Admin":
-    			this.adminPanel.update();
+    	for(Pestana p: this.pestanas) {
+    		if(p.nombre.equals(pestana)) {
+    			CardLayout cl = (CardLayout)this.rightPanel.getLayout();
+    	    	cl.show(this.rightPanel, p.nombre);
+    	    	
+    	    	p.updatePanel();
+    		}
     	}
     }
 }
