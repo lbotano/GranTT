@@ -316,6 +316,16 @@ begin
         
         SET iPartido = iPartido + 1;
 	end while;
+    
+    -- Mueve a reserva a todos los futbolistas de equipos con futbolistas que se hayan lesionado o suspendido   
+	UPDATE GRANTT.Equipo_Usuario_Jugador euj
+    INNER JOIN GRANTT.Jugador j
+    ON
+		j.id_jugador = euj.id_jugador AND
+        (j.partidosSuspendido > 0 OR j.diasLesionado > 0)
+	INNER JOIN GRANTT.Equipo_Usuario_Jugador eujj
+	ON euj.id_equipo = eujj.id_equipo
+    SET eujj.titular = false;
 end//
 
 DELIMITER ;

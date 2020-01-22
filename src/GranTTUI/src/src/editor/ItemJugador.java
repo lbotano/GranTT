@@ -51,7 +51,6 @@ public class ItemJugador extends Jugador {
 				(this.getAmarillas() ? " <font color=orange>TARJETA AMARILLA</font>" : "") +
 				" Precio: " + this.getValor() +
 				"</html>";
-		//return this.getNombre() + " " + this.getDiasLesionado() + " " + this.getPartidosSuspendido() + " " + this.getAmarillas() + " " + this.getRojas();
-	}
+		}
 	
 }
