@@ -167,6 +167,10 @@ class LogIn extends JFrame {
                                     }
                                 }    
                                 ms.cambiarPestana("Tienda");
+                                if(!(BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) > 0)) {
+                                	JOptionPane.showMessageDialog(null, "Su Equipo No Es Valido. Modifiquelo Para Poder Jugar.");
+                                	ms.cambiarPestana("Editor");
+                                }
                             }
                             return;
                         }
