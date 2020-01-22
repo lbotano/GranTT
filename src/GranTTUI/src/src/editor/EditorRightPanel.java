@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -18,6 +19,7 @@ public class EditorRightPanel extends JPanel{
 	public JScrollPane prlSP;
 	public JButton btnAgregar = new JButton("Agregar");
 	public Dimension size;
+	public JLabel label = new JLabel("Suplentes");
 	
 	private GridBagLayout gbl = new GridBagLayout();;
 	private GridBagConstraints gbc = new GridBagConstraints();
@@ -36,18 +38,20 @@ public class EditorRightPanel extends JPanel{
 		this.setPreferredSize(this.size);
 		this.prl = new ReservePlayerList(this.size);
 		
+		this.setBackground(Color.WHITE);
+		label.setHorizontalAlignment(JLabel.CENTER);
 		
-		this.setBackground(Color.GRAY);
+		gbc.gridy = 0;
+		gbc.weighty = 0.05;
+		this.add(this.label, gbc);
 
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.weighty = 0.95;
+		gbc.gridy = 1;
+		gbc.weighty = 0.9;
 		gbc.weightx = 1.0;
 		this.add(this.prl.getScroll(), gbc);
 
-		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		gbc.weighty = 0.05;
 		gbc.weightx = 1.0;
 		this.add(this.btnAgregar, gbc);
