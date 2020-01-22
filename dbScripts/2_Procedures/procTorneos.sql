@@ -307,6 +307,12 @@ begin
 			partidosSuspendido > 0 AND
 			(id_equipoReal = @idEquipoLocal OR
             id_equipoReal = @idEquipoVisitante);
+		DELETE o.* FROM GRANTT.Ocurrencia o
+        INNER JOIN GRANTT.Jugador j
+        ON o.id_jugador = j.id_jugador
+        WHERE
+			j.partidosSuspendido = 0 AND
+            o.ocurrencia = 4;
         
         SET iPartido = iPartido + 1;
 	end while;

@@ -74,7 +74,7 @@ public class EditorPanel extends JPanel {
 						panelDerecha.prl.addJugador(panelIzquierda.pfl.quitarJugador());
 						estado.actualizarValor();
 					} else {
-						JOptionPane.showMessageDialog(null, "Tenés que seleccionar un jugador");
+						JOptionPane.showMessageDialog(null, "Tiene que seleccionar un jugador");
 					}
 				}
 			}
@@ -98,7 +98,7 @@ public class EditorPanel extends JPanel {
 						
 						// Fijarse si tiene posiciones vacias
 						Jugador.Posiciones p = j.getPosicion();
-						System.out.println("ID Del Seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
+						System.out.println("ID del seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
 						int max = 0;
 						switch(p) {
 							case ARQUERO:
@@ -137,7 +137,7 @@ public class EditorPanel extends JPanel {
 						}
 					} else {
 						JOptionPane.showMessageDialog(
-                            null, "Tenés que seleccionar un jugador."
+                            null, "Tiene que seleccionar un jugador."
                         );
 					}
 				}
@@ -167,7 +167,7 @@ public class EditorPanel extends JPanel {
 							EditorPanel.this.estado.actualizarValor();
 						} else {
 							JOptionPane.showMessageDialog(
-	                            null, "No Se Pudo Guardar Su Equipo. Jugadores Invalidos."
+	                            null, "No se pudo guardar el equipo. Jugadores inválidos."
 	                        );
 						}
 					}
@@ -178,13 +178,5 @@ public class EditorPanel extends JPanel {
 	public void getJugadores() {
 		this.panelIzquierda.getJugadoresTitulares();
 		this.panelDerecha.getJugadoresSuplentes();
-		/*
-		this.jugadores.clear();
-		ArrayList<Jugador> jug = (ArrayList<Jugador>) BaseDeDatos.obtenerJugadoresEquipo();
-		ArrayList<ItemJugador> jugadores = new ArrayList<ItemJugador>();
-		for(Jugador j : jug) {
-			jugadores.add(new ItemJugador(j));
-		}
-		*/
 	}
 }

@@ -74,7 +74,7 @@ public class EditorLeftPanel extends JPanel {
 		if(this.pfl.getModel().getSize() == 11) {
 			return true;
 		} else {
-			System.out.println("El Equipo Ingresado Es Invalido");
+			System.out.println("El equipo ingresado es inválido");
 			return false;
 		}
 	}

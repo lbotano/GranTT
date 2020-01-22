@@ -49,7 +49,7 @@ public class ReservePlayerList extends JList<ItemJugador> {
 			this.repaint();
 			return j;
 		} else {
-			System.out.println("Jugador Nulo en " + this.toString());
+			System.out.println("Jugador nulo en " + this.toString());
 			return null;
 		}
 	}

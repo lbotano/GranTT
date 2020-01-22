@@ -41,16 +41,17 @@ public class ItemJugador extends Jugador {
 	}
 	
 	public String toString() {
-		return "<html><font color=green>" + this.getPosicion() +
-				"</font> " + this.getNombre() +
-				(this.getDiasLesionado() > 0 ? " <font color=blue>LESIONADO Dias: " + this.getDiasLesionado() + "</font>" : "") +
+		return "<html><i>" + this.getPosicion() + "</i> " +
+				this.getNombre() +
+				(this.getDiasLesionado() > 0 ? " <font color=blue>LESIONADO: " + this.getDiasLesionado() + " días</font>": "") +
 				(this.getPartidosSuspendido() > 0 ? 
-						" <font color=red>TARJETA ROJA</font> Partidos Suspendidos: <font color=red>" + this.getPartidosSuspendido() + "</font>" : 
+						" <font color=red>TARJETA ROJA</font> <i>Suspendido por:</i> <font color=red>" + this.getPartidosSuspendido() + " partidos</font>" : 
 						""
 				) +
 				(this.getAmarillas() ? " <font color=orange>TARJETA AMARILLA</font>" : "") +
 				" Precio: " + this.getValor() +
 				"</html>";
+		//return this.getNombre() + " " + this.getDiasLesionado() + " " + this.getPartidosSuspendido() + " " + this.getAmarillas() + " " + this.getRojas();
 	}
 	
 }

@@ -30,21 +30,17 @@ public class PlayerFieldList extends JList<ItemJugador> {
 		scroll.setViewportView(this);
 		
 		this.setBackground(Color.WHITE);
-		//this.setLayoutOrientation(JList.VERTICAL);
-		
 		
 		this.setPreferredSize(this.size);
-		
-		
 	}
 
 	public void addJugador(Jugador j) {
 		if(this.validarInsercion(j.getPosicion())) {
 			this.model.addElement(
-					new ItemJugador(j)
-				);
+				new ItemJugador(j)
+			);
 		} else {
-			System.out.println("Se Intento Poner Un Jugador De Mas En Una Posicion.");
+			System.out.println("Se intentó poner un jugador de más en una posición.");
 		}
 	}
 
@@ -56,13 +52,9 @@ public class PlayerFieldList extends JList<ItemJugador> {
 			this.repaint();
 			return new ItemJugador(j);
 		} else {
-			System.out.println("Jugador Nulo en " + this.toString());
+			System.out.println("Jugador nulo en " + this.toString());
 			return null;
 		}
-	}
-	
-	public void initComponents() {
-		
 	}
 	
 	public boolean validarInsercion(Jugador.Posiciones p) {
@@ -84,12 +76,8 @@ public class PlayerFieldList extends JList<ItemJugador> {
 				c++;
 			}
 		}
-		//verifico la cantidad
-		if(c < max) {
-			return true;
-		} else {
-			return false;
-		}
+		// Verifica la cantidad
+		return c < max;
 	}
 	public JScrollPane getScroll() {
 		return this.scroll;
