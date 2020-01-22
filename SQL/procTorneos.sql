@@ -133,6 +133,7 @@ end//
 
 DELIMITER ;
 
+
 drop procedure if exists jugarDiaSiguiente;
 DELIMITER //
 create procedure jugarDiaSiguiente()
@@ -269,6 +270,7 @@ begin
             
             CALL ponerOcurrencia(1, @id_partido, @idJugadorRandom);
             
+            
             SET iGolVisitante = iGolVisitante + 1;
         end while;
         
@@ -298,7 +300,7 @@ begin
         
 			SET iOcurrencia = iOcurrencia + 1;
         end while;
-
+        
         -- El jugador suspendido ya pasó un día
         UPDATE GRANTT.Jugador
         SET partidosSuspendido = partidosSuspendido - 1
@@ -306,9 +308,26 @@ begin
 			partidosSuspendido > 0 AND
 			(id_equipoReal = @idEquipoLocal OR
             id_equipoReal = @idEquipoVisitante);
+		DELETE o.* FROM GRANTT.Ocurrencia o
+        INNER JOIN GRANTT.Jugador j
+        ON o.id_jugador = j.id_jugador
+        WHERE
+			j.partidosSuspendido = 0 AND
+            o.ocurrencia = 4;
         
         SET iPartido = iPartido + 1;
 	end while;
+    /*
+    -- Mueve a reserva a todos los futbolistas de equipos con futbolistas que se hayan lesionado o suspendido   
+	UPDATE GRANTT.Equipo_Usuario_Jugador euj
+    INNER JOIN GRANTT.Jugador j
+    ON
+		j.id_jugador = euj.id_jugador AND
+        (j.partidosSuspendido > 0 OR j.diasLesionado > 0)
+	INNER JOIN GRANTT.Equipo_Usuario_Jugador eujj
+	ON euj.id_equipo = eujj.id_equipo
+    SET eujj.titular = false;
+    */
 end//
 
 DELIMITER ;

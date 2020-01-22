@@ -153,7 +153,6 @@ class LogIn extends JFrame {
                             } else {
                                 MainScreen ms = new MainScreen();
                                 dispose();
-                                ms.cambiarPestana("Tienda");
                                 
                                 // Se fija si hace falta crear el equipo
                                 if(BaseDeDatos.usuarioNoTieneEquipo()) {
@@ -167,6 +166,7 @@ class LogIn extends JFrame {
                                         JOptionPane.showMessageDialog(null, "Hubo Un Error Al Crear El Equipo");
                                     }
                                 }    
+                                ms.cambiarPestana("Tienda");
                             }
                             return;
                         }
