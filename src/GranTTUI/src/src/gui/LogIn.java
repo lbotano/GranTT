@@ -161,7 +161,19 @@ class LogIn extends JFrame {
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Error al crear el equipo");
                                     }
-                                }    
+                                }
+                                
+                                if(
+                            		BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) <= 0 &&
+                            		!BaseDeDatos.usuarioNoTieneEquipo()
+                        		) {
+                                	JOptionPane.showMessageDialog(
+                                		null,
+                                		"Todavía hace falta armar el equipo",
+                                		"Probablemente un jugador se lesionó o suspendió",
+                                		JOptionPane.WARNING_MESSAGE);
+                                	ms.cambiarPestana("Editor");
+                                }
                             }
                             return;
                         }
