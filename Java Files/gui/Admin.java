@@ -47,11 +47,15 @@ public class Admin extends JPanel{
 		}
 		
 		int intJornada = BaseDeDatos.obtenerJornada();
-		if(intJornada >= 0)
+		System.out.println("Numero Jornada: " + intJornada);
+		if(intJornada >= 0) {
 			jornada.setText("Día: " + BaseDeDatos.obtenerJornada());
-		else
+			pasarJornada.setEnabled(true);
+		} else {
 			jornada.setText("No hay torneo");
-		pasarJornada.setEnabled(true);
+			pasarJornada.setEnabled(false);
+		}
+		
 		crearTorneo.setEnabled(true);
 		pasarJornada.repaint();
 		crearTorneo.repaint();
@@ -70,8 +74,6 @@ public class Admin extends JPanel{
 		}
 		
 		JOptionPane.showMessageDialog(this, mejores);
-		this.owner.cambiarPestana("Top Usuarios");
-		
 	}
 	
 	private void initEvents() {
@@ -96,7 +98,6 @@ public class Admin extends JPanel{
 				} else {
 					mostrarResultado();
 				}
-
 				update();
 			}
 		});
@@ -190,5 +191,7 @@ public class Admin extends JPanel{
 		this.add(crearTorneo, c);
 		
 		this.initEvents();
+		
+		this.update();
 	}
 }

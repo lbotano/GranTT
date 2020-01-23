@@ -153,7 +153,6 @@ class LogIn extends JFrame {
                             } else {
                                 MainScreen ms = new MainScreen();
                                 dispose();
-                                
                                 // Se fija si hace falta crear el equipo
                                 if(BaseDeDatos.usuarioNoTieneEquipo()) {
                                     String in = "";
@@ -165,11 +164,12 @@ class LogIn extends JFrame {
                                     } else {
                                         JOptionPane.showMessageDialog(null, "Hubo Un Error Al Crear El Equipo");
                                     }
-                                }    
-                                ms.cambiarPestana("Tienda");
-                                if(!(BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) > 0)) {
-                                	JOptionPane.showMessageDialog(null, "Su Equipo No Es Valido. Modifiquelo Para Poder Jugar.");
-                                	ms.cambiarPestana("Editor");
+                                    ms.cambiarPestana("Tienda");
+                                } else {
+                                	if(!(BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) > 0)) {
+                                    	JOptionPane.showMessageDialog(null, "Su Equipo No Es Valido. Modifiquelo Para Poder Jugar.");
+                                    	ms.cambiarPestana("Editor");
+                                    }
                                 }
                             }
                             return;

@@ -39,6 +39,7 @@ public class TiendaListaComprar extends JPanel{
 		// Añadir jugadores a la lista
 		for(Jugador jugador : jugadores) {
 			this.jugadoresPanel.add(new TiendaJugador(jugador));
+//			Updater.update();
 		}
 		
 		// Graficar la lista
@@ -55,6 +56,7 @@ public class TiendaListaComprar extends JPanel{
 			lista.add(jugador);
 		}
 		lista.revalidate();
+		lista.repaint();
 	}
 	
 	public TiendaListaComprar() {

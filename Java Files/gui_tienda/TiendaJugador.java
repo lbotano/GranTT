@@ -67,12 +67,14 @@ public class TiendaJugador extends JPanel {
 		this.dorsal = new JLabel(Integer.toString(jugador.getDorsal()));
 		this.posicion = new JLabel(jugador.getPosicion().name());
 		
-		this.botonComprar = new JButton("Comprar");
-		
+		this.botonComprar = new JButton("Comprar");		
+		//System.out.println("Presupuesto: " + BaseDeDatos.obtenerPresupuesto() + " <> " + jugador.getValor() + " -- Valido: " + Updater.esValido(jugador));
+
 		// Desactiva el botón comprar si el jugador no tiene plata
-		if(jugador.getValor() > BaseDeDatos.obtenerPresupuesto() && !Updater.esValido(jugador)) {
+		if(jugador.getValor() > BaseDeDatos.obtenerPresupuesto() || !Updater.esValido(jugador)) {
 			botonComprar.setEnabled(false);
 		}else {
+			botonComprar.setEnabled(true);
 			botonComprar.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {

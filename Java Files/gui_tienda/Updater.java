@@ -37,31 +37,33 @@ public class Updater {
 		listaVender.setJugadores(BaseDeDatos.obtenerJugadoresEquipo());
 		presupuesto.setText("Presupuesto: $" + BaseDeDatos.obtenerPresupuesto());
 		tiendaPanel.updateRestantes();
-
+		System.out.println("Tamaño Total Del Equipo: " + listaVender.jugadores.size());
 	}
 	
 	public static boolean esValido(Jugador j) {
+		System.out.println("Validating Player");
 		Jugador.Posiciones posicion = j.getPosicion();
 		int max = 0;
 		switch(posicion) {
 			case ARQUERO:
-				max = 1;
+				max = 2;
 				break;
 			case DEFENSOR:
 			case MEDIO_CAMPISTA:
-				max = 4;
+				max = 5;
 				break;
 			case DELANTERO:
-				max = 2;
+				max = 3;
 		}
 		
 		int cantPosicion = 0;
-		for(Jugador jugador : listaVender.jugadores) {
+
+		for(Jugador jugador : BaseDeDatos.obtenerJugadoresEquipo()) {
 			if(jugador.getPosicion() == posicion) {
 				cantPosicion++;
 			}
 		}
-		
+
 		return cantPosicion < max;
 	}
 }

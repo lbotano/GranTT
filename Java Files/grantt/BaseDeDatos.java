@@ -17,7 +17,7 @@ public class BaseDeDatos {
 	private static Connection conn;
 		
 	public static Usuario usuarioLogueado;
-	private static Torneo torneoActual = null;
+	public static Torneo torneoActual = null;
 	
 	public static void inicializarBd() {
 		try{
@@ -747,6 +747,7 @@ public class BaseDeDatos {
 		if(torneoActual != null) {
 			try {
 				query = conn.prepareStatement("CALL obtenerPartidosPendientes(?)");
+				
 				query.setInt(1,  torneoActual.getId());
 				
 				rs = query.executeQuery();
