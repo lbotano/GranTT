@@ -98,6 +98,7 @@ CREATE TABLE Ocurrencia (
     ocurrencia INTEGER NOT NULL,
     id_partido INTEGER NOT NULL,
     id_jugador INTEGER NOT NULL,
+    orden FLOAT NOT NULL,
     CONSTRAINT pk_ocurrencia PRIMARY KEY (id_ocurrencia),
     CONSTRAINT fk_ocurrencia_partido FOREIGN KEY (id_partido) REFERENCES Partido(id_partido),
     CONSTRAINT fk_ocurrencia_jugador FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador)

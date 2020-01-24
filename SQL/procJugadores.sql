@@ -58,12 +58,13 @@ BEGIN
 	INTO @id_equipoVisitante;
     
     -- Devuelve las ocurrencias de forma desordenada
-    SELECT * FROM
+    SELECT esLocal, ocurrencia, nombre FROM
     (
 		SELECT
 			true AS esLocal,
-			ol.ocurrencia,
-			jl.nombre
+			ol.ocurrencia AS ocurrencia,
+			jl.nombre AS nombre,
+            ol.orden AS orden
 		FROM
 			GRANTT.Ocurrencia ol,
 			GRANTT.Jugador jl
@@ -74,8 +75,9 @@ BEGIN
 		UNION
 		SELECT
 			false AS esLocal,
-            ov.ocurrencia,
-            jv.nombre
+            ov.ocurrencia AS ocurrencia,
+            jv.nombre AS nombre,
+            ov.orden AS orden
 		FROM
 			GRANTT.Ocurrencia ov,
             GRANTT.Jugador jv
@@ -84,7 +86,7 @@ BEGIN
             ov.id_partido = p_id_partido AND
             jv.id_equipoReal = @id_equipoVisitante
     ) AS T
-    ORDER BY RAND();
+    ORDER BY orden;
 END//
 
 DELIMITER ;
@@ -97,8 +99,8 @@ DROP PROCEDURE IF EXISTS ponerOcurrencia;
 DELIMITER //
 CREATE PROCEDURE ponerOcurrencia(p_ocurrencia INTEGER, p_id_partido INTEGER, p_id_jugador INTEGER)
 BEGIN
-	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador)
-    VALUES (p_ocurrencia, p_id_partido, p_id_jugador);
+	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador, orden)
+    VALUES (p_ocurrencia, p_id_partido, p_id_jugador, RAND());
     
     IF p_ocurrencia = 1 THEN
 		UPDATE GRANTT.Jugador
