@@ -98,7 +98,6 @@ public class EditorPanel extends JPanel {
 						
 						// Fijarse si tiene posiciones vacias
 						Jugador.Posiciones p = j.getPosicion();
-						System.out.println("ID del seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
 						int max = 0;
 						switch(p) {
 							case ARQUERO:

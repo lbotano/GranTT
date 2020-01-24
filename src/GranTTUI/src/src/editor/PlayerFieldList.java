@@ -39,8 +39,6 @@ public class PlayerFieldList extends JList<ItemJugador> {
 			this.model.addElement(
 				new ItemJugador(j)
 			);
-		} else {
-			System.out.println("Se intentó poner un jugador de más en una posición.");
 		}
 	}
 
@@ -51,10 +49,8 @@ public class PlayerFieldList extends JList<ItemJugador> {
 			this.revalidate();
 			this.repaint();
 			return new ItemJugador(j);
-		} else {
-			System.out.println("Jugador nulo en " + this.toString());
-			return null;
 		}
+		return null;
 	}
 	
 	public boolean validarInsercion(Jugador.Posiciones p) {

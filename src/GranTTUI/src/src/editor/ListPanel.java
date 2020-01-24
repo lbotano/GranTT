@@ -44,8 +44,9 @@ public class ListPanel extends JPanel {
 				j.getNombre() + " " + 
 				j.getPosicion().toString() + 
 				" Precio: " + j.getValor() + "<br>" + 
-				"Partidos Suspendidos: " + j.getPartidosSuspendido() +
-				"Tarjetas Amarillas: " + j.getAmarillas() + 
+				"Partidos suspendido: <font color=red>" + j.getPartidosSuspendido() + "</font>" + 
+				"Tarjetas amarillas: <font color=red>" + j.getAmarillas() + "</font>" +
+				"Lesionado: <font color=red>" + j.getDiasLesionado() + " días</font>" +
 				"</html>"
 			);
 		}

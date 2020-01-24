@@ -27,7 +27,6 @@ public abstract class PlayerPanel extends JPanel {
 		this.precio = new JLabel();
 		this.estado = new JLabel();
 		
-		
 		this.setLayout(this.gbl);
 	}
 	
@@ -36,11 +35,9 @@ public abstract class PlayerPanel extends JPanel {
 	public abstract Jugador quitarJugador();
 	
 	protected void displayPlayer(Jugador j) {
-		
 		this.jugador = j;
 		this.gbl = new GridBagLayout();
 		this.gbc = new GridBagConstraints();
-		
 		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -67,10 +64,9 @@ public abstract class PlayerPanel extends JPanel {
 		
 		this.estado.setText("Estado: ");
 		if(this.jugador.getDiasLesionado() > 0) {
-			this.estado.setText(this.estado.getText() + "Lesionado Por " + this.jugador.getDiasLesionado() + " Dias.");
+			this.estado.setText(this.estado.getText() + "Lesionado por <font color=red>" + this.jugador.getDiasLesionado() + "</font> días.");
 		} else if(this.jugador.getPartidosSuspendido() > 0) {
-			
-			this.estado.setText("<html>" + this.estado.getText() + "Suspendido por <font color=red>" + this.jugador.getPartidosSuspendido() + "</font> Dias.<html>");
+			this.estado.setText("<html>" + this.estado.getText() + "Suspendido por <font color=red>" + this.jugador.getPartidosSuspendido() + "</font> partidos.<html>");
 		} else {
 			this.estado.setText(this.estado.getText() + "Normal");
 		}

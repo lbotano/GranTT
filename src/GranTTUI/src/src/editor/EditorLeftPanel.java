@@ -71,12 +71,7 @@ public class EditorLeftPanel extends JPanel {
 	}
 	
 	public boolean validarEquipo() {
-		if(this.pfl.getModel().getSize() == 11) {
-			return true;
-		} else {
-			System.out.println("El equipo ingresado es inválido");
-			return false;
-		}
+		return this.pfl.getModel().getSize() == 11;
 	}
 	
 }

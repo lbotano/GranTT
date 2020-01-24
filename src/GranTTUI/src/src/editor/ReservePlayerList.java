@@ -25,20 +25,13 @@ public class ReservePlayerList extends JList<ItemJugador> {
 		super();
 		this.setModel(model);
 		this.size = size;
-		
 		scroll.setViewportView(this);
 		this.setLayoutOrientation(JList.VERTICAL);
-		//this.setBackground(Color.DARK_GRAY);
-		
 		this.setPreferredSize(this.size);
-		
 	}
 
 	public void addJugador(ItemJugador j) {
-		this.model.addElement(
-			j
-		);
-
+		this.model.addElement(j);
 	}
 
 	public ItemJugador quitarJugador() {
@@ -48,14 +41,9 @@ public class ReservePlayerList extends JList<ItemJugador> {
 			this.revalidate();
 			this.repaint();
 			return j;
-		} else {
-			System.out.println("Jugador nulo en " + this.toString());
-			return null;
 		}
-	}
-	
-	public void initComponents() {
 		
+		return null;
 	}
 	
 	public JScrollPane getScroll() {

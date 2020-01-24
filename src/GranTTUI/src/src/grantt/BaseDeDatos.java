@@ -248,8 +248,6 @@ public class BaseDeDatos {
 			}
 		}
 		
-		System.out.println(jugadores.size());
-		
 		return jugadores;
 	}
 	
@@ -1214,7 +1212,6 @@ public class BaseDeDatos {
  		PreparedStatement sp = null;
  		try {
  			sp = conn.prepareStatement("CALL actualizarJugadorEquipo(?, ?, ?)");
- 			System.out.println(j.getNombre() + " " + j.getId() + " " + titular);
  			sp.setString(1, usuarioLogueado.getNombre());
  			sp.setInt(2, j.getId());
  			sp.setBoolean(3, titular);
