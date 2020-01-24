@@ -78,12 +78,11 @@ public class Admin extends JPanel{
 			mejores += "No Se Encontro Ningun Jugador :(</html>";
 		}
 		
-		JOptionPane.showMessageDialog(this, mejores);
+		JOptionPane.showMessageDialog(this, mejores, "Los Mejores", JOptionPane.WARNING_MESSAGE);
 	}
 	
 	private void initEvents() {
 		pasarJornada.addMouseListener(new MouseListener() {
-			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 			

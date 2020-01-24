@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import editor.EditorPanel;
 
-
 public class MainScreen extends JFrame {
     public JPanel menuContainer;
     public JPanel leftPanel;
@@ -73,9 +72,10 @@ public class MainScreen extends JFrame {
     			((Jugar) panel).update(); 
     		else if(panel instanceof TiendaPanel)
     			Updater.update();
-    		else if(panel instanceof EditorPanel)
+    		else if(panel instanceof EditorPanel) {
     			((EditorPanel) panel).getJugadores();
-    		else if(panel instanceof TopPanel)
+    			((EditorPanel) panel).estado.actualizarValor();
+    		} else if(panel instanceof TopPanel)
     			((TopPanel) panel).update();
     		else if(panel instanceof Admin)
     			((Admin) panel).update();
