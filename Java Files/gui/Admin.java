@@ -66,8 +66,13 @@ public class Admin extends JPanel{
 		
 		List<Usuario> usuarios = BaseDeDatos.obtenerTopUsuarios();
 		if(usuarios.size() > 0) {
+			int cont = 0;
 			for(Usuario u : usuarios) {
 				mejores += u.getNombre() + " " + u.getPresupuesto() + "</html>";
+				cont++;
+				if(cont == 3) {
+					break;
+				}
 			}
 		} else {
 			mejores += "No Se Encontro Ningun Jugador :(</html>";

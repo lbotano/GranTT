@@ -165,11 +165,17 @@ class LogIn extends JFrame {
                                         JOptionPane.showMessageDialog(null, "Hubo Un Error Al Crear El Equipo");
                                     }
                                     ms.cambiarPestana("Tienda");
-                                } else {
-                                	if(!(BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) > 0)) {
-                                    	JOptionPane.showMessageDialog(null, "Su Equipo No Es Valido. Modifiquelo Para Poder Jugar.");
-                                    	ms.cambiarPestana("Editor");
-                                    }
+                                }
+                                if(
+                            		BaseDeDatos.obtenerValorEquipoUsuario(BaseDeDatos.usuarioLogueado.getNombre()) <= 0 &&
+                            		!BaseDeDatos.usuarioNoTieneEquipo()
+                        		) {
+                                	JOptionPane.showMessageDialog(
+                                		null,
+                                		"Todavía hace falta armar el equipo",
+                                		"Probablemente un jugador se lesionó o suspendió",
+                                		JOptionPane.WARNING_MESSAGE);
+                                	ms.cambiarPestana("Editor");
                                 }
                             }
                             return;
