@@ -15,6 +15,8 @@ import grantt.BaseDeDatos;
 import grantt.Torneo;
 
 public class Admin extends JPanel{
+	private MainScreen main;
+	
 	private GridBagLayout layout;
 	private GridBagConstraints c;
 	
@@ -48,7 +50,6 @@ public class Admin extends JPanel{
 	
 	private void initEvents() {
 		pasarJornada.addMouseListener(new MouseListener() {
-			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 			
@@ -63,13 +64,15 @@ public class Admin extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				BaseDeDatos.jugarDiaSiguiente();;
+				BaseDeDatos.jugarDiaSiguiente();
 				update();
+				if(BaseDeDatos.obtenerPartidosPendientes().size() == 0) {
+					main.cambiarPestana("Top");
+				}
 			}
 		});
 		
 		crearTorneo.addMouseListener(new MouseListener() {
-			
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 			
@@ -90,7 +93,9 @@ public class Admin extends JPanel{
 		});
 	}
 	
-	public Admin() {
+	public Admin(MainScreen main) {
+		this.main = main;
+		
 		layout = new GridBagLayout();
 		c = new GridBagConstraints();
 		this.setLayout(layout);

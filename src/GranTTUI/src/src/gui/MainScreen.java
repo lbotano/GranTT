@@ -128,7 +128,7 @@ public class MainScreen extends JFrame {
         pestanas.add(new Pestana("Editor", new EditorPanel(new Dimension(this.size.width / 20 * 18, this.size.height))));
         pestanas.add(new Pestana("Top", new TopPanel()));
         // Añade la pestaña de administrador si es necesario
-        if(BaseDeDatos.esAdmin()) pestanas.add(new Pestana("Admin", new Admin()));
+        if(BaseDeDatos.esAdmin()) pestanas.add(new Pestana("Admin", new Admin(this)));
         
         // Cambia el estilo de los botones
         Dimension buttonSize = new Dimension(size.width / 20 * 2, size.height / 20);

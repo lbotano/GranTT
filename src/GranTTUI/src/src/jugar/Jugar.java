@@ -93,7 +93,6 @@ public final class Jugar extends JPanel {
     		
     		// Añade el partido al acordeon
     		partidosAcordeon.addItem(item);
-    		
     	}
     	
     	List<Partido> partidosPendientes = BaseDeDatos.obtenerPartidosPendientes();
@@ -118,12 +117,10 @@ public final class Jugar extends JPanel {
     		
     		// Añade el partido al acordeon
     		partidosAcordeon.addItem(item);
-    		
     	}
     }
        
     private void initComponents(){
-    	
     	partidosAcordeon = new LAcordeon();
     	JScrollPane scrollPartidos = new JScrollPane(partidosAcordeon);
     	
