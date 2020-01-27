@@ -228,6 +228,25 @@ begin
 end//
 delimiter ;
 
+drop function if exists getAmarillas;
+delimiter //
+create function getAmarillas(
+	f_idJugador int
+) returns int deterministic
+begin
+	select count(*) into @cant from 
+		Jugador j,
+        Ocurrencia o
+	where
+		j.id_jugador = o.id_jugador
+        and o.ocurrencia = 3
+		and j.id_jugador = f_idJugador
+	limit 1;
+    return @cant;
+end//
+delimiter ;
+
+
 -- call obtenerPartidosPendientes();
 -- select obtenerValorEquipo('asd')
 -- call obtenerTopUsuarios()

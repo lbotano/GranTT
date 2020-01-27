@@ -1291,4 +1291,35 @@ public class BaseDeDatos {
  			e.printStackTrace();
  		}
  	}
+ 	
+ 	public static int getCantAmarillas(Jugador j) {
+		inicializarBd();
+		PreparedStatement query = null;
+		ResultSet rs = null;
+		try {
+			query = conn.prepareStatement("SELECT getAmarillas(?)");
+			query.setInt(1, j.getId());
+			
+			rs = query.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(conn != null) {
+				try {conn.close();}catch(SQLException e) {}
+			}
+			
+			if(query != null) {
+				try {query.close();}catch(SQLException e) {}
+			}
+			
+			if(rs != null) {
+				try {query.close();}catch(SQLException e) {}
+			}
+		}
+		return 0;
+	}
 }

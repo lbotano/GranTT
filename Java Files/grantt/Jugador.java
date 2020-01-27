@@ -88,6 +88,10 @@ public class Jugador {
 		return BaseDeDatos.tieneTarjetaAmarilla(this);
 	}
 	
+	public int getCantAmarillas() {
+		return BaseDeDatos.getCantAmarillas(this);
+	}
+	
 	public boolean getRojas() {
 		return BaseDeDatos.tieneTarjetaRoja(this);
 	}

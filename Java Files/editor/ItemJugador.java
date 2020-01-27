@@ -1,5 +1,6 @@
 package editor;
 
+import grantt.BaseDeDatos;
 import grantt.Jugador;
 
 public class ItemJugador extends Jugador {
@@ -40,6 +41,7 @@ public class ItemJugador extends Jugador {
 		);
 	}
 	
+	
 	public String toString() {
 		return "<html><font color=green>" + this.getPosicion() +
 				"</font> " + this.getNombre() +
@@ -48,7 +50,7 @@ public class ItemJugador extends Jugador {
 						" <font color=red>TARJETA ROJA</font> Partidos Suspendidos: <font color=red>" + this.getPartidosSuspendido() + "</font>" : 
 						""
 				) +
-				(this.getAmarillas() ? " <font color=orange>TARJETA AMARILLA</font>" : "") +
+				(this.getCantAmarillas() > 0 ? " <font color=orange>TARJETA AMARILLA Cantidad: " + this.getCantAmarillas() + "</font>" : "") +
 				" Precio: " + this.getValor() +
 				"</html>";
 	}
