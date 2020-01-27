@@ -8,6 +8,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import grantt.Equipo;
 
@@ -25,24 +27,10 @@ public class TiendaEquipos extends JPanel{
 		
 		dataModel 	= new DefaultListModel<Equipo>();
 		lista 		= new JList<>(dataModel);
-	
 		
-		lista.addMouseListener(new MouseListener() {
-			
+		lista.addListSelectionListener(new ListSelectionListener() {
 			@Override
-			public void mouseReleased(MouseEvent arg0) {}
-			
-			@Override
-			public void mousePressed(MouseEvent arg0) {}
-			
-			@Override
-			public void mouseExited(MouseEvent arg0) {}
-			
-			@Override
-			public void mouseEntered(MouseEvent arg0) {}
-			
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void valueChanged(ListSelectionEvent arg0) {
 				listaComprar.setJugadores(lista.getSelectedValue().getJugadores());
 				Updater.update();
 			}
