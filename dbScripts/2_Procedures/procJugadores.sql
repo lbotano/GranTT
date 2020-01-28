@@ -115,6 +115,23 @@ BEGIN
 			UPDATE GRANTT.Jugador
             SET partidosSuspendido = 2
             WHERE id_jugador = p_id_jugador;
+		ELSEIF p_ocurrencia = 3 THEN
+			-- Obtiene la cantidad de tarjetas amarillas que tiene
+			SELECT COUNT(*)
+            FROM GRANTT.Ocurrencia
+            WHERE
+				id_jugador = p_id_jugador AND
+                ocurrencia = 3
+			INTO @cantAmarillas;
+            
+            IF @cantAmarillas >= 5 THEN
+				DELETE FROM GRANTT.Ocurrencia
+                WHERE
+					id_jugador = p_id_jugador AND
+                    ocurrencia = 3;
+				
+                CALL ponerOcurrencia(4, p_id_partido, p_id_jugador);
+            END IF;
 		ELSEIF p_ocurrencia = 2 THEN
 			UPDATE GRANTT.Jugador
             SET diasLesionado = 5
