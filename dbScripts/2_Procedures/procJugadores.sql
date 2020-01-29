@@ -99,6 +99,8 @@ DROP PROCEDURE IF EXISTS ponerOcurrencia;
 DELIMITER //
 CREATE PROCEDURE ponerOcurrencia(p_ocurrencia INTEGER, p_id_partido INTEGER, p_id_jugador INTEGER)
 BEGIN
+	SET max_sp_recursion_depth=2;
+
 	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador, orden)
     VALUES (p_ocurrencia, p_id_partido, p_id_jugador, RAND());
     
@@ -122,9 +124,17 @@ BEGIN
             WHERE
 				id_jugador = p_id_jugador AND
                 ocurrencia = 3
-			INTO @cantAmarillas;
+			INTO @cantAmarillasTorneo;
             
-            IF @cantAmarillas >= 5 THEN
+            SELECT COUNT(*)
+            FROM GRANTT.Ocurrencia
+            WHERE
+				id_partido = p_id_partido AND
+				id_jugador = p_id_jugador AND
+                ocurrencia = 3
+			INTO @cantAmarillasPartido;
+            
+            IF @cantAmarillasTorneo >= 5 OR @cantAmarillasPartido >= 1 THEN
 				DELETE FROM GRANTT.Ocurrencia
                 WHERE
 					id_jugador = p_id_jugador AND
@@ -138,6 +148,8 @@ BEGIN
             WHERE id_jugador = p_id_jugador;
         END IF;
     END IF;
+    
+    SET max_sp_recursion_depth=0;
 END//
 DELIMITER ;
 
