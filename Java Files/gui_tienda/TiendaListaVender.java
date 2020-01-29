@@ -39,7 +39,7 @@ public class TiendaListaVender extends JPanel{
 	public void setJugadores(List<Jugador> jugadores) {
 		// Actualiza la lista de jugadores
 		this.jugadores.clear();
-		System.out.println("Setteando jugadores. Cant: " + jugadores.size());
+//		System.out.println("Setteando jugadores. Cant: " + jugadores.size());
 		this.jugadores.addAll(jugadores);
 		
 		// Poner jugadores en el List de paneles

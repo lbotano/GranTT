@@ -254,7 +254,7 @@ public class BaseDeDatos {
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		List<Jugador> jugadores = new ArrayList<Jugador>();
-		System.out.println("Hola dario jajajxd " + usuarioLogueado.getEquipo());
+//		System.out.println("Hola dario jajajxd " + usuarioLogueado.getEquipo());
 		try {
 			query = conn.prepareStatement("CALL obtenerJugadoresEquipoUsuario(?)");
 			query.setString(1, usuarioLogueado.getNombre());
@@ -278,7 +278,7 @@ public class BaseDeDatos {
 			}
 		}
 		
-		System.out.println(jugadores.size());
+//		System.out.println(jugadores.size());
 		
 		return jugadores;
 	}
@@ -1245,7 +1245,7 @@ public class BaseDeDatos {
  		PreparedStatement sp = null;
  		try {
  			sp = conn.prepareStatement("CALL actualizarJugadorEquipo(?, ?, ?)");
- 			System.out.println(j.getNombre() + " " + j.getId() + " " + titular);
+// 			System.out.println(j.getNombre() + " " + j.getId() + " " + titular);
  			sp.setString(1, usuarioLogueado.getNombre());
  			sp.setInt(2, j.getId());
  			sp.setBoolean(3, titular);
@@ -1268,7 +1268,7 @@ public class BaseDeDatos {
  			
  			while(rs.next()) {
  				valor = rs.getInt(1);
- 				System.out.println("HOLAxd " + usuario + " " + valor);
+// 				System.out.println("HOLAxd " + usuario + " " + valor);
  			}
  			
  			try {conn.close();}catch(Exception e) {}

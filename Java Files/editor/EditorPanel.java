@@ -98,7 +98,7 @@ public class EditorPanel extends JPanel {
 						
 						// Fijarse si tiene posiciones vacias
 						Jugador.Posiciones p = j.getPosicion();
-						System.out.println("ID Del Seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
+//						System.out.println("ID Del Seleccionado: " + j.getId() + " Nombre: " + j.getNombre());
 						int max = 0;
 						switch(p) {
 							case ARQUERO:
@@ -178,13 +178,5 @@ public class EditorPanel extends JPanel {
 	public void getJugadores() {
 		this.panelIzquierda.getJugadoresTitulares();
 		this.panelDerecha.getJugadoresSuplentes();
-		/*
-		this.jugadores.clear();
-		ArrayList<Jugador> jug = (ArrayList<Jugador>) BaseDeDatos.obtenerJugadoresEquipo();
-		ArrayList<ItemJugador> jugadores = new ArrayList<ItemJugador>();
-		for(Jugador j : jug) {
-			jugadores.add(new ItemJugador(j));
-		}
-		*/
 	}
 }

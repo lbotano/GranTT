@@ -93,6 +93,7 @@ CREATE TABLE Equipo_Usuario_Jugador (
  * 3: Tarjeta amarillas
  * 4: Tarjeta roja
  */
+ 
 CREATE TABLE Ocurrencia (
 	id_ocurrencia INTEGER NOT NULL auto_increment,
     ocurrencia INTEGER NOT NULL,

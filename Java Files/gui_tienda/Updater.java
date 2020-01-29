@@ -37,11 +37,11 @@ public class Updater {
 		listaVender.setJugadores(BaseDeDatos.obtenerJugadoresEquipo());
 		presupuesto.setText("Presupuesto: $" + BaseDeDatos.obtenerPresupuesto());
 		tiendaPanel.updateRestantes();
-		System.out.println("Tamaño Total Del Equipo: " + listaVender.jugadores.size());
+//		System.out.println("Tamaño Total Del Equipo: " + listaVender.jugadores.size());
 	}
 	
 	public static boolean esValido(Jugador j) {
-		System.out.println("Validating Player");
+//		System.out.println("Validating Player");
 		Jugador.Posiciones posicion = j.getPosicion();
 		int max = 0;
 		switch(posicion) {

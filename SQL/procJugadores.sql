@@ -99,6 +99,8 @@ DROP PROCEDURE IF EXISTS ponerOcurrencia;
 DELIMITER //
 CREATE PROCEDURE ponerOcurrencia(p_ocurrencia INTEGER, p_id_partido INTEGER, p_id_jugador INTEGER)
 BEGIN
+	SET max_sp_recursion_depth=2;
+
 	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador, orden)
     VALUES (p_ocurrencia, p_id_partido, p_id_jugador, RAND());
     
@@ -115,12 +117,39 @@ BEGIN
 			UPDATE GRANTT.Jugador
             SET partidosSuspendido = 2
             WHERE id_jugador = p_id_jugador;
+		ELSEIF p_ocurrencia = 3 THEN
+			-- Obtiene la cantidad de tarjetas amarillas que tiene
+			SELECT COUNT(*)
+            FROM GRANTT.Ocurrencia
+            WHERE
+				id_jugador = p_id_jugador AND
+                ocurrencia = 3
+			INTO @cantAmarillasTorneo;
+            
+            SELECT COUNT(*)
+            FROM GRANTT.Ocurrencia
+            WHERE
+				id_partido = p_id_partido AND
+				id_jugador = p_id_jugador AND
+                ocurrencia = 3
+			INTO @cantAmarillasPartido;
+            
+            IF @cantAmarillasTorneo >= 5 OR @cantAmarillasPartido >= 1 THEN
+				DELETE FROM GRANTT.Ocurrencia
+                WHERE
+					id_jugador = p_id_jugador AND
+                    ocurrencia = 3;
+				
+                CALL ponerOcurrencia(4, p_id_partido, p_id_jugador);
+            END IF;
 		ELSEIF p_ocurrencia = 2 THEN
 			UPDATE GRANTT.Jugador
             SET diasLesionado = 5
             WHERE id_jugador = p_id_jugador;
         END IF;
     END IF;
+    
+    SET max_sp_recursion_depth=0;
 END//
 DELIMITER ;
 

@@ -246,7 +246,6 @@ begin
 end//
 delimiter ;
 
-
 -- call obtenerPartidosPendientes();
 -- select obtenerValorEquipo('asd')
 -- call obtenerTopUsuarios()
