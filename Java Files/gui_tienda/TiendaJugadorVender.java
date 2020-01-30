@@ -24,6 +24,7 @@ public class TiendaJugadorVender extends JPanel{
 	JLabel precio;
 	JLabel dorsal;
 	JLabel posicion;
+	JLabel situacion;
 	JButton botonVender;
 	
 	GridBagLayout layout;
@@ -60,32 +61,25 @@ public class TiendaJugadorVender extends JPanel{
 		precio = new JLabel("$" + Float.toString(jugador.getValor()));
 		dorsal = new JLabel(Integer.toString(jugador.getDorsal()));
 		posicion = new JLabel(jugador.getPosicion().name());
+		
+		String strSituacion = "<html>Situación: ";
+		for(int i = 0; i < jugador.getAmarillas(); i++) {
+			strSituacion += "<font color=#ffe100>█</font> ";
+		}
+		for(int i = 0; i < jugador.getRojas(); i++) {
+			strSituacion += "<font color=red>█</font> ";
+		}
+		if(jugador.getDiasLesionado() > 0) {
+			strSituacion += "<font color=blue>⚕</font> ";
+		}
+		strSituacion += "</html>";
+		this.situacion = new JLabel(strSituacion);
+		
 		botonVender = new JButton("Vender");
 		
 		layout = new GridBagLayout();
 		
 		GridBagConstraints c = new GridBagConstraints();
-		
-		// Pone el color del jugador según su estado
-		boolean tarjetasAmarillas	= jugador.getAmarillas();
-		boolean tarjetasRojas		= jugador.getRojas();
-		int diasLesionado		= jugador.getDiasLesionado();
-		
-		if(diasLesionado > 0) {
-			if(tarjetasAmarillas || tarjetasRojas) {
-				color2 = Color.CYAN;
-			}else {
-				color1 = Color.CYAN;
-			}
-		}
-		
-		if(tarjetasAmarillas) {
-			color1 = Color.YELLOW;
-		}
-		
-		if(tarjetasRojas) {
-			color1 = Color.RED;
-		}
 		
 		this.setLayout(layout);
 		
@@ -116,6 +110,12 @@ public class TiendaJugadorVender extends JPanel{
 		c.gridheight = 1;
 		add(posicion, c);
 		
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 1;
+		c.gridheight = 1;
+		add(situacion, c);
+		
 		c.weightx = 0;
 		c.gridx = 1;
 		c.gridy = 0;
@@ -134,9 +134,6 @@ public class TiendaJugadorVender extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				if(BaseDeDatos.venderJugador(jugador.getId())) {
 					Updater.update();
-					System.out.println("Jugador vendido");
-				}else {
-					System.out.println("Jugador no vendido");
 				}
 			}
 		});

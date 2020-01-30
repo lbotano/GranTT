@@ -33,10 +33,8 @@ public class TiendaEquipos extends JPanel{
 			new ListSelectionListener() {
 				@Override
 				public void valueChanged(ListSelectionEvent arg0) {
-					 JList<Equipo> l = (JList<Equipo>)arg0.getSource();
-					 Equipo selected = l.getSelectedValue();
-					 listaComprar.setJugadores(lista.getSelectedValue().getJugadores());
-					 Updater.update();
+					listaComprar.setJugadores(lista.getSelectedValue().getJugadores());
+					Updater.update();
 				}
 			}
 		);

@@ -84,16 +84,16 @@ public class Jugador {
 		return this.dorsal;
 	}
 	
-	public boolean getAmarillas() {
-		return BaseDeDatos.tieneTarjetaAmarilla(this);
+	public int getAmarillas() {
+		return BaseDeDatos.cantidadTarjetasAmarillas(this);
 	}
 	
 	public int getCantAmarillas() {
-		return BaseDeDatos.getCantAmarillas(this);
+		return BaseDeDatos.cantidadTarjetasAmarillas(this);
 	}
 	
-	public boolean getRojas() {
-		return BaseDeDatos.tieneTarjetaRoja(this);
+	public int getRojas() {
+		return BaseDeDatos.tieneTarjetaRoja(this) ? 1 : 0;
 	}
 	
 	public boolean equals(Object obj) {

@@ -1292,12 +1292,12 @@ public class BaseDeDatos {
  		}
  	}
  	
- 	public static int getCantAmarillas(Jugador j) {
+ 	public static int cantidadTarjetasAmarillas(Jugador j) {
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		try {
-			query = conn.prepareStatement("SELECT getAmarillas(?)");
+			query = conn.prepareStatement("SELECT cantidadTarjetasAmarillas(?)");
 			query.setInt(1, j.getId());
 			
 			rs = query.executeQuery();
