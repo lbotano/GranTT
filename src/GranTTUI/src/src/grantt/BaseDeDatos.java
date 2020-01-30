@@ -1086,18 +1086,18 @@ public class BaseDeDatos {
 		return ocurrencias;
 	}
 	
-	public static boolean tieneTarjetaAmarilla(Jugador j) {
+	public static int cantidadTarjetasAmarillas(Jugador j) {
 		inicializarBd();
 		PreparedStatement query = null;
 		ResultSet rs = null;
 		try {
-			query = conn.prepareStatement("SELECT tieneTarjetaAmarilla(?)");
+			query = conn.prepareStatement("SELECT cantidadTarjetasAmarillas(?)");
 			query.setInt(1, j.getId());
 			
 			rs = query.executeQuery();
 			
 			if(rs.next()) {
-				return rs.getBoolean(1);
+				return rs.getInt(1);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -1114,7 +1114,7 @@ public class BaseDeDatos {
 				try {query.close();}catch(SQLException e) {}
 			}
 		}
-		return false;
+		return 0;
 	}
 	
 	public static boolean tieneTarjetaRoja(Jugador j) {		

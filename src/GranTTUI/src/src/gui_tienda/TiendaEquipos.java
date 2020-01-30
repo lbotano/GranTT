@@ -1,7 +1,5 @@
 package gui_tienda;
 import java.awt.BorderLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.DefaultListModel;

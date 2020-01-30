@@ -1,10 +1,10 @@
-drop function if exists tieneTarjetaAmarilla;
+drop function if exists cantidadTarjetasAmarillas;
 DELIMITER //
-create function tieneTarjetaAmarilla(p_id_jugador INTEGER)
+create function cantidadTarjetasAmarillas(p_id_jugador INTEGER)
 returns boolean
 deterministic
 begin
-	SELECT COUNT(*) > 0
+	SELECT COUNT(*)
     FROM GRANTT.Ocurrencia
     WHERE
 		id_jugador = p_id_jugador AND
@@ -100,6 +100,7 @@ DELIMITER //
 CREATE PROCEDURE ponerOcurrencia(p_ocurrencia INTEGER, p_id_partido INTEGER, p_id_jugador INTEGER)
 BEGIN
 	SET max_sp_recursion_depth=2;
+    SELECT * FROM GRANTT.Ocurrencia;
 
 	INSERT INTO GRANTT.Ocurrencia (ocurrencia, id_partido, id_jugador, orden)
     VALUES (p_ocurrencia, p_id_partido, p_id_jugador, RAND());
@@ -134,7 +135,9 @@ BEGIN
                 ocurrencia = 3
 			INTO @cantAmarillasPartido;
             
-            IF @cantAmarillasTorneo >= 5 OR @cantAmarillasPartido >= 1 THEN
+            insert into log values (@cantAmarillasTorneo,@cantAmarillasPartido,0,0);
+            
+            IF @cantAmarillasTorneo >= 5 OR @cantAmarillasPartido >= 2 THEN
 				DELETE FROM GRANTT.Ocurrencia
                 WHERE
 					id_jugador = p_id_jugador AND
