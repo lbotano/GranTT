@@ -1,5 +1,7 @@
 package editor;
 
+import javax.swing.JLabel;
+
 import grantt.Jugador;
 
 public class ItemJugador extends Jugador {
@@ -41,14 +43,20 @@ public class ItemJugador extends Jugador {
 	}
 	
 	public String toString() {
+		String strSituacion = " Situación: ";
+		for(int i = 0; i < this.getAmarillas(); i++) {
+			strSituacion += "<font color=#ffe100>█</font> ";
+		}
+		for(int i = 0; i < this.getRojas(); i++) {
+			strSituacion += "<font color=red>█</font> ";
+		}
+		if(this.getDiasLesionado() > 0) {
+			strSituacion += "<font color=blue>⚕</font> ";
+		}
+		
 		return "<html><i>" + this.getPosicion() + "</i> " +
 				this.getNombre() +
-				(this.getDiasLesionado() > 0 ? " <font color=blue>LESIONADO: " + this.getDiasLesionado() + " días</font>": "") +
-				(this.getPartidosSuspendido() > 0 ? 
-						" <font color=red>TARJETA ROJA</font> <i>Suspendido por:</i> <font color=red>" + this.getPartidosSuspendido() + " partidos</font>" : 
-						""
-				) +
-				(this.getAmarillas() ? " <font color=orange>TARJETA AMARILLA</font>" : "") +
+				strSituacion +
 				" Precio: " + this.getValor() +
 				"</html>";
 		}
