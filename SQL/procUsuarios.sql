@@ -71,14 +71,15 @@ drop procedure if exists seleccionarTopUsuarios;
 DELIMITER //
 create procedure seleccionarTopUsuarios()
 begin
-	SELECT
-		u.nombre AS nombreUsuario,
-        e.nombre AS nombreEquipo,
-		obtenerValorTotalEquipo(e.id_equipo) AS dou
-	FROM
-		GRANTT.Usuario u,
-        GRANTT.Equipo_Usuario e
-	WHERE
-		u.id_equipo = e.id_equipo
-	ORDER BY dou DESC;
+	select u.nombre as nombreUsuario, sum(j.valor) as valorTotal from
+		usuario u,
+		jugador j,
+		equipo_usuario_jugador euj,
+        equipo_usuario eu
+    where j.id_jugador = euj.id_jugador
+		and u.id_equipo = euj.id_equipo
+        and eu.id_equipo = u.id_equipo
+        and (validarEquipo(u.nombre) = 1)
+	group by u.nombre
+	order by j.valor desc;
 end//
