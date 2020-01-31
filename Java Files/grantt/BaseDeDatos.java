@@ -705,10 +705,10 @@ public class BaseDeDatos {
 		
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		try{
-			query = conn.prepareStatement("CALL seleccionarTopUsuarios()");
+			query = conn.prepareStatement("CALL obtenerTopUsuarios()");
 			rs = query.executeQuery();
 			while(rs.next()) {
-				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getString("nombreEquipo"));
+				Usuario usuario = new Usuario(rs.getString("nombreUsuario"), rs.getDouble("valorTotal"));
 				usuarios.add(usuario);
 			}
 		}catch(SQLException e) {

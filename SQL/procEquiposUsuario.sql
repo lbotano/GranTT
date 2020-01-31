@@ -80,20 +80,24 @@ CREATE FUNCTION obtenerValorTotalEquipoUsuario(p_usuario NVARCHAR(50))
 RETURNS int
 deterministic
 BEGIN
-	SELECT id_equipo
-    FROM GRANTT.Usuario
-    WHERE nombre = p_usuario
-    INTO @equipo;
-	
-    SELECT SUM(valor) 
-    FROM
-		GRANTT.Jugador j,
-        GRANTT.Equipo_Usuario_Jugador euj
-	WHERE
-		j.id_jugador = euj.id_jugador AND
-        euj.id_equipo = @equipo AND
-        euj.titular = true
-	INTO @valor;
-    return @valor;
+    select validarEquipo(p_usuario) into @esValido;
+    if(@esValido = 1) then
+		select u.id_equipo into @equipo from
+			usuario u
+		where
+			u.nombre = p_usuario
+		limit 1;
+        
+        select sum(j.valor) into @resultado from 
+			equipo_usuario_jugador euj,
+			jugador j
+		where
+			j.id_jugador = euj.id_jugador
+			and euj.id_equipo = @equipo
+            limit 1;
+		return @resultado;
+    else
+		return 0;
+    end if;
 END//
 DELIMITER ;
