@@ -64,37 +64,6 @@ public class BaseDeDatos {
 		return false;
 	}
 	
-	public static boolean crearUsuario(Usuario usuario, String dni) {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		try {
-			query = conn.prepareStatement("SELECT crearUsuario(?, ?, ?);");
-			query.setString(1, usuario.getNombre());
-			query.setString(2, usuario.getContraseña());
-			query.setBoolean(3, false);
-			query.setString(4, dni);
-			
-			rs = query.executeQuery();
-			if(rs.next()) return rs.getBoolean(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return false;
-	}
-	
 	public static boolean crearUsuario(Usuario usuario, boolean esAdmin, String dni) {
 		inicializarBd();
 		PreparedStatement query = null;
@@ -498,91 +467,6 @@ public class BaseDeDatos {
 		return new Torneo(id, jornada);
 	}
 	
-	public static List<Integer> obtenerIdTorneos() {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		List<Integer> ids = new ArrayList<Integer>();
-		try {
-			query = conn.prepareStatement("CALL obtenerIdTorneos()");
-			
-			rs = query.executeQuery();
-			while(rs.next()) {
-				ids.add(rs.getInt("id_torneo"));
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return ids;
-	}
-	
-	public static int obtenerUltimoTorneo() {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		try {
-			query = conn.prepareStatement("SELECT obtenerUltimoTorneo()");
-			
-			rs = query.executeQuery();
-			if(rs.next()) return rs.getInt(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return -1;
-	}
-	
-	public static boolean seJugoTorneo(int idTorneo) {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		try {
-			query = conn.prepareStatement("SELECT seJugoTorneo(?)");
-			query.setInt(1, idTorneo);
-			
-			rs = query.executeQuery();
-			if(rs.next()) return rs.getBoolean(1);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return false;
-	}
-	
 	public static void crearTorneo() {
 		inicializarBd();
 		PreparedStatement query = null;
@@ -615,28 +499,6 @@ public class BaseDeDatos {
 			setTorneoActual(idTorneo);
 		}else {
 			System.err.println("Error al crear torneo");
-		}
-	}
-	
-	public static void subirValorJugador(Jugador jugador, int suma) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL subirValorJugador(?, ?)");
-			query.setInt(1, jugador.getId());
-			query.setInt(2, suma);
-			
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
 		}
 	}
 	
@@ -806,10 +668,6 @@ public class BaseDeDatos {
 		return torneos;
 	}
 	
-	public static Torneo obtenerTorneoActual() {
-		return torneoActual;
-	}
-	
 	public static int obtenerJornada() {
 		inicializarBd();
 		PreparedStatement query = null;
@@ -835,125 +693,6 @@ public class BaseDeDatos {
 				if(rs != null) {
 					try {query.close();}catch(SQLException e) {}
 				}
-			}
-		}
-		return -1;
-	}
-	
-	public static void anadirPartidoPendiente(Partido p) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL anadirPartidoPendiente(?, ?, ?, ?)");
-			query.setInt(1, torneoActual.getId());
-			query.setInt(2, p.getJornada());
-			query.setInt(3, p.getEquipoLocal().getId());
-			query.setInt(4, p.getEquipoVisitante().getId());
-			
-			query.execute();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
-	public static List<Partido> obtenerPartidosSinJugarDeHoy() {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		
-		List<Partido> partidos = new ArrayList<Partido>();
-		try {
-			query = conn.prepareStatement("CALL obtenerPartidosSinJugarDeHoy(?, ?)");
-			query.setInt(1, torneoActual.getId());
-			query.setInt(2, torneoActual.getJornada());
-			
-			rs = query.executeQuery();
-			
-			while(rs.next()) {
-				Equipo local 		= torneoActual.getEquiposPorId(rs.getInt("id_local"));
-				Equipo visitante	= torneoActual.getEquiposPorId(rs.getInt("id_visitante"));
-				Partido partido = new Partido(rs.getInt("id_partido"), local, visitante, rs.getInt("jornada"));
-				partidos.add(partido);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return partidos;
-	}
-	
-	public static void ponerResultadoDePartido(Partido partido) {
-		if(partido.getId() < 0) {
-			System.err.println("ERROR FATAL: Partido con id nula");
-			return;
-		}
-		
-		inicializarBd();
-		PreparedStatement query = null;
-		
-		try{
-			query = conn.prepareStatement("CALL ponerResultadoDePartido(?, ?, ?)");
-			query.setInt(1, partido.getId());
-			query.setInt(2, partido.getGolesLocal());
-			query.setInt(3, partido.getGolesVisitante());
-			
-			query.execute();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
-	public static int obtenerIdJugadorRandom(Equipo equipo) {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		
-		try {
-			query = conn.prepareStatement("SELECT obtenerJugadorRandom(?)");
-			query.setInt(1, equipo.getId());
-			
-			rs = query.executeQuery();
-			if(rs.next()) return rs.getInt(1);
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
 			}
 		}
 		return -1;
@@ -988,47 +727,6 @@ public class BaseDeDatos {
 			}
 		}
 		return usuarios;
-	}
-	
-	public static void actualizarDiasSuspendido(Jugador j) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL actualizarDiasSuspendido(?)");
-			query.setInt(1, j.getId());
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try {conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-	}
-	
-	public static void ponerTarjetaAmarilla(Jugador j, Partido p) {
-		inicializarBd();
-		PreparedStatement query = null;
-		try {
-			query = conn.prepareStatement("CALL ponerTarjetaAmarilla(?, ?)");
-			query.setInt(1, j.getId());
-			query.setInt(2, p.getId());
-			query.execute();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try {conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
 	}
 	
 	public static List<Ocurrencia> obtenerOcurrencias(int idPartido){
