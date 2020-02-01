@@ -66,7 +66,7 @@ begin
     return @esAdmin;
 end//
 DELIMITER ;
-
+/*
 drop procedure if exists seleccionarTopUsuarios;
 DELIMITER //
 create procedure seleccionarTopUsuarios()
@@ -83,3 +83,4 @@ begin
 	group by u.nombre
 	order by j.valor desc;
 end//
+*/
