@@ -1,11 +1,9 @@
 package grantt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Torneo {
 	private int id;
-	private List<Partido> partidos;
 	private List<Equipo> equipos;
 	
 	private int diaHoy;
@@ -13,12 +11,7 @@ public class Torneo {
 	public Torneo(int id, int diaHoy) {
 		this.id = id;
 		this.equipos = BaseDeDatos.obtenerEquiposReales();
-		this.partidos = new ArrayList<Partido>();
 		this.diaHoy = diaHoy;
-	}
-	
-	public List<Partido> getPartidos() {
-		return this.partidos;
 	}
 	
 	public int getId() {

@@ -11,12 +11,6 @@ public class Partido {
 	
 	private int jornada;
 	
-	public Partido(Equipo equipoLocal, Equipo equipoVisitante, int jornada) {
-		this.equipoLocal = equipoLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.jornada = jornada;
-	}
-	
 	public Partido(int id, Equipo equipoLocal, Equipo equipoVisitante, int jornada) {
 		this.id = id;
 		this.equipoLocal = equipoLocal;
@@ -55,14 +49,5 @@ public class Partido {
 	
 	public int getId() {
 		return this.id;
-	}
-	
-	@Override
-	public String toString() {
-		if(this.golesLocal < 0 || this.golesVisitante < 0) {
-			return this.equipoLocal.getNombre() + " PENDIENTE " + this.equipoVisitante.getNombre();
-		}else {
-			return this.equipoLocal.getNombre() + " " + this.golesLocal + "-" + this.golesVisitante + " " + this.equipoVisitante.getNombre();
-		}
 	}
 }

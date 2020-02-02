@@ -3,7 +3,6 @@ package grantt;
 public class Ocurrencia {
 	private TipoOcurrencia tipo;
 	private Jugador jugador;
-	private int partido;
 	
 	private String nombre;
 	private boolean esLocal;
@@ -13,12 +12,6 @@ public class Ocurrencia {
 		LESION,
 		AMARILLA,
 		ROJA
-	}
-	
-	public Ocurrencia(Jugador jugador, TipoOcurrencia tipo, int partido) {
-		this.jugador = jugador;
-		this.tipo = tipo;
-		this.partido = partido;
 	}
 	
 	public Ocurrencia(String nombre, TipoOcurrencia tipo, boolean esLocal) {
@@ -33,10 +26,6 @@ public class Ocurrencia {
 	
 	public Jugador getJugador() {
 		return this.jugador;
-	}
-	
-	public int getPartido() {
-		return this.partido;
 	}
 	
 	public boolean getEsLocal() {
