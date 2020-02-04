@@ -133,8 +133,6 @@ begin
 end//
 delimiter ;
 
--- select validarCantTitulares('asd')
-
 drop function if exists validarCantSuplentes;
 delimiter //
 create function validarCantSuplentes(
@@ -246,8 +244,4 @@ begin
 end//
 delimiter ;
 
--- call obtenerPartidosPendientes();
--- select obtenerValorEquipo('asd')
--- call obtenerTopUsuarios()
 -- call resetDatabase()
--- call obtenerJugadoresEquipoUsuario('asd');

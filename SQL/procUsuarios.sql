@@ -66,21 +66,3 @@ begin
     return @esAdmin;
 end//
 DELIMITER ;
-/*
-drop procedure if exists seleccionarTopUsuarios;
-DELIMITER //
-create procedure seleccionarTopUsuarios()
-begin
-	select u.nombre as nombreUsuario, sum(j.valor) as valorTotal from
-		usuario u,
-		jugador j,
-		equipo_usuario_jugador euj,
-        equipo_usuario eu
-    where j.id_jugador = euj.id_jugador
-		and u.id_equipo = euj.id_equipo
-        and eu.id_equipo = u.id_equipo
-        and (validarEquipo(u.nombre) = 1)
-	group by u.nombre
-	order by j.valor desc;
-end//
-*/

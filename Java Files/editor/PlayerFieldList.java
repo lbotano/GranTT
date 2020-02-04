@@ -30,19 +30,15 @@ public class PlayerFieldList extends JList<ItemJugador> {
 		scroll.setViewportView(this);
 		
 		this.setBackground(Color.WHITE);
-		//this.setLayoutOrientation(JList.VERTICAL);
-		
 		
 		this.setPreferredSize(this.size);
-		
-		
 	}
 
 	public void addJugador(Jugador j) {
 		if(this.validarInsercion(j.getPosicion())) {
 			this.model.addElement(
-					new ItemJugador(j)
-				);
+				new ItemJugador(j)
+			);
 		} else {
 			System.out.println("Se Intento Poner Un Jugador De Mas En Una Posicion.");
 		}
@@ -61,9 +57,7 @@ public class PlayerFieldList extends JList<ItemJugador> {
 		}
 	}
 	
-	public void initComponents() {
-		
-	}
+	public void initComponents() {}
 	
 	public boolean validarInsercion(Jugador.Posiciones p) {
 		int max;

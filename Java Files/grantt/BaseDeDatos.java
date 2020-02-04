@@ -607,37 +607,7 @@ public class BaseDeDatos {
 		}
 		return partidos;
 	}
-	
-	public static int getCalidad(Equipo equipo) {
-		inicializarBd();
-		PreparedStatement query = null;
-		ResultSet rs = null;
-		
-		int resultado = -1;
-		try{
-			query = conn.prepareStatement("SELECT obtenerValorTotalEquipo(?)");
-			query.setInt(1, equipo.getId());
-			
-			rs = query.executeQuery();
-			if(rs.next()) resultado = (int) Math.ceil(rs.getInt(1) / 4000);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(conn != null) {
-				try{conn.close();}catch(SQLException e) {}
-			}
-			
-			if(query != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-			
-			if(rs != null) {
-				try {query.close();}catch(SQLException e) {}
-			}
-		}
-		return resultado;
-	}
-	
+
 	public static List<Torneo> obtenerTorneos(){
 		inicializarBd();
 		PreparedStatement query = null;

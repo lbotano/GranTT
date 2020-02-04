@@ -13,7 +13,6 @@ import grantt.Jugador;
 
 public class ReservePlayerList extends JList<ItemJugador> {
 	
-	
 	public Dimension size;
 	public GridBagLayout gbl;
 	public GridBagConstraints gbc;
@@ -28,17 +27,14 @@ public class ReservePlayerList extends JList<ItemJugador> {
 		
 		scroll.setViewportView(this);
 		this.setLayoutOrientation(JList.VERTICAL);
-		//this.setBackground(Color.DARK_GRAY);
 		
 		this.setPreferredSize(this.size);
-		
 	}
 
 	public void addJugador(ItemJugador j) {
 		this.model.addElement(
 			j
 		);
-
 	}
 
 	public ItemJugador quitarJugador() {
@@ -54,12 +50,9 @@ public class ReservePlayerList extends JList<ItemJugador> {
 		}
 	}
 	
-	public void initComponents() {
-		
-	}
+	public void initComponents() {}
 	
 	public JScrollPane getScroll() {
 		return this.scroll;
 	}
-	
 }

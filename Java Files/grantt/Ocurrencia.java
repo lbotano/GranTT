@@ -14,13 +14,7 @@ public class Ocurrencia {
 		AMARILLA,
 		ROJA
 	}
-	
-	public Ocurrencia(Jugador jugador, TipoOcurrencia tipo, int partido) {
-		this.jugador = jugador;
-		this.tipo = tipo;
-		this.partido = partido;
-	}
-	
+
 	public Ocurrencia(String nombre, TipoOcurrencia tipo, boolean esLocal) {
 		this.nombre = nombre;
 		this.tipo = tipo;

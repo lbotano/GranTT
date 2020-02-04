@@ -22,19 +22,19 @@ import javax.swing.border.EmptyBorder;
 
 class LogIn extends JFrame {
     
-    JPanel panel = new JPanel();
+    private JPanel panel = new JPanel();
     
-    BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+    private BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
     
-    JTextField txtUsuario = new JTextField("Nombre De Usuario");
+    private JTextField txtUsuario = new JTextField("Nombre De Usuario");
     
-    JPasswordField txtContraseña = new JPasswordField();
+    private JPasswordField txtContraseña = new JPasswordField();
     
-    JButton btnIniciarSesion = new JButton("Iniciar Sesion");
+    private JButton btnIniciarSesion = new JButton("Iniciar Sesion");
     
-    JButton btnRegistrarse = new JButton("Registrarse");
+    private JButton btnRegistrarse = new JButton("Registrarse");
     
-    SignUp su;
+    private SignUp su;
     
     
     public LogIn() {

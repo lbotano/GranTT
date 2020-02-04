@@ -14,7 +14,6 @@ public class TopPanel extends JPanel{
 	private DefaultListModel<String> lm = new DefaultListModel<String>();
 	private JList<String> usuarios = new JList<String>(lm);
 	private JScrollPane scroll = new JScrollPane(usuarios);
-	
 	private BorderLayout layout = new BorderLayout();
 	
 	public void update() {

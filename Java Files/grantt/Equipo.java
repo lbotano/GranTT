@@ -23,10 +23,6 @@ public class Equipo {
 		return this.nombre;
 	}
 	
-	public int getCalidad() {
-		return BaseDeDatos.getCalidad(this);
-	}
-	
 	public List<Jugador> getJugadores(){
 		return this.jugadores;
 	}

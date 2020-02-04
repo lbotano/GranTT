@@ -30,7 +30,6 @@ public class EditorRightPanel extends JPanel{
 		this.setLayout(this.gbl);
 		initComponents(d);
 		initEvents();
-		//this.getJugadoresSuplentes();
 	}
 	
 	private void initComponents(Dimension d) {
@@ -57,10 +56,7 @@ public class EditorRightPanel extends JPanel{
 		this.add(this.btnAgregar, gbc);
 	}
 	
-	private void initEvents() {
-		
-	}
-	
+	private void initEvents() {}
 	
 	public void getJugadoresSuplentes() {
 		this.prl.model.removeAllElements();

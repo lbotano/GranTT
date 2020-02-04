@@ -19,11 +19,6 @@ public class Usuario {
 		this.valor = valor;
 	}
 	
-	public Usuario(String nombre, int valor) {
-		this.nombre = nombre;
-		this.valor = valor;
-	}
-	
 	public void setEquipo(int id_equipo) {
 		this.id_equipo = id_equipo;
 	}

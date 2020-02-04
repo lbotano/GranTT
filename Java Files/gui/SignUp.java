@@ -28,21 +28,21 @@ import javax.swing.border.EmptyBorder;
 
 public class SignUp extends JFrame {
 
-    JPanel panel;
-    BoxLayout boxlayout;
+    private JPanel panel;
+    private BoxLayout boxlayout;
     
-    JTextField txtUsuario;
-    JPasswordField txtContraseña;
-    JCheckBox chkAdmin;
+    private JTextField txtUsuario;
+    private JPasswordField txtContraseña;
+    private JCheckBox chkAdmin;
     
-    NumberFormat formato = NumberFormat.getNumberInstance();
-    JFormattedTextField txtDni = new JFormattedTextField(formato);
+    private NumberFormat formato = NumberFormat.getNumberInstance();
+    private JFormattedTextField txtDni = new JFormattedTextField(formato);
     
-    JButton btnRegistrarse;
-    JButton btnCancelar;
+    private JButton btnRegistrarse;
+    private JButton btnCancelar;
     
-    final String CODIGO_ADMIN = "admin";
-    boolean esAdmin = false;
+    private final String CODIGO_ADMIN = "admin";
+    private boolean esAdmin = false;
     
     public SignUp() {
         super("GranTT - Registrarse");

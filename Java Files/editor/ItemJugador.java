@@ -25,7 +25,6 @@ public class ItemJugador extends Jugador {
 			partidosSuspendido, 
 			dorsal
 		);
-		
 	}
 	
 	public ItemJugador(Jugador j) {
@@ -56,7 +55,6 @@ public class ItemJugador extends Jugador {
 				strSituacion += "<font color=blue>⚕</font> ";
 			}
 		}
-		
 		
 		return "<html><i><font color=green>" + this.getPosicion() + "</font></i> " +
 				this.getNombre() +
