@@ -43,7 +43,7 @@ CREATE TABLE Jugador (
     edad INTEGER,
     id_equipoReal INTEGER,
     dorsal INTEGER,
-    valor FLOAT DEFAULT 100,
+    valor FLOAT DEFAULT 1000,
     diasLesionado INTEGER,
     partidosSuspendido INTEGER DEFAULT 0,
     CONSTRAINT pk_jugador PRIMARY KEY (id_jugador),
