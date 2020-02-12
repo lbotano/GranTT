@@ -55,9 +55,7 @@ public class TiendaJugador extends JPanel {
 		this.botonComprar = new JButton("Comprar");
 		
 		// Desactiva el botón comprar si el jugador no tiene plata
-		if(jugador.getValor() > BaseDeDatos.obtenerPresupuesto() && !Updater.esValido(jugador)) {
-			botonComprar.setEnabled(false);
-		}else {
+		if(jugador.getValor() <= BaseDeDatos.obtenerPresupuesto() && Updater.esValido(jugador)) {
 			botonComprar.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
@@ -66,6 +64,8 @@ public class TiendaJugador extends JPanel {
 					}
 				}
 			});
+		}else {
+			botonComprar.setEnabled(false);
 		}
 				
 		// Insertar los objetos
