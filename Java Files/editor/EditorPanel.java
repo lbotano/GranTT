@@ -23,7 +23,7 @@ public class EditorPanel extends JPanel {
 	public StatePanel estado;
 	public EditorLeftPanel panelIzquierda;
 	public EditorRightPanel panelDerecha;
-	public StatePanel sp;
+
 	
 	ArrayList<ItemJugador> jugadores;
 	
@@ -42,7 +42,7 @@ public class EditorPanel extends JPanel {
 		this.size = d;
 		this.setMaximumSize(this.size);
 		
-		this.estado = new StatePanel(new Dimension(this.size.width, this.size.height / 5), this);
+		this.estado = new StatePanel(new Dimension(this.size.width, this.size.height / 5));
 		this.panelIzquierda = new EditorLeftPanel(new Dimension(this.size.width / 6, this.size.height / 5 * 4), this);
 		this.panelDerecha = new EditorRightPanel(new Dimension(this.size.width / 6, this.size.height / 5 * 4), this);
 		this.getJugadores();

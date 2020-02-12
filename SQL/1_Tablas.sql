@@ -23,7 +23,7 @@ CREATE TABLE Equipo_Usuario (
 CREATE TABLE Usuario (
 	nombre NVARCHAR(50),
     contraseña TEXT(512),
-    id_equipo INTEGER,
+    id_equipo INTEGER UNIQUE,
     admin BOOLEAN,
     dni NCHAR(10) UNIQUE,
     CONSTRAINT pk_usuario PRIMARY KEY (nombre),
@@ -75,7 +75,8 @@ CREATE TABLE Partido (
     partido_visitante INTEGER,
     CONSTRAINT pk_partido PRIMARY KEY (id_partido),
     CONSTRAINT fk_partido_local FOREIGN KEY (partido_local) REFERENCES Equipo_Local(id_equipo_local),
-    CONSTRAINT fk_partido_visitante FOREIGN KEY (partido_visitante) REFERENCES Equipo_Visitante(id_equipo_visitante)
+    CONSTRAINT fk_partido_visitante FOREIGN KEY (partido_visitante) REFERENCES Equipo_Visitante(id_equipo_visitante),
+    CONSTRAINT fk_id_torneo FOREIGN KEY (id_torneo) REFERENCES Torneo(id_torneo)
 );
 
 CREATE TABLE Equipo_Usuario_Jugador (
@@ -86,7 +87,6 @@ CREATE TABLE Equipo_Usuario_Jugador (
     CONSTRAINT fk_relEquipoUsuario_jugador FOREIGN KEY (id_jugador) REFERENCES Jugador(id_jugador),
     CONSTRAINT fk_relEquipoUsuario_equipo FOREIGN KEY (id_equipo) REFERENCES Equipo_Usuario(id_equipo)
 );
-
 /*
  * 1: Gol
  * 2: Lesion

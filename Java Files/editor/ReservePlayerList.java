@@ -50,8 +50,6 @@ public class ReservePlayerList extends JList<ItemJugador> {
 		}
 	}
 	
-	public void initComponents() {}
-	
 	public JScrollPane getScroll() {
 		return this.scroll;
 	}

@@ -79,6 +79,8 @@ public class Admin extends JPanel{
 		}
 		
 		JOptionPane.showMessageDialog(this, mejores, "Los Mejores", JOptionPane.WARNING_MESSAGE);
+		
+		owner.cambiarPestana("Top");
 	}
 	
 	private void initEvents() {

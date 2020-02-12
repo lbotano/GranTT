@@ -57,8 +57,6 @@ public class PlayerFieldList extends JList<ItemJugador> {
 		}
 	}
 	
-	public void initComponents() {}
-	
 	public boolean validarInsercion(Jugador.Posiciones p) {
 		int max;
 		switch(p) {
@@ -85,6 +83,7 @@ public class PlayerFieldList extends JList<ItemJugador> {
 			return false;
 		}
 	}
+	
 	public JScrollPane getScroll() {
 		return this.scroll;
 	}

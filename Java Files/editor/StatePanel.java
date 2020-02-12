@@ -22,7 +22,7 @@ public class StatePanel extends JPanel {
 	public JLabel precio;
 	public JButton btnGuardar;
 	
-	public StatePanel(Dimension d, EditorPanel ep) {
+	public StatePanel(Dimension d) {
 		super();
 		
 		this.size = d;
