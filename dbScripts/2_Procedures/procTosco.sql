@@ -1,3 +1,7 @@
+-- Para quitar una regla de mysql que no permite hacer
+-- order by con columnas que no estan en el group by
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+
 DROP PROCEDURE IF EXISTS obtenerTitularesEquipoUsuario;
 DELIMITER //
 CREATE PROCEDURE obtenerTitularesEquipoUsuario(p_usuario NVARCHAR(50))
@@ -80,3 +84,94 @@ create procedure actualizarJugadorEquipo(
     end if;
 end//
 delimiter ;
+
+drop function if exists validarCantTitulares;
+delimiter //
+create function validarCantTitulares(
+	f_usuario nvarchar(50)
+) returns int deterministic
+begin
+	select u.id_equipo into @equipo from
+		Usuario u
+	where
+		u.nombre = f_usuario
+	limit 1;
+    
+	select count(*) into @cant from 
+		Equipo_Usuario_Jugador euj
+    inner join
+		Jugador j
+    on euj.id_jugador = j.id_jugador
+	where 
+		euj.id_equipo = @equipo
+		and (j.diasLesionado = 0 or j.diasLesionado is null)
+		and (j.partidosSuspendido is null or j.partidosSuspendido < 1)
+        and euj.titular = 1;
+	if @cant = 11 then
+		return true;
+	else
+		return false;
+	end if;
+end//
+delimiter ;
+
+drop function if exists validarCantSuplentes;
+delimiter //
+create function validarCantSuplentes(
+	f_usuario nvarchar(50)
+) returns int deterministic
+begin
+	select u.id_equipo into @equipo
+    from
+		Usuario u
+	where
+		u.nombre = f_usuario
+	limit 1;
+    
+	select count(*) into @cant from 
+		Equipo_Usuario_Jugador euj
+    inner join
+		Jugador j
+    on euj.id_jugador = j.id_jugador
+	where 
+		euj.id_equipo = @equipo
+        and euj.titular = 0;
+	if @cant = 4 then
+		return true;
+	else
+		return false;
+	end if;
+end//
+delimiter ;
+
+drop function if exists validarEquipo;
+delimiter //
+create function validarEquipo (
+	f_usuario nvarchar(50)
+) returns boolean deterministic
+begin
+	if(
+		select validarCantTitulares(f_usuario) = 1
+		and (select validarCantSuplentes(f_usuario) = 1)
+	) then
+		return true;
+    else
+		return false;
+    end if;
+end//
+delimiter ;
+
+drop procedure if exists obtenerTopUsuarios;
+delimiter //
+create procedure obtenerTopUsuarios()
+begin
+	select u.nombre as nombreUsuario, obtenerValorTotalEquipoUsuario(u.nombre) as valorTotal
+    from
+		Usuario u
+    where 
+        (validarEquipo(u.nombre) = 1)
+	order by valorTotal desc;
+end//
+delimiter ;
+
+CALL obtenerTopUsuarios();

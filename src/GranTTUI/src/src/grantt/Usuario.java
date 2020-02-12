@@ -14,6 +14,11 @@ public class Usuario {
 		this.contraseña = contraseña;
 	}
 	
+	public Usuario(String nombre, double valor) {
+		this.nombre = nombre;
+		this.valor = valor;
+	}
+	
 	public void setEquipo(int id_equipo) {
 		this.id_equipo = id_equipo;
 	}
