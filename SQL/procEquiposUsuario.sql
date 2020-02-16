@@ -89,8 +89,8 @@ BEGIN
 		limit 1;
         
         select sum(j.valor) into @resultado from 
-			equipo_usuario_jugador euj,
-			jugador j
+			Equipo_Usuario_Jugador euj,
+			Jugador j
 		where
 			j.id_jugador = euj.id_jugador
 			and euj.id_equipo = @equipo

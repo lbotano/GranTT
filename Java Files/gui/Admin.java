@@ -75,7 +75,7 @@ public class Admin extends JPanel{
 				}
 			}
 		} else {
-			mejores += "No Se Encontro Ningun Jugador :(</html>";
+			mejores += "No Se Encontro Ningun Jugador.</html>";
 		}
 		
 		JOptionPane.showMessageDialog(this, mejores, "Los Mejores", JOptionPane.WARNING_MESSAGE);

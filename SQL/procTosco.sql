@@ -86,12 +86,12 @@ drop procedure if exists resetDatabase;
 delimiter //
 create procedure resetDatabase()
 begin
-    delete from ocurrencia;
-    delete from partido;
-    delete from equipo_local;
-    delete from equipo_visitante;
+    delete from Ocurrencia;
+    delete from Partido;
+    delete from Equipo_Local;
+    delete from Equipo_Visitante;
 	delete from Torneo;
-    update jugador 
+    update Jugador 
     set 
 		valor = 1000,
         diasLesionado = 0,
@@ -110,15 +110,15 @@ create function validarCantTitulares(
 ) returns int deterministic
 begin
 	select u.id_equipo into @equipo from
-		usuario u
+		Usuario u
 	where
 		u.nombre = f_usuario
 	limit 1;
     
 	select count(*) into @cant from 
-		equipo_usuario_jugador euj
+		Equipo_Usuario_Jugador euj
     inner join
-		jugador j
+		Jugador j
     on euj.id_jugador = j.id_jugador
 	where 
 		euj.id_equipo = @equipo
@@ -140,15 +140,15 @@ create function validarCantSuplentes(
 ) returns int deterministic
 begin
 	select u.id_equipo into @equipo from
-		usuario u
+		Usuario u
 	where
 		u.nombre = f_usuario
 	limit 1;
     
 	select count(*) into @cant from 
-		equipo_usuario_jugador euj
+		Equipo_Usuario_Jugador euj
     inner join
-		jugador j
+		Jugador j
     on euj.id_jugador = j.id_jugador
 	where 
 		euj.id_equipo = @equipo
@@ -185,16 +185,16 @@ delimiter //
 create procedure obtenerTopUsuarios()
 begin
 	select u.nombre as nombreUsuario, sum(j.valor) as valorTotal from
-		usuario u,
-		jugador j,
-		equipo_usuario_jugador euj,
-        equipo_usuario eu
+		Usuario u,
+		Jugador j,
+		Equipo_Usuario_Jugador euj,
+        Equipo_Usuario eu
     where j.id_jugador = euj.id_jugador
 		and u.id_equipo = euj.id_equipo
         and eu.id_equipo = u.id_equipo
         and (validarEquipo(u.nombre) = 1)
 	group by u.nombre
-	order by j.valor desc;
+	order by valorTotal desc;
 end//
 delimiter ;
 
@@ -213,8 +213,8 @@ begin
 		limit 1;
         
         select sum(j.valor) into @resultado from 
-			equipo_usuario_jugador euj,
-			jugador j
+			Equipo_Usuario_Jugador euj,
+			Jugador j
 		where
 			j.id_jugador = euj.id_jugador
 			and euj.id_equipo = @equipo
