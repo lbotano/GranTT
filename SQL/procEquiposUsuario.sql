@@ -83,7 +83,7 @@ BEGIN
     select validarEquipo(p_usuario) into @esValido;
     if(@esValido = 1) then
 		select u.id_equipo into @equipo from
-			usuario u
+			Usuario u
 		where
 			u.nombre = p_usuario
 		limit 1;
