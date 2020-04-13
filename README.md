@@ -1,3 +1,2 @@
 # GranTT
-School project I had, We want to kill ourselves
-ESTO ES UNA PRUEBA
+School project, [Gran DT](https://en.wikipedia.org/wiki/Gran_DT) clone.
